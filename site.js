@@ -25,6 +25,7 @@ if (hero){
   const depth = () => { const h = hero.offsetHeight; tgt = Math.min(1, Math.max(0, (scrollY - h * .3) / (h * .9))); if (!run){ run = true; requestAnimationFrame(step); } };
   addEventListener('scroll', depth, { passive: true });
   addEventListener('resize', depth); depth();
+  if (!calm && matchMedia('(pointer: fine)').matches) addEventListener('mousemove', e => { bgEl.style.setProperty('--mx', (e.clientX / innerWidth - .5).toFixed(3)); bgEl.style.setProperty('--my', (e.clientY / innerHeight - .5).toFixed(3)); }, { passive: true });
   new IntersectionObserver((es, o) => es.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); o.unobserve(e.target); } }), { threshold: .25 }).observe($('wheel'));
   document.querySelectorAll('.seg').forEach(g => {
     const on = () => { $('hub1').textContent = g.dataset.name; $('hub2').textContent = g.dataset.sub; };
