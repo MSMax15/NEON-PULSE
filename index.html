@@ -26,29 +26,66 @@
 <div class="surface" aria-hidden="true"><svg viewBox="0 0 1440 70" preserveAspectRatio="none"><path d="M0 40Q90 10 180 40T360 40T540 40T720 40T900 40T1080 40T1260 40T1440 40V70H0Z" fill="#08153c" fill-opacity=".55"/></svg></div>
 
 <section id="explore"><div class="wrap">
-<h2>Pick a bubble</h2><p class="intro">Each bubble opens its own page. Dashed means unconfirmed.</p>
-<div class="mm" id="mm">
-<svg viewBox="0 0 1000 680" aria-hidden="true"><path d="M500 340Q330 310 160 136"/><path d="M500 340Q480 200 500 54"/><path d="M500 340Q670 310 840 136"/><path d="M500 340Q330 370 160 544"/><path d="M500 340Q520 480 500 626"/><path d="M500 340Q670 370 840 544"/></svg>
-<div class="core">GTA 6</div>
-<a class="node" href="cheats.html" style="left:16%;top:20%;--g:linear-gradient(135deg,#ff4f8b,#ff9a3c)">
- <img src="images/cheats.jpg" alt="" onerror="this.remove()"> <!-- BUBBLE IMAGE: put your photo at images/cheats.jpg -->
- <span><b>Cheats</b><small>Live at launch</small></span></a>
-<a class="node" href="cars.html" style="left:50%;top:8%;--g:linear-gradient(135deg,#ff9a3c,#ff4f8b)">
- <img src="images/cars.jpg" alt="" onerror="this.remove()"> <!-- BUBBLE IMAGE: put your photo at images/cars.jpg -->
- <span><b>Cars</b><small>After launch</small></span></a>
-<a class="node rumor" href="leaks.html" style="left:84%;top:20%;--g:linear-gradient(135deg,#7a2bd1,#19e3d2)">
- <img src="images/leaks.jpg" alt="" onerror="this.remove()"> <!-- BUBBLE IMAGE: put your photo at images/leaks.jpg -->
- <span><b>Leaks</b><small>Unconfirmed</small></span></a>
-<a class="node" href="weapons.html" style="left:16%;top:80%;--g:linear-gradient(135deg,#ff4f8b,#7a2bd1)">
- <img src="images/weapons.jpg" alt="" onerror="this.remove()"> <!-- BUBBLE IMAGE: put your photo at images/weapons.jpg -->
- <span><b>Weapons</b><small>After launch</small></span></a>
-<a class="node" href="map.html" style="left:50%;top:92%;--g:linear-gradient(135deg,#19e3d2,#2a64c8)">
- <img src="images/map.jpg" alt="" onerror="this.remove()"> <!-- BUBBLE IMAGE: put your photo at images/map.jpg -->
- <span><b>Map</b><small>After launch</small></span></a>
-<a class="node" href="gameplay.html" style="left:84%;top:80%;--g:linear-gradient(135deg,#ff4f8b,#ff9a3c)">
- <img src="images/gameplay.jpg" alt="" onerror="this.remove()"> <!-- BUBBLE IMAGE: put your photo at images/gameplay.jpg -->
- <span><b>Gameplay</b><small>From launch day</small></span></a>
-</div></div></section>
+<h2>Pick a slot</h2><p class="intro">Hover a slice, click to open it. Dashed means unconfirmed.</p>
+<svg class="wheel" id="wheel" viewBox="0 0 600 600" role="group" aria-label="Category wheel">
+<defs><linearGradient id="tint" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5a1a8c" stop-opacity=".45"/><stop offset="1" stop-color="#ff4f8b" stop-opacity=".6"/></linearGradient><linearGradient id="g0" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff9a3c"/><stop offset="1" stop-color="#ff4f8b"/></linearGradient><clipPath id="c0"><path d="M161.1 43.1A292 292 0 0 1 438.9 43.1L356.1 196.2A118 118 0 0 0 243.9 196.2Z"/></clipPath><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff4f8b"/><stop offset="1" stop-color="#7a2bd1"/></linearGradient><clipPath id="c1"><path d="M453.0 51.3A292 292 0 0 1 591.9 291.8L418.0 296.7A118 118 0 0 0 361.8 199.5Z"/></clipPath><linearGradient id="g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff4f8b"/><stop offset="1" stop-color="#ff9a3c"/></linearGradient><clipPath id="c2"><path d="M591.9 308.2A292 292 0 0 1 453.0 548.7L361.8 400.5A118 118 0 0 0 418.0 303.3Z"/></clipPath><linearGradient id="g3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#19e3d2"/><stop offset="1" stop-color="#2a64c8"/></linearGradient><clipPath id="c3"><path d="M438.9 556.9A292 292 0 0 1 161.1 556.9L243.9 403.8A118 118 0 0 0 356.1 403.8Z"/></clipPath><linearGradient id="g4" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff4f8b"/><stop offset="1" stop-color="#ff9a3c"/></linearGradient><clipPath id="c4"><path d="M147.0 548.7A292 292 0 0 1 8.1 308.2L182.0 303.3A118 118 0 0 0 238.2 400.5Z"/></clipPath><linearGradient id="g5" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7a2bd1"/><stop offset="1" stop-color="#19e3d2"/></linearGradient><clipPath id="c5"><path d="M8.1 291.8A292 292 0 0 1 147.0 51.3L238.2 199.5A118 118 0 0 0 182.0 296.7Z"/></clipPath></defs>
+<a class="seg" href="cars.html" data-name="Cars" data-sub="After launch" style="--tx:0.0px;--ty:-14.0px" aria-label="Cars, After launch">
+ <path d="M161.1 43.1A292 292 0 0 1 438.9 43.1L356.1 196.2A118 118 0 0 0 243.9 196.2Z" fill="url(#g0)"/>
+ <!-- WHEEL IMAGE: put your photo at images/cars.jpg (square works best) -->
+ <image href="images/cars.jpg" x="130" y="-75" width="340" height="340" preserveAspectRatio="xMidYMid slice" clip-path="url(#c0)"/>
+ <path d="M161.1 43.1A292 292 0 0 1 438.9 43.1L356.1 196.2A118 118 0 0 0 243.9 196.2Z" fill="url(#tint)"/>
+ <path class="edge" d="M161.1 43.1A292 292 0 0 1 438.9 43.1L356.1 196.2A118 118 0 0 0 243.9 196.2Z" fill="none"/>
+ <text class="t1" x="300" y="95" text-anchor="middle">Cars</text>
+ <text class="t2" x="300" y="117" text-anchor="middle">After launch</text>
+</a>
+<a class="seg" href="weapons.html" data-name="Weapons" data-sub="After launch" style="--tx:12.1px;--ty:-7.0px" aria-label="Weapons, After launch">
+ <path d="M453.0 51.3A292 292 0 0 1 591.9 291.8L418.0 296.7A118 118 0 0 0 361.8 199.5Z" fill="url(#g1)"/>
+ <!-- WHEEL IMAGE: put your photo at images/weapons.jpg (square works best) -->
+ <image href="images/weapons.jpg" x="308" y="28" width="340" height="340" preserveAspectRatio="xMidYMid slice" clip-path="url(#c1)"/>
+ <path d="M453.0 51.3A292 292 0 0 1 591.9 291.8L418.0 296.7A118 118 0 0 0 361.8 199.5Z" fill="url(#tint)"/>
+ <path class="edge" d="M453.0 51.3A292 292 0 0 1 591.9 291.8L418.0 296.7A118 118 0 0 0 361.8 199.5Z" fill="none"/>
+ <text class="t1" x="478" y="198" text-anchor="middle">Weapons</text>
+ <text class="t2" x="478" y="220" text-anchor="middle">After launch</text>
+</a>
+<a class="seg" href="gameplay.html" data-name="Gameplay" data-sub="From launch day" style="--tx:12.1px;--ty:7.0px" aria-label="Gameplay, From launch day">
+ <path d="M591.9 308.2A292 292 0 0 1 453.0 548.7L361.8 400.5A118 118 0 0 0 418.0 303.3Z" fill="url(#g2)"/>
+ <!-- WHEEL IMAGE: put your photo at images/gameplay.jpg (square works best) -->
+ <image href="images/gameplay.jpg" x="308" y="232" width="340" height="340" preserveAspectRatio="xMidYMid slice" clip-path="url(#c2)"/>
+ <path d="M591.9 308.2A292 292 0 0 1 453.0 548.7L361.8 400.5A118 118 0 0 0 418.0 303.3Z" fill="url(#tint)"/>
+ <path class="edge" d="M591.9 308.2A292 292 0 0 1 453.0 548.7L361.8 400.5A118 118 0 0 0 418.0 303.3Z" fill="none"/>
+ <text class="t1" x="478" y="402" text-anchor="middle">Gameplay</text>
+ <text class="t2" x="478" y="424" text-anchor="middle">From launch day</text>
+</a>
+<a class="seg" href="map.html" data-name="Map" data-sub="After launch" style="--tx:0.0px;--ty:14.0px" aria-label="Map, After launch">
+ <path d="M438.9 556.9A292 292 0 0 1 161.1 556.9L243.9 403.8A118 118 0 0 0 356.1 403.8Z" fill="url(#g3)"/>
+ <!-- WHEEL IMAGE: put your photo at images/map.jpg (square works best) -->
+ <image href="images/map.jpg" x="130" y="335" width="340" height="340" preserveAspectRatio="xMidYMid slice" clip-path="url(#c3)"/>
+ <path d="M438.9 556.9A292 292 0 0 1 161.1 556.9L243.9 403.8A118 118 0 0 0 356.1 403.8Z" fill="url(#tint)"/>
+ <path class="edge" d="M438.9 556.9A292 292 0 0 1 161.1 556.9L243.9 403.8A118 118 0 0 0 356.1 403.8Z" fill="none"/>
+ <text class="t1" x="300" y="505" text-anchor="middle">Map</text>
+ <text class="t2" x="300" y="527" text-anchor="middle">After launch</text>
+</a>
+<a class="seg" href="cheats.html" data-name="Cheats" data-sub="Live at launch" style="--tx:-12.1px;--ty:7.0px" aria-label="Cheats, Live at launch">
+ <path d="M147.0 548.7A292 292 0 0 1 8.1 308.2L182.0 303.3A118 118 0 0 0 238.2 400.5Z" fill="url(#g4)"/>
+ <!-- WHEEL IMAGE: put your photo at images/cheats.jpg (square works best) -->
+ <image href="images/cheats.jpg" x="-48" y="232" width="340" height="340" preserveAspectRatio="xMidYMid slice" clip-path="url(#c4)"/>
+ <path d="M147.0 548.7A292 292 0 0 1 8.1 308.2L182.0 303.3A118 118 0 0 0 238.2 400.5Z" fill="url(#tint)"/>
+ <path class="edge" d="M147.0 548.7A292 292 0 0 1 8.1 308.2L182.0 303.3A118 118 0 0 0 238.2 400.5Z" fill="none"/>
+ <text class="t1" x="122" y="402" text-anchor="middle">Cheats</text>
+ <text class="t2" x="122" y="424" text-anchor="middle">Live at launch</text>
+</a>
+<a class="seg" href="leaks.html" data-name="Leaks" data-sub="Unconfirmed" style="--tx:-12.1px;--ty:-7.0px" aria-label="Leaks, Unconfirmed">
+ <path d="M8.1 291.8A292 292 0 0 1 147.0 51.3L238.2 199.5A118 118 0 0 0 182.0 296.7Z" fill="url(#g5)"/>
+ <!-- WHEEL IMAGE: put your photo at images/leaks.jpg (square works best) -->
+ <image href="images/leaks.jpg" x="-48" y="27" width="340" height="340" preserveAspectRatio="xMidYMid slice" clip-path="url(#c5)"/>
+ <path d="M8.1 291.8A292 292 0 0 1 147.0 51.3L238.2 199.5A118 118 0 0 0 182.0 296.7Z" fill="url(#tint)"/>
+ <path class="edge" d="M8.1 291.8A292 292 0 0 1 147.0 51.3L238.2 199.5A118 118 0 0 0 182.0 296.7Z" fill="none" stroke-dasharray="10 8"/>
+ <text class="t1" x="122" y="197" text-anchor="middle">Leaks</text>
+ <text class="t2" x="122" y="219" text-anchor="middle">Unconfirmed</text>
+</a>
+<g class="hub"><circle cx="300" cy="300" r="108"/><text id="hub1" x="300" y="302" text-anchor="middle">GTA 6</text><text id="hub2" x="300" y="334" text-anchor="middle">Pick a slot</text></g>
+</svg>
+</div></section>
 
 <section id="facts"><div class="wrap split">
 <div><h2>What we know</h2><p class="intro">Only facts. We update this page when Rockstar does.</p><a class="btn" href="https://support.rockstargames.com/servicestatus" target="_blank" rel="noopener">Is GTA 6 down? Rockstar status</a></div>

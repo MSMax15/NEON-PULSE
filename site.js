@@ -25,7 +25,13 @@ if (hero){
   const depth = () => { const h = hero.offsetHeight; tgt = Math.min(1, Math.max(0, (scrollY - h * .3) / (h * .9))); if (!run){ run = true; requestAnimationFrame(step); } };
   addEventListener('scroll', depth, { passive: true });
   addEventListener('resize', depth); depth();
-  new IntersectionObserver((es, o) => es.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); o.unobserve(e.target); } }), { threshold: .2 }).observe($('mm'));
+  new IntersectionObserver((es, o) => es.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); o.unobserve(e.target); } }), { threshold: .25 }).observe($('wheel'));
+  document.querySelectorAll('.seg').forEach(g => {
+    const on = () => { $('hub1').textContent = g.dataset.name; $('hub2').textContent = g.dataset.sub; };
+    const off = () => { $('hub1').textContent = 'GTA 6'; $('hub2').textContent = 'Pick a slot'; };
+    g.addEventListener('mouseenter', on); g.addEventListener('focus', on);
+    g.addEventListener('mouseleave', off); g.addEventListener('blur', off);
+  });
 }
 
 // category pages: lightbox + copy
