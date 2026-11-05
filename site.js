@@ -179,43 +179,96 @@ document.addEventListener('click', e => {
   if (!img) return;
   const lb = document.createElement('div');
   lb.className = 'lb';
-  lb.innerHTML = '<img src="' + img.src + '" alt="' + (img.alt || '') + '"><p>' + (cap ? cap.innerHTML : '') + '</p>';
-  lb.onclick = () => lb.remove();
+  lb.setAttribute('role', 'dialog');
+  lb.setAttribute('aria-modal', 'true');
+  lb.setAttribute('aria-label', 'Bildansicht');
+
+  // Build the lightbox with DOM APIs. Never interpolate image alt text or
+  // caption markup into innerHTML.
+  const enlarged = document.createElement('img');
+  enlarged.src = img.currentSrc || img.src;
+  enlarged.alt = img.alt || '';
+  enlarged.decoding = 'async';
+  lb.append(enlarged);
+
+  if (cap && cap.textContent.trim()) {
+    const caption = document.createElement('p');
+    caption.textContent = cap.textContent.trim();
+    lb.append(caption);
+  }
+
+  lb.addEventListener('click', () => lb.remove());
   document.body.append(lb);
 });
 addEventListener('keydown', e => { if (e.key === 'Escape') document.querySelector('.lb')?.remove(); });
 
-// Formspree alarm (skip hard fail on file://)
+// Formspree alarm. Only send to the configured HTTPS endpoint.
 document.querySelectorAll('form[data-subscribe]').forEach(f => f.addEventListener('submit', async e => {
   e.preventDefault();
   const msg = f.querySelector('.msg');
-  const btn = f.querySelector('button');
+  const btn = f.querySelector('button[type="submit"], button:not([type])');
   if (!msg || !btn) return;
+
   if (isFile) {
     msg.textContent = 'Lokal (file://) kein Versand. Bitte die Live-Seite oder einen lokalen Server nutzen.';
     return;
   }
+
+  let endpoint;
+  try {
+    endpoint = new URL(f.getAttribute('action') || '', location.href);
+  } catch (_) {
+    msg.textContent = 'Formularziel ungültig. Bitte später erneut versuchen.';
+    return;
+  }
+  if (f.method.toLowerCase() !== 'post' ||
+      endpoint.protocol !== 'https:' ||
+      endpoint.origin !== 'https://formspree.io' ||
+      endpoint.pathname !== '/f/xaeeklye') {
+    msg.textContent = 'Formular ist momentan nicht korrekt konfiguriert.';
+    return;
+  }
+
+  const honeypot = f.elements.namedItem('_gotcha');
+  if (honeypot && String(honeypot.value || '').trim()) {
+    // Quietly discard bot submissions; do not forward them.
+    msg.textContent = 'Danke! Deine Anfrage wurde entgegengenommen.';
+    f.reset();
+    return;
+  }
+
+  const email = f.elements.namedItem('email');
+  if (email && typeof email.value === 'string') {
+    email.value = email.value.trim();
+    if (email.value.length > 254 || !email.checkValidity()) {
+      email.reportValidity();
+      return;
+    }
+  }
+
   btn.disabled = true;
   msg.textContent = 'Anmeldung wird übermittelt ...';
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 15000);
+
   try {
-    const response = await fetch(f.action, {
+    const response = await fetch(endpoint.href, {
       method: 'POST',
       body: new FormData(f),
-      headers: { 'Accept': 'application/json' }
+      headers: { 'Accept': 'application/json' },
+      credentials: 'omit',
+      cache: 'no-store',
+      referrerPolicy: 'strict-origin-when-cross-origin',
+      signal: controller.signal
     });
-    if (!response.ok) {
-      let detail = '';
-      try {
-        const data = await response.json();
-        detail = (data.errors || []).map(x => x.message).join(' ');
-      } catch (_) {}
-      throw new Error(detail || 'Formular konnte nicht gesendet werden.');
-    }
+    if (!response.ok) throw new Error('submission_failed');
+
     msg.textContent = 'Danke! 6PULSE hat deine Anmeldung erhalten. Automatische Status-Mails starten, sobald der Alarmdienst aktiv ist.';
     f.reset();
-  } catch (err) {
-    msg.textContent = 'Senden fehlgeschlagen. Bitte Verbindung prüfen und noch einmal versuchen.';
+  } catch (_) {
+    msg.textContent = 'Senden fehlgeschlagen oder Zeitüberschreitung. Bitte Verbindung prüfen und erneut versuchen.';
   } finally {
+    clearTimeout(timeout);
     btn.disabled = false;
   }
 }));

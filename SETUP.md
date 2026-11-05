@@ -1,23 +1,41 @@
-# Status-Alarm einrichten (ca. 20 Minuten)
+# GTA 6 Status-Alarm einrichten
 
-1. **Buttondown-Konto** anlegen (buttondown.com). Username notieren. Unter Settings den **API-Key** kopieren.
-   Prüfe dort: Double Opt-in ist aktiv, Absendername ist gesetzt, und schau dir Tarif-Limits an
-   (Anzahl Abonnenten und Mails pro Tag), denn jede Alarm-Mail geht an ALLE auf einmal.
-2. In `site.js` ganz unten `DEIN-USERNAME` durch deinen Buttondown-Username ersetzen.
-3. Im GitHub-Repo: **Settings > Secrets and variables > Actions > New repository secret**
-   Name `BUTTONDOWN_API_KEY`, Wert = dein API-Key. (Den Key niemals in eine Datei schreiben.)
-4. **Settings > Actions > General > Workflow permissions**: "Read and write permissions" wählen.
-5. Dateien hochladen:
-   - `bot/monitor.py`
-   - `status-monitor.yml` nach `.github/workflows/status-monitor.yml` (beim Anlegen den ganzen Pfad als Dateinamen tippen)
-   - alle Seiten: `index.html`, `alarm.html`, `impressum.html`, `datenschutz.html`, die sechs Kategorie-Seiten, `style.css`, `site.js`
-6. **Test:** Actions > status-monitor > Run workflow > bei `simulate` z. B. `up` eintragen.
-   Im Log steht "DRY RUN, would send ..." (es wird dabei NIE eine echte Mail verschickt).
-   Ein Lauf ohne `simulate` zeigt in der Zeile "seen around the name", was der Bot auf der Rockstar-Seite sieht.
-7. **Impressum und Datenschutz** ausfüllen und prüfen lassen. Ohne beides keine E-Mail-Adressen sammeln.
+## Voraussetzungen
 
-## Wichtig
-- Das Repo muss **öffentlich** sein, sonst verbrauchen die Läufe alle 5 Minuten deine Gratis-Actions-Minuten.
-- GitHub kann Läufe um mehrere Minuten verzögern oder bei sehr wenig Aktivität pausieren. Schau nach einigen Wochen in den Actions-Tab.
-- Der Bot kann die Rockstar-Seite von hier aus nicht getestet werden. Prüfe am Launch-Tag (oder früher) das Log und passe `NAMES` in `monitor.py` an.
-- Bis `ALERT_FROM` (Standard: 18. November 2026) verschickt der Bot keine Mails, damit keine Fehlalarme vor dem Launch rausgehen.
+- Ein Buttondown-Konto mit bestätigter Absenderadresse.
+- GitHub Actions für dieses Repository aktiviert.
+- Ein Repository-Secret namens `BUTTONDOWN_API_KEY`.
+
+## Einrichtung
+
+1. Lege bei Buttondown den Verteiler an und aktiviere Double Opt-in. Prüfe Absender, Datenschutz und Tarif-/Versandlimits.
+2. Öffne im GitHub-Repository **Settings → Secrets and variables → Actions**.
+3. Lege unter **Repository secrets** das Secret `BUTTONDOWN_API_KEY` an. Trage ausschließlich dort den Buttondown-API-Key ein. Niemals den Key in `site.js`, HTML, YAML, ZIP oder einen Commit schreiben.
+4. Prüfe unter **Settings → Actions → General → Workflow permissions**, dass GitHub Actions Schreibrechte für `GITHUB_TOKEN` erhalten darf. Das Workflow-YAML begrenzt `contents: write` auf den Statusmonitor-Job und nutzt den Token nur in den Push-Schritten.
+5. Lade die Projektdateien in das Repository hoch. Wichtig sind:
+   - `monitor.py`
+   - `requirements.txt`
+   - `.github/workflows/status-monitor.yml`
+   - `.github/workflows/security-audit.yml`
+   - `.github/dependabot.yml`
+   - `status.json`
+   - die Website-Dateien und Assets
+6. Öffne **Actions → status-monitor**. Starte **Run workflow** zunächst mit `simulate` leer, damit ein normaler Lauf den Status nur prüft. Für einen Trockenlauf kannst du `up`, `limited`, `down` oder `maintenance` eintragen. Simulationen ändern den gespeicherten Status nicht und versenden keine echte E-Mail.
+7. Prüfe die Actions-Logs. Nach dem ersten Lauf sollte der Branch `status-data` automatisch erstellt worden sein. Der Statusmonitor aktualisiert dort `status.json`.
+8. Mache vor dem Launch einen echten Test mit einem Testverteiler und bestätige, dass Formspree-Anmeldungen und Buttondown-E-Mails korrekt ankommen.
+
+## Sicherheitsregeln
+
+- `BUTTONDOWN_API_KEY` gehört ausschließlich in GitHub Repository Secrets.
+- Der Workflow benötigt Schreibrechte, um den Branch `status-data` zu aktualisieren. Gib keine zusätzlichen Rechte frei.
+- Prüfe Dependabot-Pull-Requests und den Workflow `security-audit` regelmäßig.
+- Der Monitor verschickt keine E-Mail vor `ALERT_FROM` (Standard: `2026-11-18T00:00:00+00:00`).
+- Ohne `BUTTONDOWN_API_KEY` bricht ein echter Versandversuch ab, statt den Status als erfolgreich versendet zu speichern.
+- Simulationen verschicken keine echten E-Mails und schreiben keinen Status.
+- Formspree-Anmeldungen allein aktivieren noch keinen automatischen Alarmdienst.
+
+## Grenzen
+
+- GitHub Actions können sich verzögern; der 5-Minuten-Zeitplan ist keine Echtzeitgarantie.
+- Rockstar kann seine Statusseite ändern. Prüfe am Launch-Tag die Logs und passe `NAMES`/die Status-Erkennung in `monitor.py` nur anhand bestätigter Seitenelemente an.
+- Impressum und Datenschutzerklärung müssen vollständig und rechtlich geprüft sein, bevor du personenbezogene Daten sammelst oder E-Mails verschickst.
