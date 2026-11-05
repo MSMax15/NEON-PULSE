@@ -23,3 +23,9 @@ Erlaubte `status`-Werte: `unlisted` | `up` | `limited` | `down` | `maintenance`
 - Status-Chip: liest zuerst die Live-Datei des Bots (Branch status-data), erst danach die statische status.json. Nach dem Launch zeigt "unlisted" nicht mehr "vor Release".
 - Partner-Seite: "Offizieller Hosting-Partner" geändert in "Hosting-Partner (Affiliate)".
 - Datenschutz: Abschnitte zu ZAP-Bannern (werden beim Laden der Seite abgerufen), Google Fonts und Statusanzeige ergänzt. Bitte rechtlich prüfen lassen.
+
+## Neu (Assistent)
+- Zwei Ratgeber-Seiten: `teamspeak-server-mieten.html`, `minecraft-server-mieten.html` (dauerhaft gesucht, auch nach dem GTA-Launch). Verlinkt in Menü, Sitemap und untereinander.
+- Alle Seiten: canonical, Open Graph und Social-Vorschaubild ergänzt.
+- `site.js`: optionales, cookiefreies Klick-Zählen für Affiliate-Links (aus, bis ein GoatCounter-Code gesetzt ist).
+- `LAUNCH-DAY.md`: Checkliste bis und nach dem 19.11.

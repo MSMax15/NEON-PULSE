@@ -358,3 +358,20 @@ if (chips.length) {
     if (found) el.setAttribute('href', found); else el.remove();
   });
 })();
+
+// Optional, cookie-free click counting for affiliate links (GoatCounter). Stays OFF while GOATCOUNTER is empty.
+// To switch on: create a free account at goatcounter.com, put your site code below, and add GoatCounter to datenschutz.html first.
+(() => {
+  const GOATCOUNTER = '';
+  if (!GOATCOUNTER) return;
+  const s = document.createElement('script');
+  s.async = true; s.src = 'https://gc.zgo.at/count.js';
+  s.dataset.goatcounter = 'https://' + GOATCOUNTER + '.goatcounter.com/count';
+  document.head.appendChild(s);
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[rel~="sponsored"]');
+    if (!a || !window.goatcounter || !window.goatcounter.count) return;
+    let path = a.href; try { path = new URL(a.href).pathname; } catch (_) {}
+    window.goatcounter.count({ path: 'affiliate' + path, title: location.pathname, event: true });
+  });
+})();
