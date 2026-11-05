@@ -224,7 +224,7 @@ document.querySelectorAll('form[data-subscribe]').forEach(f => f.addEventListene
 const chips = document.querySelectorAll('[data-status]');
 if (chips.length) {
   const LABELS = {
-    unlisted: 'Noch nicht live (vor Release)',
+    unlisted: 'Bei Rockstar noch nicht gelistet',
     up: 'Online',
     limited: 'Eingeschränkt',
     down: 'Gestört / Down',
@@ -249,9 +249,10 @@ if (chips.length) {
   if (isFile) {
     apply('unlisted', 'Lokaler Datei-Modus – status.json wird unter file:// oft blockiert.');
   } else {
+    // live data from the bot branch first, the static file in this repo is only the fallback
     const tryUrls = [
-      'status.json',
-      'https://raw.githubusercontent.com/MSMax15/NEON-PULSE/status-data/status.json'
+      'https://raw.githubusercontent.com/MSMax15/NEON-PULSE/status-data/status.json',
+      'status.json'
     ];
     (async () => {
       for (const url of tryUrls) {
@@ -331,4 +332,29 @@ if (chips.length) {
   }, true);
 
   paint();
+})();
+
+// Images: tolerate .jpg / .jpeg / .png / .webp mixes and give the wheel a fallback photo
+(() => {
+  const EXTS = ['jpg', 'jpeg', 'png', 'webp'];
+  const parts = u => { const m = u.match(/^(.*)\.(jpe?g|png|webp)$/i); return m ? [m[1], m[2].toLowerCase()] : [u, '']; };
+  const variants = u => { const [b, e] = parts(u); return [e, ...EXTS].filter((x, i, a) => x && a.indexOf(x) === i).map(x => b + '.' + x); };
+  const loads = u => new Promise(res => { const i = new Image(); i.onload = () => res(true); i.onerror = () => res(false); i.src = u; });
+  const first = async urls => { for (const u of urls) if (await loads(u)) return u; return null; };
+
+  // category pages: keep the slot hint when no photo exists under any extension
+  document.querySelectorAll('.ph img').forEach(async img => {
+    const src = img.getAttribute('src') || '';
+    const found = await first(variants(src));
+    if (!found) img.remove(); else if (found !== src) img.src = found;
+  });
+
+  // wheel: images/<name>.* first, then the first photo of that category (images/<name>/01.*)
+  document.querySelectorAll('.seg').forEach(async a => {
+    const cat = (a.getAttribute('href') || '').replace('.html', '');
+    const el = a.querySelector('image');
+    if (!el || !cat) return;
+    const found = await first([...variants('images/' + cat + '.jpg'), ...variants('images/' + cat + '/01.jpg')]);
+    if (found) el.setAttribute('href', found); else el.remove();
+  });
 })();

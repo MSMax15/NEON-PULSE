@@ -39,7 +39,7 @@ jobs:
           python-version: "3.12"
       - run: pip install requests beautifulsoup4
       - name: Check Rockstar status
-        run: python bot/monitor.py
+        run: python monitor.py
         env:
           BUTTONDOWN_API_KEY: ${{ secrets.BUTTONDOWN_API_KEY }}
           SIMULATE: ${{ inputs.simulate }}
