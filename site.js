@@ -136,3 +136,29 @@ if (chips.length) fetch('https://raw.githubusercontent.com/MSMax15/NEON-PULSE/st
     chips.forEach(c => { c.textContent = 'GTA 6 laut Rockstar: ' + (L[s.status] || 'unbekannt'); c.dataset.s = s.status; });
   })
   .catch(() => chips.forEach(c => { c.textContent = 'Status gerade nicht abrufbar'; }));
+
+// VI nav toggle (mobile / tablet)
+(() => {
+  const btn = document.querySelector('.nav-vi');
+  const panel = document.getElementById('nav-panel');
+  if (!btn || !panel) return;
+  const close = () => {
+    btn.setAttribute('aria-expanded', 'false');
+    panel.classList.remove('open');
+    document.body.classList.remove('nav-open');
+    btn.setAttribute('aria-label', 'Menü öffnen');
+  };
+  const open = () => {
+    btn.setAttribute('aria-expanded', 'true');
+    panel.classList.add('open');
+    document.body.classList.add('nav-open');
+    btn.setAttribute('aria-label', 'Menü schließen');
+  };
+  btn.addEventListener('click', () => {
+    if (window.matchMedia('(min-width:961px)').matches) return;
+    btn.getAttribute('aria-expanded') === 'true' ? close() : open();
+  });
+  panel.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
+  addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+  addEventListener('resize', () => { if (window.matchMedia('(min-width:961px)').matches) close(); });
+})();

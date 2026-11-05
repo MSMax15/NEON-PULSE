@@ -21,13 +21,12 @@ h1,h2,h3{font-family:Unbounded,Figtree,sans-serif}
 @keyframes up{to{transform:translateY(-110vh)}}
 /* nav */
 nav{position:fixed;inset:0 0 auto;z-index:5;background:linear-gradient(#170a2eee,transparent)}
-nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:1.4rem;padding-top:1rem;padding-bottom:1.4rem}
+nav .wrap{/* layout via .nav-bar */}
 .logo{display:block;flex:none}
 .logo img{display:block;height:46px;width:auto;filter:drop-shadow(0 0 12px #ff4f8b66)}
 .logo i{font-style:normal;color:var(--flamingo)}
-nav ul{display:flex;gap:1.2rem;list-style:none;padding:0;overflow-x:auto}
-nav ul a{color:var(--sand);text-decoration:none;font-weight:600;opacity:.85;white-space:nowrap}
-nav ul a:hover,nav ul a[aria-current]{opacity:1;text-decoration:underline;text-decoration-color:var(--flamingo);text-underline-offset:6px;text-decoration-thickness:2px}
+nav ul{list-style:none;padding:0;margin:0}
+/* nav link styles handled under .nav-panel */
 /* hero */
 .hero{position:relative;min-height:100svh;display:flex;align-items:center;padding:6rem 0 5rem}
 .hero h1{font-size:clamp(1.1rem,2.4vw,1.5rem);font-weight:600}
@@ -253,8 +252,7 @@ footer{padding:2.5rem 0;background:#08153cdd;border-top:1px solid var(--line);co
 .chip{min-height:36px}
 .affiliate-disclosure{max-width:60ch}
 .hosting-link,.affiliate-banner,.partner-pillars article,.partner-stage{backdrop-filter:blur(8px)}
-nav ul{gap:1rem;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-nav ul::-webkit-scrollbar{display:none}
+/* legacy nav scroll removed – VI panel */
 @media(max-width:700px){
   nav .wrap{padding-top:.75rem;padding-bottom:1rem;gap:.8rem}
   .logo img{height:38px}
@@ -345,4 +343,104 @@ body.launch .affiliate-rail{
 }
 @media(prefers-reduced-motion:reduce){
   body.launch .bg .rays{animation:none}
+}
+
+/* ========== VI menu (Roman 6) – mobile + desktop ========== */
+.nav-bar{
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  padding-top:1rem;padding-bottom:1.2rem;position:relative;
+}
+nav .logo{flex:none;z-index:6}
+.nav-vi{
+  flex:none;z-index:6;display:grid;place-items:center;
+  width:52px;height:48px;padding:0;border:2px solid var(--line);
+  border-radius:12px;background:#ffffff0c;color:var(--sand);
+  transition:border-color .2s,background .2s,box-shadow .2s,transform .2s;
+}
+.nav-vi:hover,.nav-vi[aria-expanded=true]{
+  border-color:var(--flamingo);background:#ff4f8b18;
+  box-shadow:0 0 22px #ff4f8b44;
+}
+.nav-vi-glyph{
+  font:900 1.35rem/1 Unbounded,sans-serif;letter-spacing:.06em;
+  background:linear-gradient(135deg,var(--flamingo),var(--orange),var(--teal));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  text-shadow:none;filter:drop-shadow(0 0 10px #ff4f8b55);
+}
+.nav-panel{
+  /* desktop default: horizontal links */
+  display:flex;align-items:center;flex:1;justify-content:flex-end;min-width:0;
+}
+.nav-panel ul{
+  display:flex;flex-wrap:wrap;justify-content:flex-end;gap:.35rem .9rem;
+  list-style:none;padding:0;margin:0;
+}
+.nav-panel a{
+  color:var(--sand);text-decoration:none;font-weight:600;opacity:.88;
+  white-space:nowrap;padding:.35rem .2rem;border-radius:6px;
+  transition:opacity .15s,color .15s;
+}
+.nav-panel a:hover,.nav-panel a[aria-current]{
+  opacity:1;color:#fff;
+  text-decoration:underline;text-decoration-color:var(--flamingo);
+  text-underline-offset:6px;text-decoration-thickness:2px;
+}
+
+/* Mobile / tablet: VI opens dropdown panel */
+@media(max-width:960px){
+  .nav-panel{
+    display:none;position:absolute;left:1.4rem;right:1.4rem;top:calc(100% - .2rem);
+    flex-direction:column;align-items:stretch;justify-content:flex-start;
+    padding:.7rem;border-radius:16px;border:1px solid var(--line);
+    background:#12081ef6;backdrop-filter:blur(18px);
+    box-shadow:0 20px 50px #000a,0 0 0 1px #ff4f8b22;
+    z-index:5;
+  }
+  .nav-panel.open{display:flex;animation:navIn .28s ease}
+  @keyframes navIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+  .nav-panel ul{
+    flex-direction:column;flex-wrap:nowrap;gap:0;width:100%;
+  }
+  .nav-panel li{border-bottom:1px solid #ffffff12}
+  .nav-panel li:last-child{border-bottom:0}
+  .nav-panel a{
+    display:block;padding:.95rem 1rem;border-radius:10px;
+    text-decoration:none;font-size:1.05rem;
+  }
+  .nav-panel a:hover,.nav-panel a[aria-current]{
+    background:#ff4f8b18;text-decoration:none;color:var(--teal);
+  }
+  .nav-vi{display:grid}
+}
+
+/* Desktop: VI as neon badge, links always visible */
+@media(min-width:961px){
+  .nav-vi{
+    order:3;margin-left:.4rem;width:48px;height:44px;
+    border-radius:11px;cursor:default;pointer-events:none;
+    /* decorative brand mark on desktop – still readable as VI */
+    opacity:.95;
+  }
+  .nav-vi:hover{transform:none}
+  .nav-panel{order:2}
+  .nav-panel ul{gap:.2rem 1.05rem}
+  .nav-panel a{font-size:.95rem;opacity:.9}
+}
+
+/* body lock when mobile menu open */
+body.nav-open{overflow:hidden}
+body.nav-open .nav-vi{border-color:var(--teal);box-shadow:0 0 24px #19e3d255}
+
+/* launch mode VI accent */
+body.launch .nav-vi-glyph{
+  background:linear-gradient(135deg,#ff3d9a,#ffb347,#2ef5e4);
+  -webkit-background-clip:text;background-clip:text;
+}
+body.launch .nav-panel{border-color:#ff3d9a44}
+@media(max-width:960px){
+  body.launch .nav-panel{background:#12081efa;box-shadow:0 20px 60px #ff3d9a33}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .nav-panel.open{animation:none}
 }
