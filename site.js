@@ -106,15 +106,25 @@ if (hero) {
   const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
   let cur = 0, tgt = 0, run = false;
   const step = () => {
-    cur += (tgt - cur) * .12;
-    if (calm || Math.abs(tgt - cur) < .001) { cur = tgt; run = false; }
-    else requestAnimationFrame(step);
+    // softer lerp = smoother dive crossfade while scrolling
+    const k = calm ? 1 : 0.075;
+    cur += (tgt - cur) * k;
+    if (Math.abs(tgt - cur) < 0.0008) {
+      cur = tgt;
+      run = false;
+    } else {
+      requestAnimationFrame(step);
+    }
     if (bgEl) bgEl.style.setProperty('--d', cur.toFixed(4));
   };
   const depth = () => {
     const h = hero.offsetHeight || 1;
-    tgt = Math.min(1, Math.max(0, (scrollY - h * .15) / (h * 1.15)));
-    if (!run) { run = true; requestAnimationFrame(step); }
+    // longer blend range for smoother surface → underwater
+    tgt = Math.min(1, Math.max(0, (scrollY - h * 0.08) / (h * 1.35)));
+    if (!run) {
+      run = true;
+      requestAnimationFrame(step);
+    }
   };
   addEventListener('scroll', depth, { passive: true });
   addEventListener('resize', depth);
@@ -201,10 +211,10 @@ document.querySelectorAll('form[data-subscribe]').forEach(f => f.addEventListene
       } catch (_) {}
       throw new Error(detail || 'Formular konnte nicht gesendet werden.');
     }
-    msg.textContent = 'Danke! Deine Anmeldung wurde übermittelt. Automatische Status-E-Mails erst nach Aktivierung des Alarmdienstes.';
+    msg.textContent = 'Danke! 6PULSE hat deine Anmeldung erhalten. Automatische Status-Mails starten, sobald der Alarmdienst aktiv ist.';
     f.reset();
   } catch (err) {
-    msg.textContent = 'Das hat nicht geklappt. Bitte Verbindung prüfen und erneut versuchen.';
+    msg.textContent = 'Senden fehlgeschlagen. Bitte Verbindung prüfen und noch einmal versuchen.';
   } finally {
     btn.disabled = false;
   }

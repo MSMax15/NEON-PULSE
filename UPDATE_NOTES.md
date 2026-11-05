@@ -6,7 +6,7 @@
 - Optional später: Branch `status-data` + `monitor.py` (siehe SETUP.md) für automatische Updates.
 
 ## Server-Alarm (Formspree)
-- Formulare posten an `https://formspree.io/f/xyeeovyz`.
+- Formulare posten an `https://formspree.io/f/xaeeklye`.
 - Anmeldungen erscheinen im Formspree-Dashboard.
 - Automatische „Server online“-Mails brauchen zusätzlich Buttondown + GitHub Action (SETUP.md).
 
