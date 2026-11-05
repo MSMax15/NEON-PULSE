@@ -500,3 +500,32 @@ body.launch .nav-drawer{
     opacity:0;pointer-events:none;transform:scale(.9);
   }
 }
+
+/* Dual affiliate creatives – integrated, not spam */
+.affiliate-duo{
+  display:grid;grid-template-columns:1fr 1fr;gap:1rem;
+  margin:1.4rem 0 0;
+}
+.affiliate-duo a{
+  display:flex;align-items:center;justify-content:center;
+  padding:.75rem;border:1px solid #ffffff18;border-radius:14px;
+  background:#070e28;transition:border-color .2s,transform .2s,box-shadow .2s;
+  min-height:88px;
+}
+.affiliate-duo a:hover{
+  border-color:#19e3d2aa;transform:translateY(-2px);
+  box-shadow:0 12px 28px #0005;
+}
+.affiliate-duo img{
+  display:block;max-width:100%;max-height:120px;width:auto;height:auto;
+  object-fit:contain;border-radius:6px;
+}
+@media(max-width:640px){
+  .affiliate-duo{grid-template-columns:1fr}
+  .affiliate-duo a{min-height:72px}
+  .affiliate-duo img{max-height:100px}
+}
+.affiliate-duo-label{
+  font:600 .68rem Figtree,sans-serif;letter-spacing:.14em;color:var(--teal);
+  margin:1.6rem 0 .5rem;
+}
