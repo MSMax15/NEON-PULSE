@@ -1,20 +1,30 @@
 # Neon Pulse – Update notes
 
-## Implemented
-- Added a responsive ZAP-Hosting horizontal affiliate banner on the homepage.
-- Added a compact vertical ZAP-Hosting banner on wide desktop screens only; it is hidden on smaller screens to avoid covering content.
-- Added a hosting discovery section for game-server and voice-server hosting, with affiliate links and a clear affiliate disclosure.
-- Connected the existing GTA 6 status-alarm signup form on `index.html` and `alarm.html` to the supplied Formspree endpoint `https://formspree.io/f/xyeeovyz`.
-- Added named consent and subject fields and an AJAX submission handler with success/error feedback.
-- Updated the privacy page to identify Formspree form processing and disclose affiliate links (the page still contains legal placeholders that must be completed).
+## Neu in diesem Stand
+- **SEO-Landingpage** `gta6-server-hosting.html` für Suchanfragen wie:
+  - „GTA 6 Server mieten“
+  - „GTA 6 Server erstellen“
+  - „FiveM Server Hosting“
+  - „TeamSpeak Server Hosting“
+- Seite beantwortet die Nutzerfrage klar, bleibt ehrlich (kein offizieller GTA-6-Dedicated-Server vor Launch), führt mit CTAs und Affiliate-Links zu ZAP-Hosting.
+- Structured Data (Article Schema), optimierte Meta-Title/Description, Canonical.
+- Sitemap erweitert und priorisiert die neue Seite hoch.
+- Nav „Hosting“ zeigt jetzt auf die Landingpage (Index + Alarm).
+- Hosting-Block auf der Startseite verlinkt stark auf den Guide + behält die direkten Affiliate-Buttons.
 
-## Important limitations / setup
-- Formspree now receives signup submissions. This alone does NOT send automatic GTA 6 status-change emails. The monitoring workflow and a mailing provider/API key still need to be configured and tested.
-- The site currently does not verify or publish third-party game-server uptime. No public server directory or live server ping feature was added because there is no server data/API or moderation process configured.
-- Only two ZAP banner creatives were supplied. The second supplied destination URL contained `Pulseneonz` (extra `z`); to avoid a potentially broken destination, both creatives currently use the first supplied affiliate destination: `https://zap-hosting.com/Pulseneon?voucher=FeedError-a-4064`.
-- Complete and review `datenschutz.html` and `impressum.html` before collecting personal data or monetizing traffic. In particular, verify Formspree's current privacy/processing terms and affiliate tracking disclosures.
+## Banner (unverändert aus dem vorherigen Stand)
+- Horizontal: Pulseneon + id 467139
+- Vertikal (rechts, nur Desktop ≥1500px): Pulseneonz + id 467140
 
-## Preserved
-- The SVG category wheel is byte-for-byte unchanged.
-- All 21 existing image files are unchanged, including their original extensions (`.png`, `.jpg`, `.jpeg`).
-- Existing category pages, site assets, and countdown behavior were not rebuilt.
+## Status-Alarm
+- Formspree-Endpoint aktiv für E-Mail-Sammlung.
+- Automatische „Server online“-Mails brauchen weiterhin den Monitoring-Workflow (SETUP.md).
+
+## Bewusst unangetastet
+- Waffenrad (SVG) und alle Bilddateien inkl. originaler Endungen.
+
+## So gehst du live
+1. ZIP entpacken, Inhalt von `NEON-PULSE-main` in dein GitHub-Repo legen.
+2. GitHub Pages deployen.
+3. In Google Search Console die neue URL + Sitemap einreichen.
+4. Nach einigen Tagen Rankings für die Ziel-Keywords prüfen und ggf. weitere Landingpages (nur FiveM / nur TeamSpeak) nachlegen.
