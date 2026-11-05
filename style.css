@@ -128,3 +128,32 @@ footer{padding:2.5rem 0;background:#08153cdd;border-top:1px solid var(--line);co
 .lb img{max-width:92vw;max-height:72vh;border:3px solid #fff;box-shadow:0 0 60px #ff4f8b66}
 .lb p{max-width:60ch;text-align:center}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.bg .rays,.bubbles span{animation:none}.card{transition:none}}
+
+/* alarm, forms, legal */
+.alert{display:grid;gap:.9rem;max-width:540px}
+.alert .row2{display:flex;flex-wrap:wrap;gap:.6rem}
+.alert input[type=email]{flex:1;min-width:220px;padding:1rem 1.2rem;border-radius:99px;border:2px solid var(--line);background:#ffffff14;color:var(--sand);font:inherit}
+.alert input[type=email]:focus{border-color:var(--teal);outline:0}
+.alert button{padding:1rem 1.6rem;border:0;border-radius:99px;background:var(--flamingo);color:var(--night);font-weight:600}
+.alert button:hover{background:var(--orange)}
+.alert button:disabled{opacity:.6;cursor:wait}
+.consent{display:flex;gap:.6rem;align-items:flex-start;color:var(--muted);font-size:.9rem}
+.consent input{flex:none;margin-top:.3rem;accent-color:var(--flamingo)}
+.msg{min-height:1.4em;color:var(--teal);font-weight:600}
+.chip{display:inline-flex;align-items:center;gap:.6rem;padding:.4rem 1rem;border:1px solid var(--line);border-radius:99px;background:#08153ccc;font-weight:600}
+.chip::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--muted)}
+.chip[data-s=up]::before{background:#3ddc84}
+.chip[data-s=limited]::before,.chip[data-s=maintenance]::before{background:var(--orange)}
+.chip[data-s=down]::before{background:#ff4f4f}
+.chip[data-s=unlisted]::before{background:var(--teal)}
+.dive+.dive{margin-left:1.6rem}
+.steps{display:grid;gap:1.1rem;margin-top:2.2rem;padding:0;list-style:none;counter-reset:s}
+.steps li{counter-increment:s;position:relative;padding-left:3rem;color:var(--muted)}
+.steps li b{color:var(--sand)}
+.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:2rem;height:2rem;border-radius:50%;background:var(--flamingo);color:var(--night);font:900 .95rem/2rem Unbounded,sans-serif;text-align:center}
+.legal{display:flex;gap:1.2rem;margin-top:.8rem}
+.legal a{color:var(--muted)}
+.draft{padding:.8rem 1rem;border:2px dashed var(--orange);color:var(--orange);border-radius:6px;margin-bottom:1.6rem}
+.prose{max-width:70ch;padding-bottom:6rem}
+.prose h2{font-size:1.25rem;margin:2rem 0 .6rem}
+.prose p{color:var(--muted)}

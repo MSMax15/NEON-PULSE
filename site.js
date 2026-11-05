@@ -49,3 +49,23 @@ document.addEventListener('click', e => {
   document.body.append(lb);
 });
 addEventListener('keydown', e => { if (e.key === 'Escape') document.querySelector('.lb')?.remove(); });
+
+// status alarm: sign-up form (Buttondown) and live status chip
+const BUTTONDOWN_USER = 'DEIN-USERNAME';   // <-- your Buttondown username
+document.querySelectorAll('form[data-subscribe]').forEach(f => f.addEventListener('submit', async e => {
+  e.preventDefault();
+  const msg = f.querySelector('.msg'), btn = f.querySelector('button');
+  if (BUTTONDOWN_USER.startsWith('DEIN')){ msg.textContent = 'Der Alarm ist noch nicht eingerichtet.'; return; }
+  btn.disabled = true; msg.textContent = 'Einen Moment ...';
+  try {
+    await fetch('https://buttondown.com/api/emails/embed-subscribe/' + encodeURIComponent(BUTTONDOWN_USER), { method: 'POST', mode: 'no-cors', body: new URLSearchParams({ email: f.email.value, embed: '1' }) });
+    msg.textContent = 'Fast geschafft: Du bekommst jetzt eine E-Mail mit Bestätigungslink. Schau auch im Spam-Ordner nach.';
+    f.reset();
+  } catch (err) { msg.textContent = 'Das hat nicht geklappt. Bitte versuche es später noch einmal.'; }
+  btn.disabled = false;
+}));
+const chips = document.querySelectorAll('[data-status]');
+if (chips.length) fetch('https://raw.githubusercontent.com/MSMax15/NEON-PULSE/status-data/status.json')
+  .then(r => r.ok ? r.json() : Promise.reject())
+  .then(s => { const L = { unlisted: 'Noch nicht bei Rockstar gelistet', up: 'Online', limited: 'Eingeschränkt', down: 'Gestört', maintenance: 'Wartung' }; chips.forEach(c => { c.textContent = 'GTA 6 laut Rockstar: ' + (L[s.status] || 'unbekannt'); c.dataset.s = s.status; }); })
+  .catch(() => chips.forEach(c => { c.textContent = 'Status gerade nicht abrufbar'; }));

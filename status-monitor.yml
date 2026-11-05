@@ -1,0 +1,52 @@
+# Move this file to .github/workflows/status-monitor.yml in your repo.
+name: status-monitor
+on:
+  schedule:
+    - cron: "*/5 * * * *"     # GitHub's shortest interval; runs can be delayed by several minutes
+  workflow_dispatch:
+    inputs:
+      simulate:
+        description: "Test: pretend the status is up / limited / down / maintenance (never sends mail)"
+        required: false
+permissions:
+  contents: write
+concurrency:
+  group: status-monitor
+  cancel-in-progress: false
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - name: Make sure the data branch exists
+        run: |
+          if ! git ls-remote --exit-code --heads origin status-data >/dev/null; then
+            git checkout --orphan status-data
+            git rm -rf . >/dev/null
+            echo '{"status":"unlisted"}' > status.json
+            git add status.json
+            git -c user.name=neon-pulse-bot -c user.email=bot@users.noreply.github.com commit -m "init status data"
+            git push origin status-data
+            git checkout "$GITHUB_REF_NAME"
+          fi
+      - uses: actions/checkout@v4
+        with:
+          ref: status-data
+          path: data
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests beautifulsoup4
+      - name: Check Rockstar status
+        run: python bot/monitor.py
+        env:
+          BUTTONDOWN_API_KEY: ${{ secrets.BUTTONDOWN_API_KEY }}
+          SIMULATE: ${{ inputs.simulate }}
+      - name: Save state
+        run: |
+          cd data
+          git config user.name neon-pulse-bot
+          git config user.email bot@users.noreply.github.com
+          git add -A
+          git diff --cached --quiet || { git commit -m "status update"; git push origin HEAD:status-data; }
