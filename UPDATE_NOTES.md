@@ -1,21 +1,18 @@
 # Neon Pulse – aktueller Stand
 
-## Neu
-- **partner.html** – eigene Affiliate-Partnerseite
-  - Geschwungener Neon-Pfeil (Vice-City-Farben: pink → orange → teal)
-  - Kreis mit ZAP-Logo (Creative id 467144), transparent/screen-Blend + leichte Vice-City-Tönung
-  - Rotierende Gradient-Ringe, Hover-Scale
-  - Affiliate-Link: https://zap-hosting.com/Pulseneonzap?voucher=FeedError-a-4064
-  - SEO: Title, Description, Keywords, Canonical, Schema WebPage
-  - Auffindbar unter /partner.html und über Nav „Partner“
-- Sitemap + Nav (Index, Alarm, Hosting-Guide) um Partner ergänzt
+## Launch-Modus (ab 19. Nov 2026, 00:00)
+Sobald der Countdown bei null ist, schaltet die Startseite um:
+- body/html Klasse `launch`
+- Andere Farben (stärkeres Neon, teal/pink/orange)
+- Hero: „GTA 6 is out“ / Launch Day + neue CTAs (Rockstar Status, Alarm, Server mieten, 6PULSE × ZAP)
+- Ticker, Alarm- und Hosting-Bereiche im Launch-Look
+- **Vorschau jetzt:** `?launch=1` an die URL hängen (z. B. index.html?launch=1)
 
-## Bestehend (unverändert im Kern)
-- Horizontal-Banner: Pulseneon + id 467139
-- Vertikal-Banner: Pulseneonz + id 467140
-- gta6-server-hosting.html (SEO-Guide „Server mieten / erstellen“)
-- Formspree Status-Alarm
-- Waffenrad + alle Bilder unangetastet
+## Feinschliff
+- Cleanere Widgets, Touch-Ziele ~48px, Mobile-Prio
+- Hero-Actions als flex-Gruppe
+- Partner-Seite 6PULSE × ZAP mit klarem Logo (id 467145 / zappulsehost)
 
-## Live
-Inhalt von NEON-PULSE-main 1:1 in GitHub ersetzen und Pages deployen.
+## Unverändert
+- Waffenrad, alle Bilddateien und Endungen
+- Formspree-Alarm
