@@ -157,3 +157,29 @@ footer{padding:2.5rem 0;background:#08153cdd;border-top:1px solid var(--line);co
 .prose{max-width:70ch;padding-bottom:6rem}
 .prose h2{font-size:1.25rem;margin:2rem 0 .6rem}
 .prose p{color:var(--muted)}
+
+
+/* Affiliate placements: restrained, responsive and clearly disclosed */
+.affiliate-band{padding:2rem 0 1.25rem;border-block:1px solid var(--line);background:linear-gradient(110deg,#08153cdd,#101b45bb)}
+.affiliate-band-inner{display:grid;grid-template-columns:minmax(220px,.8fr) minmax(300px,1.2fr);align-items:center;gap:2rem}
+.affiliate-copy h2{font-size:clamp(1.2rem,2.4vw,1.8rem);margin:.45rem 0}
+.affiliate-copy p{margin:0;color:var(--muted)}
+.affiliate-kicker{font:600 .68rem Figtree,sans-serif;letter-spacing:.16em;color:var(--teal)}
+.affiliate-banner{display:flex;align-items:center;justify-content:center;min-height:90px;padding:.65rem;border:1px solid #ffffff20;border-radius:14px;background:#070e28;overflow:hidden;transition:border-color .2s,transform .2s,box-shadow .2s}
+.affiliate-banner:hover{border-color:#19e3d2aa;transform:translateY(-2px);box-shadow:0 12px 34px #0005}
+.affiliate-banner img{display:block;width:100%;max-height:150px;object-fit:contain}
+.affiliate-disclosure{font-size:.78rem!important;color:var(--muted)!important;margin:.8rem auto 0;line-height:1.5}
+.hosting-section{background:linear-gradient(135deg,#101b45aa,#08153c66)}
+.hosting-links{display:grid;gap:.8rem}
+.hosting-link{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem 1.15rem;border:1px solid var(--line);border-radius:12px;background:#ffffff0a;color:var(--sand);text-decoration:none;transition:background .2s,border-color .2s,transform .2s}
+.hosting-link:hover{background:#ffffff14;border-color:var(--teal);transform:translateY(-2px)}
+.hosting-link b,.hosting-link small{display:block}
+.hosting-link small{margin-top:.25rem;color:var(--muted)}
+.hosting-link strong{white-space:nowrap;color:var(--teal)}
+.affiliate-rail{position:fixed;z-index:8;right:12px;top:42%;width:118px;padding:.55rem;border:1px solid #ffffff25;border-radius:12px;background:#08153cee;box-shadow:0 8px 30px #0007;backdrop-filter:blur(12px)}
+.affiliate-rail>span,.affiliate-rail>small{display:block;text-align:center;font-size:.58rem;letter-spacing:.1em;color:var(--muted)}
+.affiliate-rail a{display:block;margin:.45rem 0}
+.affiliate-rail img{display:block;width:100%;height:auto;max-height:290px;object-fit:contain;border-radius:6px}
+.affiliate-rail>small{letter-spacing:0;font-size:.62rem}
+@media(max-width:1500px){.affiliate-rail{display:none}}
+@media(max-width:700px){.affiliate-band-inner{grid-template-columns:1fr;gap:1rem}.affiliate-banner{min-height:70px}.affiliate-banner img{max-height:110px}.hosting-link{align-items:flex-start}.hosting-link strong{font-size:.85rem}}

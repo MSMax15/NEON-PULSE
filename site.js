@@ -50,19 +50,33 @@ document.addEventListener('click', e => {
 });
 addEventListener('keydown', e => { if (e.key === 'Escape') document.querySelector('.lb')?.remove(); });
 
-// status alarm: sign-up form (Buttondown) and live status chip
-const BUTTONDOWN_USER = 'DEIN-USERNAME';   // <-- your Buttondown username
+// status alarm: submit email registration to Formspree.
+// This collects the request; automatic status-alert emails require a separate
+// verified mailing/monitoring workflow and are not claimed to be active here.
 document.querySelectorAll('form[data-subscribe]').forEach(f => f.addEventListener('submit', async e => {
   e.preventDefault();
   const msg = f.querySelector('.msg'), btn = f.querySelector('button');
-  if (BUTTONDOWN_USER.startsWith('DEIN')){ msg.textContent = 'Der Alarm ist noch nicht eingerichtet.'; return; }
-  btn.disabled = true; msg.textContent = 'Einen Moment ...';
+  if (!msg || !btn) return;
+  btn.disabled = true;
+  msg.textContent = 'Anmeldung wird übermittelt ...';
   try {
-    await fetch('https://buttondown.com/api/emails/embed-subscribe/' + encodeURIComponent(BUTTONDOWN_USER), { method: 'POST', mode: 'no-cors', body: new URLSearchParams({ email: f.email.value, embed: '1' }) });
-    msg.textContent = 'Fast geschafft: Du bekommst jetzt eine E-Mail mit Bestätigungslink. Schau auch im Spam-Ordner nach.';
+    const response = await fetch(f.action, {
+      method: 'POST',
+      body: new FormData(f),
+      headers: { 'Accept': 'application/json' }
+    });
+    if (!response.ok) {
+      let detail = '';
+      try { const data = await response.json(); detail = data.errors?.map(x => x.message).join(' '); } catch (_) {}
+      throw new Error(detail || 'Formular konnte nicht gesendet werden.');
+    }
+    msg.textContent = 'Danke! Deine Anmeldung wurde übermittelt. Automatische Status-E-Mails werden erst nach Aktivierung des Alarmdienstes versendet.';
     f.reset();
-  } catch (err) { msg.textContent = 'Das hat nicht geklappt. Bitte versuche es später noch einmal.'; }
-  btn.disabled = false;
+  } catch (err) {
+    msg.textContent = 'Das hat nicht geklappt. Bitte prüfe deine Verbindung und versuche es erneut.';
+  } finally {
+    btn.disabled = false;
+  }
 }));
 const chips = document.querySelectorAll('[data-status]');
 if (chips.length) fetch('https://raw.githubusercontent.com/MSMax15/NEON-PULSE/status-data/status.json')
