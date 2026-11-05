@@ -137,28 +137,42 @@ if (chips.length) fetch('https://raw.githubusercontent.com/MSMax15/NEON-PULSE/st
   })
   .catch(() => chips.forEach(c => { c.textContent = 'Status gerade nicht abrufbar'; }));
 
-// VI nav toggle (mobile / tablet)
+// Hamburger → right Vice City drawer
 (() => {
-  const btn = document.querySelector('.nav-vi');
-  const panel = document.getElementById('nav-panel');
-  if (!btn || !panel) return;
-  const close = () => {
-    btn.setAttribute('aria-expanded', 'false');
-    panel.classList.remove('open');
-    document.body.classList.remove('nav-open');
-    btn.setAttribute('aria-label', 'Menü öffnen');
-  };
+  const btn = document.querySelector('.nav-burger');
+  const drawer = document.getElementById('nav-drawer');
+  const backdrop = document.getElementById('nav-backdrop');
+  const closeBtn = document.querySelector('.nav-close');
+  if (!btn || !drawer) return;
+
   const open = () => {
     btn.setAttribute('aria-expanded', 'true');
-    panel.classList.add('open');
+    drawer.classList.add('open');
+    drawer.setAttribute('aria-hidden', 'false');
+    if (backdrop) {
+      backdrop.hidden = false;
+      requestAnimationFrame(() => backdrop.classList.add('show'));
+    }
     document.body.classList.add('nav-open');
     btn.setAttribute('aria-label', 'Menü schließen');
   };
+  const close = () => {
+    btn.setAttribute('aria-expanded', 'false');
+    drawer.classList.remove('open');
+    drawer.setAttribute('aria-hidden', 'true');
+    if (backdrop) {
+      backdrop.classList.remove('show');
+      setTimeout(() => { if (!drawer.classList.contains('open')) backdrop.hidden = true; }, 350);
+    }
+    document.body.classList.remove('nav-open');
+    btn.setAttribute('aria-label', 'Menü öffnen');
+  };
+
   btn.addEventListener('click', () => {
-    if (window.matchMedia('(min-width:961px)').matches) return;
     btn.getAttribute('aria-expanded') === 'true' ? close() : open();
   });
-  panel.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
+  closeBtn?.addEventListener('click', close);
+  backdrop?.addEventListener('click', close);
+  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
   addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
-  addEventListener('resize', () => { if (window.matchMedia('(min-width:961px)').matches) close(); });
 })();
