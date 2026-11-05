@@ -176,3 +176,78 @@ if (chips.length) fetch('https://raw.githubusercontent.com/MSMax15/NEON-PULSE/st
   drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
   addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
 })();
+
+
+// Empfehlungs-Pakete: 3D-Stack + Swipe
+(() => {
+  const root = document.querySelector('[data-packs]');
+  if (!root) return;
+  const cards = [...root.querySelectorAll('.pack-card')];
+  const dots = [...document.querySelectorAll('[data-packs-dots] button')];
+  const prev = root.querySelector('.packs-prev');
+  const next = root.querySelector('.packs-next');
+  let i = 1;
+  const n = cards.length;
+  let lock = false;
+
+  const paint = () => {
+    cards.forEach((c, idx) => {
+      c.classList.remove('is-active', 'is-prev', 'is-next');
+      if (idx === i) c.classList.add('is-active');
+      else if (idx === (i - 1 + n) % n) c.classList.add('is-prev');
+      else if (idx === (i + 1) % n) c.classList.add('is-next');
+    });
+    dots.forEach((d, idx) => d.classList.toggle('is-on', idx === i));
+  };
+
+  const go = (dir) => {
+    if (lock) return;
+    lock = true;
+    i = (i + dir + n) % n;
+    paint();
+    setTimeout(() => { lock = false; }, 320);
+  };
+  const goTo = (idx) => {
+    if (lock) return;
+    i = ((idx % n) + n) % n;
+    paint();
+  };
+
+  prev?.addEventListener('click', () => go(-1));
+  next?.addEventListener('click', () => go(1));
+  dots.forEach(d => d.addEventListener('click', () => goTo(+d.dataset.go)));
+
+  const vp = root.querySelector('.packs-viewport');
+  let x0 = null, y0 = null, dragged = false;
+  const start = (x, y) => { x0 = x; y0 = y; dragged = false; };
+  const move = (x, y) => {
+    if (x0 == null) return;
+    if (Math.abs(x - x0) > 12 && Math.abs(x - x0) > Math.abs(y - y0)) dragged = true;
+  };
+  const end = (x) => {
+    if (x0 == null) return;
+    const dx = x - x0;
+    if (dragged && Math.abs(dx) > 45) go(dx < 0 ? 1 : -1);
+    x0 = null; y0 = null;
+  };
+
+  vp?.addEventListener('touchstart', e => start(e.changedTouches[0].clientX, e.changedTouches[0].clientY), { passive: true });
+  vp?.addEventListener('touchmove', e => move(e.changedTouches[0].clientX, e.changedTouches[0].clientY), { passive: true });
+  vp?.addEventListener('touchend', e => end(e.changedTouches[0].clientX), { passive: true });
+  vp?.addEventListener('mousedown', e => start(e.clientX, e.clientY));
+  addEventListener('mousemove', e => move(e.clientX, e.clientY));
+  addEventListener('mouseup', e => end(e.clientX));
+
+  // prevent accidental navigation after swipe
+  vp?.addEventListener('click', e => {
+    if (dragged) { e.preventDefault(); e.stopPropagation(); dragged = false; }
+  }, true);
+
+  addEventListener('keydown', e => {
+    if (!root.offsetParent) return;
+    if (e.key === 'ArrowLeft') go(-1);
+    if (e.key === 'ArrowRight') go(1);
+  });
+
+  paint();
+})();
