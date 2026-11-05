@@ -129,125 +129,44 @@ document.querySelectorAll('form[data-subscribe]').forEach(f => f.addEventListene
 }));
 
 const chips = document.querySelectorAll('[data-status]');
-if (chips.length) fetch('https://raw.githubusercontent.com/MSMax15/NEON-PULSE/status-data/status.json')
-  .then(r => r.ok ? r.json() : Promise.reject())
-  .then(s => {
-    const L = { unlisted: 'Noch nicht bei Rockstar gelistet', up: 'Online', limited: 'Eingeschränkt', down: 'Gestört', maintenance: 'Wartung' };
-    chips.forEach(c => { c.textContent = 'GTA 6 laut Rockstar: ' + (L[s.status] || 'unbekannt'); c.dataset.s = s.status; });
-  })
-  .catch(() => chips.forEach(c => { c.textContent = 'Status gerade nicht abrufbar'; }));
-
-// Hamburger → right Vice City drawer
-(() => {
-  const btn = document.querySelector('.nav-burger');
-  const drawer = document.getElementById('nav-drawer');
-  const backdrop = document.getElementById('nav-backdrop');
-  const closeBtn = document.querySelector('.nav-close');
-  if (!btn || !drawer) return;
-
-  const open = () => {
-    btn.setAttribute('aria-expanded', 'true');
-    drawer.classList.add('open');
-    drawer.setAttribute('aria-hidden', 'false');
-    if (backdrop) {
-      backdrop.hidden = false;
-      requestAnimationFrame(() => backdrop.classList.add('show'));
-    }
-    document.body.classList.add('nav-open');
-    btn.setAttribute('aria-label', 'Menü schließen');
+if (chips.length) {
+  const LABELS = {
+    unlisted: 'Noch nicht live (vor Release)',
+    up: 'Online',
+    limited: 'Eingeschränkt',
+    down: 'Gestört / Down',
+    maintenance: 'Wartung'
   };
-  const close = () => {
-    btn.setAttribute('aria-expanded', 'false');
-    drawer.classList.remove('open');
-    drawer.setAttribute('aria-hidden', 'true');
-    if (backdrop) {
-      backdrop.classList.remove('show');
-      setTimeout(() => { if (!drawer.classList.contains('open')) backdrop.hidden = true; }, 350);
-    }
-    document.body.classList.remove('nav-open');
-    btn.setAttribute('aria-label', 'Menü öffnen');
-  };
-
-  btn.addEventListener('click', () => {
-    btn.getAttribute('aria-expanded') === 'true' ? close() : open();
-  });
-  closeBtn?.addEventListener('click', close);
-  backdrop?.addEventListener('click', close);
-  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
-  addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
-})();
-
-
-// Empfehlungs-Pakete: 3D-Stack + Swipe
-(() => {
-  const root = document.querySelector('[data-packs]');
-  if (!root) return;
-  const cards = [...root.querySelectorAll('.pack-card')];
-  const dots = [...document.querySelectorAll('[data-packs-dots] button')];
-  const prev = root.querySelector('.packs-prev');
-  const next = root.querySelector('.packs-next');
-  let i = 1;
-  const n = cards.length;
-  let lock = false;
-
-  const paint = () => {
-    cards.forEach((c, idx) => {
-      c.classList.remove('is-active', 'is-prev', 'is-next');
-      if (idx === i) c.classList.add('is-active');
-      else if (idx === (i - 1 + n) % n) c.classList.add('is-prev');
-      else if (idx === (i + 1) % n) c.classList.add('is-next');
+  const launchAt = new Date(2026, 10, 19, 0, 0, 0).getTime();
+  const apply = (status, detail) => {
+    const key = status || 'unlisted';
+    const preLaunch = Date.now() < launchAt && (key === 'unlisted' || !status);
+    chips.forEach(c => {
+      if (preLaunch) {
+        c.textContent = 'GTA 6: Noch nicht live – Release 19.11.2026';
+        c.dataset.s = 'unlisted';
+      } else {
+        c.textContent = 'GTA 6: ' + (LABELS[key] || key);
+        c.dataset.s = key;
+      }
+      if (detail) c.title = detail;
     });
-    dots.forEach((d, idx) => d.classList.toggle('is-on', idx === i));
   };
-
-  const go = (dir) => {
-    if (lock) return;
-    lock = true;
-    i = (i + dir + n) % n;
-    paint();
-    setTimeout(() => { lock = false; }, 320);
-  };
-  const goTo = (idx) => {
-    if (lock) return;
-    i = ((idx % n) + n) % n;
-    paint();
-  };
-
-  prev?.addEventListener('click', () => go(-1));
-  next?.addEventListener('click', () => go(1));
-  dots.forEach(d => d.addEventListener('click', () => goTo(+d.dataset.go)));
-
-  const vp = root.querySelector('.packs-viewport');
-  let x0 = null, y0 = null, dragged = false;
-  const start = (x, y) => { x0 = x; y0 = y; dragged = false; };
-  const move = (x, y) => {
-    if (x0 == null) return;
-    if (Math.abs(x - x0) > 12 && Math.abs(x - x0) > Math.abs(y - y0)) dragged = true;
-  };
-  const end = (x) => {
-    if (x0 == null) return;
-    const dx = x - x0;
-    if (dragged && Math.abs(dx) > 45) go(dx < 0 ? 1 : -1);
-    x0 = null; y0 = null;
-  };
-
-  vp?.addEventListener('touchstart', e => start(e.changedTouches[0].clientX, e.changedTouches[0].clientY), { passive: true });
-  vp?.addEventListener('touchmove', e => move(e.changedTouches[0].clientX, e.changedTouches[0].clientY), { passive: true });
-  vp?.addEventListener('touchend', e => end(e.changedTouches[0].clientX), { passive: true });
-  vp?.addEventListener('mousedown', e => start(e.clientX, e.clientY));
-  addEventListener('mousemove', e => move(e.clientX, e.clientY));
-  addEventListener('mouseup', e => end(e.clientX));
-
-  // prevent accidental navigation after swipe
-  vp?.addEventListener('click', e => {
-    if (dragged) { e.preventDefault(); e.stopPropagation(); dragged = false; }
-  }, true);
-
-  addEventListener('keydown', e => {
-    if (!root.offsetParent) return;
-    if (e.key === 'ArrowLeft') go(-1);
-    if (e.key === 'ArrowRight') go(1);
-  });
-
-  paint();
-})();
+  const tryUrls = [
+    'status.json',
+    'https://raw.githubusercontent.com/MSMax15/NEON-PULSE/status-data/status.json'
+  ];
+  (async () => {
+    for (const url of tryUrls) {
+      try {
+        const r = await fetch(url, { cache: 'no-store' });
+        if (!r.ok) continue;
+        const s = await r.json();
+        apply(s.status, s.detail || s.label || '');
+        return;
+      } catch (_) {}
+    }
+    // Fallback: honest pre-launch message (not "nicht abrufbar")
+    apply('unlisted', 'Lokaler Fallback – Rockstar bleibt die verbindliche Quelle.');
+  })();
+}

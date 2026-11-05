@@ -1,18 +1,18 @@
-# Neon Pulse – aktueller Stand
+# Neon Pulse – Status & Alarm
 
-## Launch-Modus (ab 19. Nov 2026, 00:00)
-Sobald der Countdown bei null ist, schaltet die Startseite um:
-- body/html Klasse `launch`
-- Andere Farben (stärkeres Neon, teal/pink/orange)
-- Hero: „GTA 6 is out“ / Launch Day + neue CTAs (Rockstar Status, Alarm, Server mieten, 6PULSE × ZAP)
-- Ticker, Alarm- und Hosting-Bereiche im Launch-Look
-- **Vorschau jetzt:** `?launch=1` an die URL hängen (z. B. index.html?launch=1)
+## Status-Chip
+- Liest `status.json` aus dem gleichen Repo (GitHub Pages).
+- Fallback-Text vor dem 19.11.2026: **„Noch nicht live – Release 19.11.2026“** (kein „nicht abrufbar“).
+- Optional später: Branch `status-data` + `monitor.py` (siehe SETUP.md) für automatische Updates.
 
-## Feinschliff
-- Cleanere Widgets, Touch-Ziele ~48px, Mobile-Prio
-- Hero-Actions als flex-Gruppe
-- Partner-Seite 6PULSE × ZAP mit klarem Logo (id 467145 / zappulsehost)
+## Server-Alarm (Formspree)
+- Formulare posten an `https://formspree.io/f/xyeeovyz`.
+- Anmeldungen erscheinen im Formspree-Dashboard.
+- Automatische „Server online“-Mails brauchen zusätzlich Buttondown + GitHub Action (SETUP.md).
 
-## Unverändert
-- Waffenrad, alle Bilddateien und Endungen
-- Formspree-Alarm
+## status.json pflegen
+Datei im Repo anpassen, z.B. nach Launch:
+```json
+{ "status": "up", "detail": "Rockstar meldet operational", "updated": "..." }
+```
+Erlaubte `status`-Werte: `unlisted` | `up` | `limited` | `down` | `maintenance`
