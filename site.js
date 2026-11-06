@@ -73,6 +73,7 @@ if (hero) {
     if (actions) {
       actions.innerHTML =
         '<a class="dive dive-primary" href="https://support.rockstargames.com/servicestatus" target="_blank" rel="noopener">Rockstar Status</a>' +
+        '<a class="dive" href="#live">Livestream</a>' +
         '<a class="dive" href="#alarm">Server-Alarm</a>' +
         '<a class="dive" href="gta6-server-hosting.html">Server mieten</a>' +
         '<a class="dive" href="partner.html">6PULSE × ZAP</a>';
@@ -81,6 +82,7 @@ if (hero) {
     if (ticker) {
       ticker.innerHTML = '<span>LAUNCH DAY</span><i></i><span>GTA 6 is out now</span><i></i><span>Check Rockstar status</span><i></i><span>Server &amp; TeamSpeak hosting</span><i></i><span>Status-Alarm aktivieren</span><i></i><span>6PULSE × ZAP</span><i></i><span>LAUNCH DAY</span><i></i><span>GTA 6 is out now</span><i></i><span>Check Rockstar status</span><i></i><span>Server &amp; TeamSpeak hosting</span><i></i><span>Status-Alarm aktivieren</span><i></i><span>6PULSE × ZAP</span><i></i>';
     }
+    document.dispatchEvent(new CustomEvent('np-launch'));
   };
 
   const tick = () => {
@@ -426,5 +428,61 @@ if (chips.length) {
     if (!a || !window.goatcounter || !window.goatcounter.count) return;
     let path = a.href; try { path = new URL(a.href).pathname; } catch (_) {}
     window.goatcounter.count({ path: 'affiliate' + path, title: location.pathname, event: true });
+  });
+})();
+
+// Live block (YouTube, loads only after a click).
+// Switch it from live.json: {"mode":"auto"|"live"|"offline","note":"...","videoId":""}
+(() => {
+  const box = document.getElementById('live');
+  if (!box) return;
+  const CHANNEL_ID = 'UCytwKvyxmhC1JVnb4PRdvOA';
+  const badge = document.getElementById('live-badge');
+  const note = document.getElementById('live-note');
+  const stage = document.getElementById('live-stage');
+  const gate = document.getElementById('live-gate');
+  const off = document.getElementById('live-offline');
+  const load = document.getElementById('live-load');
+  const MODES = { auto: 'STREAM', live: 'LIVE', offline: 'OFFLINE' };
+  const cfg = { mode: 'auto', note: '', videoId: '' };
+
+  const paint = () => {
+    badge.textContent = MODES[cfg.mode];
+    badge.dataset.s = cfg.mode;
+    note.textContent = cfg.note ||
+      (cfg.mode === 'live' ? 'Wir sind gerade live. Klicke auf den Player.' :
+       cfg.mode === 'offline' ? 'Gerade offline. Schau auf dem Kanal vorbei.' :
+       'Wenn wir live sind, läuft der Stream hier. Sonst findest du uns auf dem Kanal.');
+    if (gate) gate.hidden = cfg.mode === 'offline';
+    if (off) off.hidden = cfg.mode !== 'offline';
+  };
+  const maybeShow = () => {
+    if (document.body.classList.contains('launch') || cfg.mode === 'live') { paint(); box.hidden = false; }
+  };
+
+  fetch('live.json', { cache: 'no-store', credentials: 'omit' })
+    .then(r => (r.ok ? r.json() : null))
+    .then(d => {
+      if (!d || typeof d !== 'object') return;
+      if (Object.prototype.hasOwnProperty.call(MODES, d.mode)) cfg.mode = d.mode;
+      if (typeof d.note === 'string') cfg.note = d.note.slice(0, 200);
+      if (typeof d.videoId === 'string' && /^[A-Za-z0-9_-]{11}$/.test(d.videoId)) cfg.videoId = d.videoId;
+    })
+    .catch(() => {})
+    .then(maybeShow);
+  document.addEventListener('np-launch', maybeShow);
+
+  if (load) load.addEventListener('click', () => {
+    const base = cfg.videoId
+      ? 'https://www.youtube-nocookie.com/embed/' + cfg.videoId + '?'
+      : 'https://www.youtube-nocookie.com/embed/live_stream?channel=' + CHANNEL_ID + '&';
+    const f = document.createElement('iframe');
+    f.src = base + 'autoplay=1&rel=0';
+    f.title = 'Feed Error Livestream auf YouTube';
+    f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+    f.setAttribute('allowfullscreen', '');
+    f.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+    f.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-presentation allow-popups allow-popups-to-escape-sandbox');
+    stage.replaceChildren(f);
   });
 })();

@@ -29,3 +29,14 @@ Erlaubte `status`-Werte: `unlisted` | `up` | `limited` | `down` | `maintenance`
 - Alle Seiten: canonical, Open Graph und Social-Vorschaubild ergänzt.
 - `site.js`: optionales, cookiefreies Klick-Zählen für Affiliate-Links (aus, bis ein GoatCounter-Code gesetzt ist).
 - `LAUNCH-DAY.md`: Checkliste bis und nach dem 19.11.
+
+## Live-Modus V1 (Assistent)
+- Neuer Block `#live` auf der Startseite: erscheint, wenn der Countdown auf null geht, oder wenn `live.json` auf `"mode": "live"` steht.
+- Der YouTube-Player lädt erst nach Klick ("Ich bin 18+ ..."). Kanal: @FeedErrorclipz.
+- `live.json` ist dein Schalter (auch per GitHub-App am Handy änderbar):
+  - `"mode": "auto"`    zeigt "STREAM" und den Player (YouTube zeigt selbst, ob gerade ein Stream läuft)
+  - `"mode": "live"`    zeigt "LIVE" mit rotem Punkt (nur setzen, wenn du wirklich live bist)
+  - `"mode": "offline"` zeigt "Gerade offline" und den Kanal-Link
+  - `"note"`: kurzer Text (z. B. nächster Stream), `"videoId"`: optional die 11-stellige ID eines bestimmten Videos oder Mitschnitts
+- CSP: `frame-src` erlaubt nur `https://www.youtube-nocookie.com`. Datenschutz um den YouTube-Absatz ergänzt.
+- Hero-Text ohne die unbestätigte Angabe "midnight in your time zone".
