@@ -27,11 +27,3 @@ GitHub's current custom-domain instructions: https://docs.github.com/en/pages/co
 ## Next engineering phase
 
 Connect a trusted official status source and a small set of monitored endpoints. Only after validation should the page show live labels and timestamped history. Community reporting should be added with server-side rate limiting, abuse protection, and privacy-conscious data retention.
-
-
-## Security
-
-- Browser-side Content Security Policy and referrer policy are included on all HTML pages.
-- The status monitor uses pinned Python dependencies, bounded remote responses, validated state, and atomic writes.
-- GitHub Actions workflows are pinned to commit SHAs; Dependabot and a dependency audit workflow are enabled.
-- See `SECURITY.md` and `SETUP.md` before enabling email alerts.

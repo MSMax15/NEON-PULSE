@@ -73,7 +73,6 @@ if (hero) {
     if (actions) {
       actions.innerHTML =
         '<a class="dive dive-primary" href="https://support.rockstargames.com/servicestatus" target="_blank" rel="noopener">Rockstar Status</a>' +
-        '<a class="dive" href="#live">Livestream</a>' +
         '<a class="dive" href="#alarm">Server-Alarm</a>' +
         '<a class="dive" href="gta6-server-hosting.html">Server mieten</a>' +
         '<a class="dive" href="partner.html">6PULSE × ZAP</a>';
@@ -82,7 +81,6 @@ if (hero) {
     if (ticker) {
       ticker.innerHTML = '<span>LAUNCH DAY</span><i></i><span>GTA 6 is out now</span><i></i><span>Check Rockstar status</span><i></i><span>Server &amp; TeamSpeak hosting</span><i></i><span>Status-Alarm aktivieren</span><i></i><span>6PULSE × ZAP</span><i></i><span>LAUNCH DAY</span><i></i><span>GTA 6 is out now</span><i></i><span>Check Rockstar status</span><i></i><span>Server &amp; TeamSpeak hosting</span><i></i><span>Status-Alarm aktivieren</span><i></i><span>6PULSE × ZAP</span><i></i>';
     }
-    document.dispatchEvent(new CustomEvent('np-launch'));
   };
 
   const tick = () => {
@@ -181,96 +179,43 @@ document.addEventListener('click', e => {
   if (!img) return;
   const lb = document.createElement('div');
   lb.className = 'lb';
-  lb.setAttribute('role', 'dialog');
-  lb.setAttribute('aria-modal', 'true');
-  lb.setAttribute('aria-label', 'Bildansicht');
-
-  // Build the lightbox with DOM APIs. Never interpolate image alt text or
-  // caption markup into innerHTML.
-  const enlarged = document.createElement('img');
-  enlarged.src = img.currentSrc || img.src;
-  enlarged.alt = img.alt || '';
-  enlarged.decoding = 'async';
-  lb.append(enlarged);
-
-  if (cap && cap.textContent.trim()) {
-    const caption = document.createElement('p');
-    caption.textContent = cap.textContent.trim();
-    lb.append(caption);
-  }
-
-  lb.addEventListener('click', () => lb.remove());
+  lb.innerHTML = '<img src="' + img.src + '" alt="' + (img.alt || '') + '"><p>' + (cap ? cap.innerHTML : '') + '</p>';
+  lb.onclick = () => lb.remove();
   document.body.append(lb);
 });
 addEventListener('keydown', e => { if (e.key === 'Escape') document.querySelector('.lb')?.remove(); });
 
-// Formspree alarm. Only send to the configured HTTPS endpoint.
+// Formspree alarm (skip hard fail on file://)
 document.querySelectorAll('form[data-subscribe]').forEach(f => f.addEventListener('submit', async e => {
   e.preventDefault();
   const msg = f.querySelector('.msg');
-  const btn = f.querySelector('button[type="submit"], button:not([type])');
+  const btn = f.querySelector('button');
   if (!msg || !btn) return;
-
   if (isFile) {
     msg.textContent = 'Lokal (file://) kein Versand. Bitte die Live-Seite oder einen lokalen Server nutzen.';
     return;
   }
-
-  let endpoint;
-  try {
-    endpoint = new URL(f.getAttribute('action') || '', location.href);
-  } catch (_) {
-    msg.textContent = 'Formularziel ungültig. Bitte später erneut versuchen.';
-    return;
-  }
-  if (f.method.toLowerCase() !== 'post' ||
-      endpoint.protocol !== 'https:' ||
-      endpoint.origin !== 'https://formspree.io' ||
-      endpoint.pathname !== '/f/xaeeklye') {
-    msg.textContent = 'Formular ist momentan nicht korrekt konfiguriert.';
-    return;
-  }
-
-  const honeypot = f.elements.namedItem('_gotcha');
-  if (honeypot && String(honeypot.value || '').trim()) {
-    // Quietly discard bot submissions; do not forward them.
-    msg.textContent = 'Danke! Deine Anfrage wurde entgegengenommen.';
-    f.reset();
-    return;
-  }
-
-  const email = f.elements.namedItem('email');
-  if (email && typeof email.value === 'string') {
-    email.value = email.value.trim();
-    if (email.value.length > 254 || !email.checkValidity()) {
-      email.reportValidity();
-      return;
-    }
-  }
-
   btn.disabled = true;
   msg.textContent = 'Anmeldung wird übermittelt ...';
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 15000);
-
   try {
-    const response = await fetch(endpoint.href, {
+    const response = await fetch(f.action, {
       method: 'POST',
       body: new FormData(f),
-      headers: { 'Accept': 'application/json' },
-      credentials: 'omit',
-      cache: 'no-store',
-      referrerPolicy: 'strict-origin-when-cross-origin',
-      signal: controller.signal
+      headers: { 'Accept': 'application/json' }
     });
-    if (!response.ok) throw new Error('submission_failed');
-
-    msg.textContent = 'Danke! 6PULSE hat deine Anmeldung erhalten. Automatische Status-Mails starten, sobald der Alarmdienst aktiv ist.';
+    if (!response.ok) {
+      let detail = '';
+      try {
+        const data = await response.json();
+        detail = (data.errors || []).map(x => x.message).join(' ');
+      } catch (_) {}
+      throw new Error(detail || 'Formular konnte nicht gesendet werden.');
+    }
+    msg.textContent = 'Danke! Deine Anmeldung wurde übermittelt. Bitte bestätige deine E-Mail-Adresse über den Bestätigungslink von Buttondown. Erst danach erhältst du Statusmeldungen.';
     f.reset();
-  } catch (_) {
-    msg.textContent = 'Senden fehlgeschlagen oder Zeitüberschreitung. Bitte Verbindung prüfen und erneut versuchen.';
+  } catch (err) {
+    msg.textContent = 'Senden fehlgeschlagen. Bitte Verbindung prüfen und noch einmal versuchen.';
   } finally {
-    clearTimeout(timeout);
     btn.disabled = false;
   }
 }));
@@ -428,61 +373,5 @@ if (chips.length) {
     if (!a || !window.goatcounter || !window.goatcounter.count) return;
     let path = a.href; try { path = new URL(a.href).pathname; } catch (_) {}
     window.goatcounter.count({ path: 'affiliate' + path, title: location.pathname, event: true });
-  });
-})();
-
-// Live block (YouTube, loads only after a click).
-// Switch it from live.json: {"mode":"auto"|"live"|"offline","note":"...","videoId":""}
-(() => {
-  const box = document.getElementById('live');
-  if (!box) return;
-  const CHANNEL_ID = 'UCytwKvyxmhC1JVnb4PRdvOA';
-  const badge = document.getElementById('live-badge');
-  const note = document.getElementById('live-note');
-  const stage = document.getElementById('live-stage');
-  const gate = document.getElementById('live-gate');
-  const off = document.getElementById('live-offline');
-  const load = document.getElementById('live-load');
-  const MODES = { auto: 'STREAM', live: 'LIVE', offline: 'OFFLINE' };
-  const cfg = { mode: 'auto', note: '', videoId: '' };
-
-  const paint = () => {
-    badge.textContent = MODES[cfg.mode];
-    badge.dataset.s = cfg.mode;
-    note.textContent = cfg.note ||
-      (cfg.mode === 'live' ? 'Wir sind gerade live. Klicke auf den Player.' :
-       cfg.mode === 'offline' ? 'Gerade offline. Schau auf dem Kanal vorbei.' :
-       'Wenn wir live sind, läuft der Stream hier. Sonst findest du uns auf dem Kanal.');
-    if (gate) gate.hidden = cfg.mode === 'offline';
-    if (off) off.hidden = cfg.mode !== 'offline';
-  };
-  const maybeShow = () => {
-    if (document.body.classList.contains('launch') || cfg.mode === 'live') { paint(); box.hidden = false; }
-  };
-
-  fetch('live.json', { cache: 'no-store', credentials: 'omit' })
-    .then(r => (r.ok ? r.json() : null))
-    .then(d => {
-      if (!d || typeof d !== 'object') return;
-      if (Object.prototype.hasOwnProperty.call(MODES, d.mode)) cfg.mode = d.mode;
-      if (typeof d.note === 'string') cfg.note = d.note.slice(0, 200);
-      if (typeof d.videoId === 'string' && /^[A-Za-z0-9_-]{11}$/.test(d.videoId)) cfg.videoId = d.videoId;
-    })
-    .catch(() => {})
-    .then(maybeShow);
-  document.addEventListener('np-launch', maybeShow);
-
-  if (load) load.addEventListener('click', () => {
-    const base = cfg.videoId
-      ? 'https://www.youtube-nocookie.com/embed/' + cfg.videoId + '?'
-      : 'https://www.youtube-nocookie.com/embed/live_stream?channel=' + CHANNEL_ID + '&';
-    const f = document.createElement('iframe');
-    f.src = base + 'autoplay=1&rel=0';
-    f.title = 'Feed Error Livestream auf YouTube';
-    f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
-    f.setAttribute('allowfullscreen', '');
-    f.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
-    f.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-presentation allow-popups allow-popups-to-escape-sandbox');
-    stage.replaceChildren(f);
   });
 })();

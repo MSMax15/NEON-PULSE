@@ -1,41 +1,75 @@
-# GTA 6 Status-Alarm einrichten
+# Neon Pulse – Status-Alarm einrichten
 
-## Voraussetzungen
+## Architektur
 
-- Ein Buttondown-Konto mit bestätigter Absenderadresse.
-- GitHub Actions für dieses Repository aktiviert.
-- Ein Repository-Secret namens `BUTTONDOWN_API_KEY`.
+1. Die drei Website-Formulare senden an Formspree (`xaeeklye`).
+2. Formspree Simple Webhook sendet die Formularübermittlung an einen Cloudflare Worker.
+3. Der Worker validiert Honeypot, Einwilligung und E-Mail-Adresse und leitet sie serverseitig an Buttondown weiter.
+4. Buttondown legt neue Adressen als `unactivated` an und sendet eine Double-Opt-in-Bestätigung.
+5. Erst bestätigte Abonnenten erhalten spätere Statusmeldungen.
+6. GitHub Actions führt `monitor.py` regelmäßig aus und löst bei bestätigter Statusänderung eine Buttondown-Mail aus.
 
-## Einrichtung
+## A. Cloudflare Worker
 
-1. Lege bei Buttondown den Verteiler an und aktiviere Double Opt-in. Prüfe Absender, Datenschutz und Tarif-/Versandlimits.
-2. Öffne im GitHub-Repository **Settings → Secrets and variables → Actions**.
-3. Lege unter **Repository secrets** das Secret `BUTTONDOWN_API_KEY` an. Trage ausschließlich dort den Buttondown-API-Key ein. Niemals den Key in `site.js`, HTML, YAML, ZIP oder einen Commit schreiben.
-4. Prüfe unter **Settings → Actions → General → Workflow permissions**, dass GitHub Actions Schreibrechte für `GITHUB_TOKEN` erhalten darf. Das Workflow-YAML begrenzt `contents: write` auf den Statusmonitor-Job und nutzt den Token nur in den Push-Schritten.
-5. Lade die Projektdateien in das Repository hoch. Wichtig sind:
-   - `monitor.py`
-   - `requirements.txt`
-   - `.github/workflows/status-monitor.yml`
-   - `.github/workflows/security-audit.yml`
-   - `.github/dependabot.yml`
-   - `status.json`
-   - die Website-Dateien und Assets
-6. Öffne **Actions → status-monitor**. Starte **Run workflow** zunächst mit `simulate` leer, damit ein normaler Lauf den Status nur prüft. Für einen Trockenlauf kannst du `up`, `limited`, `down` oder `maintenance` eintragen. Simulationen ändern den gespeicherten Status nicht und versenden keine echte E-Mail.
-7. Prüfe die Actions-Logs. Nach dem ersten Lauf sollte der Branch `status-data` automatisch erstellt worden sein. Der Statusmonitor aktualisiert dort `status.json`.
-8. Mache vor dem Launch einen echten Test mit einem Testverteiler und bestätige, dass Formspree-Anmeldungen und Buttondown-E-Mails korrekt ankommen.
+Die vollständige Anleitung und der Worker-Code liegen in `cloudflare-worker/README.md`
+und `cloudflare-worker/worker.js`.
 
-## Sicherheitsregeln
+Benötigte verschlüsselte Worker-Secrets:
+- `BUTTONDOWN_API_KEY`
+- `FORMSPREE_WEBHOOK_TOKEN`
 
-- `BUTTONDOWN_API_KEY` gehört ausschließlich in GitHub Repository Secrets.
-- Der Workflow benötigt Schreibrechte, um den Branch `status-data` zu aktualisieren. Gib keine zusätzlichen Rechte frei.
-- Prüfe Dependabot-Pull-Requests und den Workflow `security-audit` regelmäßig.
-- Der Monitor verschickt keine E-Mail vor `ALERT_FROM` (Standard: `2026-11-18T00:00:00+00:00`).
-- Ohne `BUTTONDOWN_API_KEY` bricht ein echter Versandversuch ab, statt den Status als erfolgreich versendet zu speichern.
-- Simulationen verschicken keine echten E-Mails und schreiben keinen Status.
-- Formspree-Anmeldungen allein aktivieren noch keinen automatischen Alarmdienst.
+Optionale Variable:
+- `SITE_URL=https://pulseneon.de`
 
-## Grenzen
+## B. Formspree
 
-- GitHub Actions können sich verzögern; der 5-Minuten-Zeitplan ist keine Echtzeitgarantie.
-- Rockstar kann seine Statusseite ändern. Prüfe am Launch-Tag die Logs und passe `NAMES`/die Status-Erkennung in `monitor.py` nur anhand bestätigter Seitenelemente an.
-- Impressum und Datenschutzerklärung müssen vollständig und rechtlich geprüft sein, bevor du personenbezogene Daten sammelst oder E-Mails verschickst.
+Im Formspree-Dashboard für Formular `xaeeklye`:
+- Webhooks / Plugins öffnen.
+- **Simple Webhook** auswählen.
+- Worker-URL eintragen:
+  `https://YOUR-WORKER.YOUR-SUBDOMAIN.workers.dev/formspree/YOUR_TOKEN`
+
+Formspree dokumentiert Webhooks derzeit für Professional- und Business-Pläne.
+Ohne diese Funktion kann Formspree die Anmeldung nicht an den Worker weiterleiten.
+
+## C. Buttondown
+
+- API-Key erzeugen.
+- Double Opt-in aktiviert lassen.
+- API-Key als `BUTTONDOWN_API_KEY` im Cloudflare Worker und als GitHub Actions Secret speichern.
+- Niemals den API-Key in `site.js`, HTML oder öffentliche Repository-Dateien schreiben.
+
+Der Worker verwendet `type: unactivated`. Die Bestätigung muss durch den Besucher erfolgen.
+
+## D. GitHub Actions
+
+Die aktive Workflow-Datei liegt unter:
+`.github/workflows/status-monitor.yml`
+
+In GitHub unter **Settings → Secrets and variables → Actions**:
+- `BUTTONDOWN_API_KEY` als Repository Secret hinzufügen.
+
+Der Workflow läuft nach Zeitplan (alle fünf Minuten; GitHub kann verzögern).
+Die Standard-E-Mail-Sperre `ALERT_FROM` in `monitor.py` steht auf
+`2026-11-18T00:00:00+00:00`. Vor diesem Zeitpunkt werden echte Statusmails
+unterdrückt. Der Workflow ist kein garantierter Echtzeitdienst.
+
+## E. End-to-End-Test
+
+1. Worker deployen und beide Secrets setzen.
+2. Formspree Simple Webhook einrichten.
+3. Auf der Live-Seite eine eigene Testadresse anmelden.
+4. Prüfen, dass die Submission bei Formspree ankommt.
+5. Prüfen, dass die Adresse in Buttondown als **Unactivated** erscheint.
+6. Bestätigungs-E-Mail öffnen und Anmeldung bestätigen.
+7. In GitHub Actions `status-monitor` manuell starten und `simulate=up` setzen.
+8. Im Log muss `DRY RUN, would send` stehen. Der Simulationslauf darf keine echte E-Mail senden.
+
+## Sicherheit & Datenschutz
+
+- Der Buttondown-Key bleibt serverseitig.
+- Der Worker akzeptiert nur POST, JSON, gültige E-Mail und `consent=yes`.
+- Der Honeypot `_gotcha` wird geprüft.
+- Die Worker-URL enthält ein zufälliges Geheimnis. Bei Offenlegung rotieren.
+- Formspree Simple Webhooks sind laut Dokumentation nicht als signierte Requests beschrieben; der URL-Token schützt den Endpunkt.
+- Datenschutzhinweise, Anbieterbedingungen, Aufbewahrungsfristen und internationale Datentransfers vor dem Live-Betrieb prüfen.
