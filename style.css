@@ -83,7 +83,7 @@ h1,h2,h3{font-family:Unbounded,Figtree,sans-serif}
 nav{position:fixed;inset:0 0 auto;z-index:40;background:linear-gradient(#170a2eee,transparent)}
 nav .wrap{/* layout via .nav-bar */}
 .logo{display:block;flex:none}
-.logo img{display:block;height:46px;width:auto;filter:drop-shadow(0 0 12px #ff4f8b66)}
+.logo img{display:block;height:52px;width:auto;max-width:min(190px,48vw);object-fit:contain}
 .logo i{font-style:normal;color:var(--flamingo)}
 nav ul{list-style:none;padding:0;margin:0}
 /* nav link styles handled under .nav-panel */
@@ -315,7 +315,7 @@ footer{padding:2.5rem 0;background:#08153cdd;border-top:1px solid var(--line);co
 /* legacy nav scroll removed – VI panel */
 @media(max-width:700px){
   nav .wrap{padding-top:.75rem;padding-bottom:1rem;gap:.8rem}
-  .logo img{height:38px}
+  .logo img{height:46px}
   .hero{padding:5.2rem 0 3.5rem;min-height:92svh}
   .hero-actions{gap:.75rem 1rem;margin-top:1.6rem}
   .unit b{font-size:clamp(2.6rem,14vw,4.5rem)}
@@ -495,7 +495,7 @@ nav .logo{flex:none;position:relative;z-index:21}
 @media(min-width:1100px){
   .nav-drawer{padding:1.5rem 1.5rem 1.8rem}
   .nav-drawer-head{padding:.7rem .15rem 1.5rem;margin-bottom:1rem}
-  .nav-drawer-logo img{height:50px}
+  .nav-drawer-logo img{height:60px}
   .nav-list a{font-size:1.18rem;padding:.95rem 1rem}
   .nav-drawer-foot a{padding:.95rem 1.1rem}
 }
@@ -767,7 +767,7 @@ body.launch .pack-card.is-active{border-color:#2ef5e466;box-shadow:0 28px 60px #
   .nav-drawer-head{
     padding:.75rem .35rem 1.1rem;
   }
-  .nav-drawer-logo img{height:40px}
+  .nav-drawer-logo img{height:52px}
   .nav-list a{font-size:1.08rem;padding:.9rem .95rem}
 }
 
@@ -843,4 +843,10 @@ body.launch .pack-card.is-active{border-color:#2ef5e466;box-shadow:0 28px 60px #
 .convert-bar-btn:hover{background:var(--orange);color:var(--night)}
 @media(min-width:900px){
   .convert-bar{padding:.75rem 1.5rem}
+}
+
+.convert-note{
+  padding:1rem 1.15rem;margin:0 0 1.25rem;border-radius:14px;
+  border:1px solid #19e3d244;background:#19e3d212;color:var(--sand);
+  font-size:.95rem;line-height:1.45;
 }
