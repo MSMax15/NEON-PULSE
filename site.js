@@ -375,3 +375,60 @@ if (chips.length) {
     window.goatcounter.count({ path: 'affiliate' + path, title: location.pathname, event: true });
   });
 })();
+
+// Reliable hash scroll (#packs etc.) with fixed-nav offset – mobile + desktop
+(() => {
+  const OFFSET = () => {
+    const nav = document.querySelector('nav');
+    const h = nav ? nav.getBoundingClientRect().height : 72;
+    return Math.max(64, Math.ceil(h + 12));
+  };
+  const scrollToHash = (hash, behavior) => {
+    if (!hash || hash === '#') return false;
+    const id = decodeURIComponent(hash.replace(/^#/, ''));
+    if (!id) return false;
+    const el = document.getElementById(id);
+    if (!el) return false;
+    const top = el.getBoundingClientRect().top + window.scrollY - OFFSET();
+    window.scrollTo({ top: Math.max(0, top), behavior: behavior || 'smooth' });
+    return true;
+  };
+  const run = (behavior) => {
+    if (!location.hash) return;
+    scrollToHash(location.hash, behavior);
+  };
+  // after layout: fonts/images can shift position
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      run('auto');
+      requestAnimationFrame(() => run('smooth'));
+      setTimeout(() => run('smooth'), 120);
+      setTimeout(() => run('smooth'), 400);
+    });
+  } else {
+    run('auto');
+    setTimeout(() => run('smooth'), 50);
+    setTimeout(() => run('smooth'), 300);
+  }
+  window.addEventListener('hashchange', () => run('smooth'));
+  // same-page links with hash
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a[href*="#"]');
+    if (!a) return;
+    let url;
+    try { url = new URL(a.href, location.href); } catch (_) { return; }
+    if (url.pathname !== location.pathname && url.pathname.replace(/\/$/, '') !== location.pathname.replace(/\/$/, '')) {
+      // allow /index.html vs /
+      const here = location.pathname.replace(/\/index\.html$/, '/').replace(/\/$/, '') || '/';
+      const there = url.pathname.replace(/\/index\.html$/, '/').replace(/\/$/, '') || '/';
+      if (here !== there) return;
+    }
+    if (!url.hash) return;
+    if (scrollToHash(url.hash, 'smooth')) {
+      e.preventDefault();
+      if (history.pushState) history.pushState(null, '', url.hash);
+      else location.hash = url.hash;
+    }
+  });
+})();
+

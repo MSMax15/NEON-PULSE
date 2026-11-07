@@ -605,6 +605,7 @@ body.launch .nav-drawer{
 
 /* ========== Empfehlungs-Pakete (Kern vor Waffenrad) ========== */
 .packs-section{
+  scroll-margin-top:5.5rem;
   padding:4rem 0 3.5rem;
   background:linear-gradient(180deg,#08153c00,#1a0a3088 30%,#08153c66 100%);
   overflow:hidden;
@@ -785,3 +786,15 @@ body.launch .pack-card.is-active{border-color:#2ef5e466;box-shadow:0 28px 60px #
 .legal-card p{margin:0 0 .6rem;color:var(--sand)}
 .legal-card p:last-child{margin-bottom:0}
 .legal-note{font-size:.88rem;color:var(--muted)!important;margin-top:.75rem!important}
+
+
+/* Reliable #packs / #alarm anchor offset (fixed nav, mobile + desktop) */
+#packs, #alarm, #hosting, #explore, #top {
+  scroll-margin-top: 5.5rem;
+}
+@media (max-width: 700px) {
+  html { scroll-padding-top: 5.75rem; }
+  #packs, #alarm, #hosting, #explore, #top {
+    scroll-margin-top: 5.75rem;
+  }
+}
