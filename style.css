@@ -264,7 +264,7 @@ footer{padding:2.5rem 0;background:#08153cdd;border-top:1px solid var(--line);co
 .faq details p{padding:.9rem 1.15rem 1.15rem;margin:0;color:var(--muted)}
 .host-cta-final{margin-top:2.5rem;padding:1.8rem 1.4rem;border-radius:16px;background:linear-gradient(135deg,#101b45cc,#08153c99);border:1px solid #ffffff18}
 
-/* Partner page – 6PULSE × ZAP */
+/* Partner page – Pulseneon × ZAP */
 .partner-head .intro{max-width:42ch}
 .partner-brand{font:900 clamp(2rem,7vw,3.6rem)/1 Unbounded,sans-serif;letter-spacing:-.02em;margin:.4rem 0 .6rem;text-shadow:0 4px 30px #170a2e}
 .partner-brand span{color:var(--flamingo);margin:0 .15em}
@@ -771,7 +771,7 @@ body.launch .pack-card.is-active{border-color:#2ef5e466;box-shadow:0 28px 60px #
   .nav-list a{font-size:1.08rem;padding:.9rem .95rem}
 }
 
-/* Legal pages – Vice City / 6PULSE */
+/* Legal pages – Vice City / Pulseneon */
 .legal-page{max-width:640px;padding-bottom:3rem}
 .legal-card{
   margin:0 0 1.25rem;padding:1.35rem 1.4rem;border-radius:16px;
@@ -849,4 +849,32 @@ body.launch .pack-card.is-active{border-color:#2ef5e466;box-shadow:0 28px 60px #
   padding:1rem 1.15rem;margin:0 0 1.25rem;border-radius:14px;
   border:1px solid #19e3d244;background:#19e3d212;color:var(--sand);
   font-size:.95rem;line-height:1.45;
+}
+
+/* Pulseneon font punch – main conversion pages */
+body.page-packs h1,
+body.page-partner h1,
+body.page-home .hero h1,
+body.page-home #headline {
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  text-shadow:
+    0 0 18px #ff4f8b66,
+    0 0 40px #19e3d233,
+    0 2px 0 #0008;
+}
+body.page-packs .affiliate-kicker,
+body.page-partner .affiliate-kicker,
+body.page-home .affiliate-kicker {
+  letter-spacing: 0.14em;
+  font-weight: 700;
+}
+body.page-packs h2,
+body.page-partner h2 {
+  font-weight: 900;
+  letter-spacing: 0.015em;
+}
+body.page-home .hero .date {
+  font-weight: 600;
+  letter-spacing: 0.03em;
 }

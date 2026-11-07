@@ -1,4 +1,4 @@
-# Neon Pulse – Status-Alarm einrichten
+# Pulseneon – Status-Alarm einrichten
 
 ## Architektur
 

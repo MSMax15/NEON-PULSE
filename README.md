@@ -1,4 +1,4 @@
-# Pulse Neon
+# Pulseneon
 
 Independent gaming status hub. Initial static MVP for GitHub Pages.
 

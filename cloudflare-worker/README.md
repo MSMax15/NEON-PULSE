@@ -1,4 +1,4 @@
-# Neon Pulse – Formspree to Buttondown bridge
+# Pulseneon – Formspree to Buttondown bridge
 
 This Worker securely forwards Formspree status-alarm signups to Buttondown.
 The Buttondown API key stays server-side. New subscribers are created as

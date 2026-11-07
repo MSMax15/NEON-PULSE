@@ -1,4 +1,4 @@
-# Neon Pulse – Status & Alarm
+# Pulseneon – Status & Alarm
 
 ## Status-Chip
 - Liest `status.json` aus dem gleichen Repo (GitHub Pages).

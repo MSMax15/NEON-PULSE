@@ -75,11 +75,11 @@ if (hero) {
         '<a class="dive dive-primary" href="https://support.rockstargames.com/servicestatus" target="_blank" rel="noopener">Rockstar Status</a>' +
         '<a class="dive" href="#alarm">Server-Alarm</a>' +
         '<a class="dive" href="gta6-server-hosting.html">Server mieten</a>' +
-        '<a class="dive" href="partner.html">6PULSE × ZAP</a>';
+        '<a class="dive" href="partner.html">Pulseneon × ZAP</a>';
     }
     const ticker = document.querySelector('.ticker div');
     if (ticker) {
-      ticker.innerHTML = '<span>LAUNCH DAY</span><i></i><span>GTA 6 is out now</span><i></i><span>Check Rockstar status</span><i></i><span>Server &amp; TeamSpeak hosting</span><i></i><span>Status-Alarm aktivieren</span><i></i><span>6PULSE × ZAP</span><i></i><span>LAUNCH DAY</span><i></i><span>GTA 6 is out now</span><i></i><span>Check Rockstar status</span><i></i><span>Server &amp; TeamSpeak hosting</span><i></i><span>Status-Alarm aktivieren</span><i></i><span>6PULSE × ZAP</span><i></i>';
+      ticker.innerHTML = '<span>LAUNCH DAY</span><i></i><span>GTA 6 is out now</span><i></i><span>Check Rockstar status</span><i></i><span>Server &amp; TeamSpeak hosting</span><i></i><span>Status-Alarm aktivieren</span><i></i><span>Pulseneon × ZAP</span><i></i><span>LAUNCH DAY</span><i></i><span>GTA 6 is out now</span><i></i><span>Check Rockstar status</span><i></i><span>Server &amp; TeamSpeak hosting</span><i></i><span>Status-Alarm aktivieren</span><i></i><span>Pulseneon × ZAP</span><i></i>';
     }
   };
 

@@ -1,5 +1,5 @@
 /**
- * Neon Pulse signup bridge: Formspree Simple Webhook -> Buttondown.
+ * Pulseneon signup bridge: Formspree Simple Webhook -> Buttondown.
  *
  * Required Worker secrets:
  *   BUTTONDOWN_API_KEY       Buttondown API token (never put this in website code)

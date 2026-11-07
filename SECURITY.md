@@ -1,4 +1,4 @@
-# Neon Pulse – Security hardening
+# Pulseneon – Security hardening
 
 ## Applied in this update
 
