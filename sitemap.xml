@@ -100,4 +100,28 @@
     <changefreq>weekly</changefreq>
     <priority>0.93</priority>
   </url>
+  <url>
+    <loc>https://pulseneon.de/blog.html</loc>
+    <lastmod>2026-11-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://pulseneon.de/blog-gta6-server-status-erklaert.html</loc>
+    <lastmod>2026-11-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.88</priority>
+  </url>
+  <url>
+    <loc>https://pulseneon.de/blog-server-mieten-vs-selbst-hosten.html</loc>
+    <lastmod>2026-11-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.88</priority>
+  </url>
+  <url>
+    <loc>https://pulseneon.de/blog-fivem-nach-gta6-launch.html</loc>
+    <lastmod>2026-11-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.86</priority>
+  </url>
 </urlset>
