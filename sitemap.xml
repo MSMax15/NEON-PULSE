@@ -2,126 +2,122 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://pulseneon.de/</loc>
-    <lastmod>2026-11-05</lastmod>
+    <lastmod>2026-11-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://pulseneon.de/gta6-server-hosting.html</loc>
-    <lastmod>2026-11-05</lastmod>
+    <loc>https://pulseneon.de/alarm.html</loc>
+    <lastmod>2026-11-08</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.95</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pulseneon.de/fivem-server-hosting.html</loc>
-    <lastmod>2026-11-05</lastmod>
+    <loc>https://pulseneon.de/blog-fivem-nach-gta6-launch.html</loc>
+    <lastmod>2026-11-08</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.92</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pulseneon.de/partner.html</loc>
-    <lastmod>2026-11-05</lastmod>
-    <changefreq>weekly</changefreq>
+    <loc>https://pulseneon.de/blog-gta6-server-status-erklaert.html</loc>
+    <lastmod>2026-11-08</lastmod>
+    <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://pulseneon.de/alarm.html</loc>
-    <lastmod>2026-11-05</lastmod>
+    <loc>https://pulseneon.de/blog-server-mieten-vs-selbst-hosten.html</loc>
+    <lastmod>2026-11-08</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pulseneon.de/cheats.html</loc>
+    <loc>https://pulseneon.de/blog.html</loc>
+    <lastmod>2026-11-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pulseneon.de/cars.html</loc>
+    <lastmod>2026-11-08</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://pulseneon.de/weapons.html</loc>
+    <loc>https://pulseneon.de/cheats.html</loc>
+    <lastmod>2026-11-08</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://pulseneon.de/leaks.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://pulseneon.de/map.html</loc>
+    <loc>https://pulseneon.de/fivem-server-hosting.html</loc>
+    <lastmod>2026-11-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pulseneon.de/gameplay.html</loc>
+    <lastmod>2026-11-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pulseneon.de/impressum.html</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://pulseneon.de/datenschutz.html</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
+    <loc>https://pulseneon.de/gta6-server-hosting.html</loc>
+    <lastmod>2026-11-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pulseneon.de/gta6-server-status.html</loc>
-    <lastmod>2026-11-05</lastmod>
+    <lastmod>2026-11-08</lastmod>
     <changefreq>daily</changefreq>
-    <priority>0.96</priority>
+    <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://pulseneon.de/teamspeak-server-mieten.html</loc>
-    <lastmod>2026-11-05</lastmod>
+    <loc>https://pulseneon.de/leaks.html</loc>
+    <lastmod>2026-11-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseneon.de/map.html</loc>
+    <lastmod>2026-11-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pulseneon.de/minecraft-server-mieten.html</loc>
-    <lastmod>2026-11-05</lastmod>
+    <lastmod>2026-11-08</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://pulseneon.de/sixm-server-mieten.html</loc>
-    <lastmod>2026-11-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.94</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pulseneon.de/packs.html</loc>
-    <lastmod>2026-11-07</lastmod>
+    <lastmod>2026-11-08</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.93</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pulseneon.de/blog.html</loc>
-    <lastmod>2026-11-07</lastmod>
+    <loc>https://pulseneon.de/partner.html</loc>
+    <lastmod>2026-11-08</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pulseneon.de/blog-gta6-server-status-erklaert.html</loc>
-    <lastmod>2026-11-07</lastmod>
+    <loc>https://pulseneon.de/sixm-server-mieten.html</loc>
+    <lastmod>2026-11-08</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.88</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pulseneon.de/blog-server-mieten-vs-selbst-hosten.html</loc>
-    <lastmod>2026-11-07</lastmod>
+    <loc>https://pulseneon.de/teamspeak-server-mieten.html</loc>
+    <lastmod>2026-11-08</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.88</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pulseneon.de/blog-fivem-nach-gta6-launch.html</loc>
-    <lastmod>2026-11-07</lastmod>
+    <loc>https://pulseneon.de/weapons.html</loc>
+    <lastmod>2026-11-08</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.86</priority>
+    <priority>0.9</priority>
   </url>
 </urlset>

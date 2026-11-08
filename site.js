@@ -26,7 +26,7 @@ if (bub) {
       requestAnimationFrame(() => backdrop.classList.add('show'));
     }
     document.body.classList.add('nav-open');
-    btn.setAttribute('aria-label', 'Menü schließen');
+    btn.setAttribute('aria-label', 'Close menu');
   };
   const close = () => {
     btn.setAttribute('aria-expanded', 'false');
@@ -37,7 +37,7 @@ if (bub) {
       setTimeout(() => { if (!drawer.classList.contains('open')) backdrop.hidden = true; }, 350);
     }
     document.body.classList.remove('nav-open');
-    btn.setAttribute('aria-label', 'Menü öffnen');
+    btn.setAttribute('aria-label', 'Open menu');
   };
 
   btn.addEventListener('click', () => {
@@ -47,28 +47,6 @@ if (bub) {
   backdrop?.addEventListener('click', close);
   drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
   addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
-})();
-
-// International visitors: offer Google Translate once, based on browser language (not IP tracking).
-(() => {
-  let dismissed = false;
-  try { dismissed = localStorage.getItem('np-language-prompt') === '1'; } catch (_) {}
-  if (dismissed) return;
-  const lang = (navigator.languages && navigator.languages[0] || navigator.language || 'en').toLowerCase();
-  if (lang.startsWith('de')) return;
-  const target = lang.startsWith('pt') ? 'pt' : lang.startsWith('es') ? 'es' : 'en';
-  const labels = { en: ['English', 'Would you like to view Pulseneon in English?'], pt: ['Português', 'Quer ver o Pulseneon em português?'], es: ['Español', '¿Quieres ver Pulseneon en español?'] };
-  const current = location.href;
-  const googleUrl = 'https://translate.google.com/translate?sl=de&tl=' + target + '&u=' + encodeURIComponent(current);
-  const panel = document.createElement('aside');
-  panel.className = 'language-nudge';
-  panel.setAttribute('role', 'dialog');
-  panel.setAttribute('aria-label', 'Language suggestion');
-  panel.innerHTML = '<div><b>' + labels[target][0] + '</b><p>' + labels[target][1] + '</p></div><a class="language-yes" href="' + googleUrl + '" rel="noopener">Translate</a><button type="button" aria-label="Close">✕</button>';
-  const dismiss = () => { try { localStorage.setItem('np-language-prompt', '1'); } catch (_) {} panel.remove(); };
-  panel.querySelector('button').addEventListener('click', dismiss);
-  panel.querySelector('a').addEventListener('click', () => { try { localStorage.setItem('np-language-prompt', '1'); } catch (_) {} });
-  document.body.append(panel);
 })();
 
 // YouTube link is available site-wide without overpowering the navigation.
@@ -95,7 +73,7 @@ function showLaunchCinema() {
   overlay.className = 'launch-cinema';
   overlay.setAttribute('aria-label', 'Pulseneon GTA 6 Launch');
   overlay.innerHTML = '<video class="launch-cinema-video" autoplay muted playsinline preload="auto" poster="hero.png"><source src="gta6-launch.mp4" type="video/mp4"></video>' +
-    '<div class="launch-cinema-shade"></div><div class="launch-cinema-copy"><span class="cinema-kicker">PULSENEON PRESENTS</span><h2>VICE CITY IS YOURS.</h2><p>Der Countdown ist vorbei. Willkommen in GTA 6.</p><div class="cinema-actions"><button type="button" class="cinema-enter">Weiter zur Website</button><a href="' + YOUTUBE_CHANNEL_URL + '" target="_blank" rel="noopener noreferrer">YouTube ansehen ↗</a></div><small class="cinema-hint">Dein nächstes Kapitel beginnt jetzt.</small></div>';
+    '<div class="launch-cinema-shade"></div><div class="launch-cinema-copy"><span class="cinema-kicker">PULSENEON PRESENTS</span><h2>VICE CITY IS YOURS.</h2><p>The countdown is over. Welcome to GTA 6.</p><div class="cinema-actions"><button type="button" class="cinema-enter">Enter Website</button><a href="' + YOUTUBE_CHANNEL_URL + '" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div><small class="cinema-hint">Your next chapter starts now.</small></div>';
   let finished = false;
   const finish = () => {
     if (finished) return;
@@ -133,21 +111,21 @@ if (hero) {
     const count = $('count');
     const date = $('date');
     const actions = document.getElementById('hero-actions');
-    if (hl) hl.textContent = 'GTA 6 ist da';
+    if (hl) hl.textContent = 'GTA 6 is here';
     if (count) {
-      count.innerHTML = '<div class="out">Launch Day</div><p class="launch-sub">Vice City ist live. Check den Status, aktiviere den Alarm und starte deine Community.</p>';
+      count.innerHTML = '<div class="out">Launch Day</div><p class="launch-sub">Vice City is live. Check the status, enable alerts, and get your community started.</p>';
     }
-    if (date) date.textContent = 'Offizieller Status, Community-Hosting und alle GTA-6-Updates an einem Ort.';
+    if (date) date.textContent = 'Official status, community hosting, and all GTA 6 updates in one place.';
     if (actions) {
       actions.innerHTML =
-        '<a class="dive dive-primary" href="https://support.rockstargames.com/servicestatus" target="_blank" rel="noopener">Rockstar-Status</a>' +
-        '<a class="dive" href="#alarm">Server-Alarm</a>' +
-        '<a class="dive" href="gta6-server-hosting.html">Server mieten</a>' +
+        '<a class="dive dive-primary" href="https://support.rockstargames.com/servicestatus" target="_blank" rel="noopener">Rockstar Status</a>' +
+        '<a class="dive" href="#alarm">Server Alert</a>' +
+        '<a class="dive" href="gta6-server-hosting.html">Rent a Server</a>' +
         '<a class="dive" href="partner.html">Pulseneon × ZAP</a>';
     }
     const ticker = document.querySelector('.ticker div');
     if (ticker) {
-      ticker.innerHTML = '<span>GTA 6 IST DA</span><i></i><span>Jetzt verfügbar</span><i></i><span>Rockstar-Status prüfen</span><i></i><span>Server &amp; TeamSpeak-Hosting</span><i></i><span>Status-Alarm aktivieren</span><i></i><span>Pulseneon × ZAP</span><i></i><span>GTA 6 IST DA</span><i></i><span>Jetzt verfügbar</span><i></i><span>Rockstar-Status prüfen</span><i></i><span>Server &amp; TeamSpeak-Hosting</span><i></i><span>Status-Alarm aktivieren</span><i></i><span>Pulseneon × ZAP</span><i></i>'; 
+      ticker.innerHTML = '<span>GTA 6 IS HERE</span><i></i><span>Available Now</span><i></i><span>Check Rockstar Status</span><i></i><span>Server &amp; TeamSpeak Hosting</span><i></i><span>Enable Status Alerts</span><i></i><span>Pulseneon × ZAP</span><i></i><span>GTA 6 IS HERE</span><i></i><span>Available Now</span><i></i><span>Check Rockstar Status</span><i></i><span>Server &amp; TeamSpeak Hosting</span><i></i><span>Enable Status Alerts</span><i></i><span>Pulseneon × ZAP</span><i></i>'; 
     }
   };
 
@@ -279,7 +257,7 @@ document.querySelectorAll('form[data-subscribe]').forEach(f => f.addEventListene
       } catch (_) {}
       throw new Error(detail || 'Formular konnte nicht gesendet werden.');
     }
-    msg.textContent = 'Danke! Deine Anmeldung wurde übermittelt. Bitte bestätige deine E-Mail-Adresse über den Bestätigungslink von Buttondown. Erst danach erhältst du Statusmeldungen.';
+    msg.textContent = 'Thanks! Your signup has been submitted. Please confirm your email address using the confirmation link from Buttondown. You will receive status updates only after confirming.';
     f.reset();
   } catch (err) {
     msg.textContent = 'Senden fehlgeschlagen. Bitte Verbindung prüfen und noch einmal versuchen.';
