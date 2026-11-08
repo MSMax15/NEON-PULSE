@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>How to Set Up an MTA Server: Beginner Guide | Pulseneon</title>
+<meta content="How to set up an MTA server: configuration, ports, resources, and admin rights explained step by step." name="description"/>
+<meta content="set up MTA server, create MTA server, mtaserver.conf, Multi Theft Auto server guide" name="keywords"/>
+<link href="https://pulseneon.de/how-to-set-up-mta-server.html" rel="canonical"/>
+<link href="https://pulseneon.de/mta-server-einrichten.html" hreflang="de" rel="alternate"/>
+<link href="https://pulseneon.de/how-to-set-up-mta-server.html" hreflang="en" rel="alternate"/>
+<link href="https://pulseneon.de/mta-server-einrichten.html" hreflang="x-default" rel="alternate"/>
+<meta content="How to Set Up an MTA Server: Beginner Guide | Pulseneon" property="og:title"/>
+<meta content="How to set up an MTA server: configuration, ports, resources, and admin rights explained step by step." property="og:description"/>
+<meta content="article" property="og:type"/>
+<meta content="https://pulseneon.de/how-to-set-up-mta-server.html" property="og:url"/>
+<meta content="https://pulseneon.de/hero.png" property="og:image"/>
+<meta content="en_US" property="og:locale"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="How to Set Up an MTA Server: Beginner Guide | Pulseneon" name="twitter:title"/>
+<meta content="How to set up an MTA server: configuration, ports, resources, and admin rights explained step by step." name="twitter:description"/>
+<link href="favicon.png" rel="icon" type="image/png"/>
+<link href="favicon.png" rel="apple-touch-icon"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;900&amp;family=Figtree:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="style.css" rel="stylesheet"/>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Article",
+ "headline": "How to Set Up an MTA Server",
+ "description": "How to set up an MTA server: configuration, ports, resources, and admin rights explained step by step.",
+ "inLanguage": "en",
+ "author": {
+  "@type": "Organization",
+  "name": "Pulseneon"
+ },
+ "publisher": {
+  "@type": "Organization",
+  "name": "Pulseneon",
+  "url": "https://pulseneon.de/"
+ },
+ "mainEntityOfPage": "https://pulseneon.de/how-to-set-up-mta-server.html",
+ "datePublished": "2026-11-08",
+ "dateModified": "2026-11-08"
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "Which ports does MTA use?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "By default UDP 22003 for the game and TCP 22005 for HTTP. Hosts usually preconfigure them."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Where do resources go?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "In mods/deathmatch/resources."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Do I need Lua knowledge?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "For your own scripts, yes. Ready-made resources work without programming."
+   }
+  }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "Home",
+   "item": "https://pulseneon.de/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "How to Set Up an MTA Server",
+   "item": "https://pulseneon.de/how-to-set-up-mta-server.html"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<div aria-hidden="true" class="bg" style="--d:1"><img alt="" src="hero.png"/><img alt="" class="blur" src="hero.png"/><div class="grade"></div><div class="shade"></div><div class="water"></div><div class="rays"></div><div class="bubbles" id="bubbles"></div></div>
+<nav><div class="wrap nav-bar"><a class="logo" href="index.html"><img alt="Pulseneon" decoding="async" height="56" src="logo.png" width="140"/></a><button aria-controls="nav-drawer" aria-expanded="false" aria-label="Open menu" class="nav-burger" type="button"><span aria-hidden="true" class="burger-lines"><i></i><i></i><i></i></span></button></div><div class="nav-backdrop" hidden="" id="nav-backdrop"></div><aside aria-hidden="true" class="nav-drawer" id="nav-drawer"><div class="nav-drawer-head"><a aria-label="Pulseneon Home" class="nav-drawer-logo" href="index.html"><img alt="Pulseneon" decoding="async" height="64" src="logo.png" width="160"/></a><button aria-label="Close menu" class="nav-close" type="button"><svg aria-hidden="true" fill="none" height="18" viewbox="0 0 18 18" width="18"><path d="M4 4l10 10M14 4L4 14" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path></svg></button></div><ul class="nav-list"><li><a href="index.html">Home</a></li><li><a href="cheats.html">Cheats</a></li><li><a href="cars.html">Cars</a></li><li><a href="weapons.html">Weapons</a></li><li><a href="leaks.html">Leaks</a></li><li><a href="map.html">Map</a></li><li><a href="gameplay.html">Gameplay</a></li><li><a href="alarm.html">Alerts</a></li><li><a href="gta6-server-status.html">Status</a></li><li><a href="gta6-server-hosting.html">Hosting</a></li><li><a aria-current="page" href="fivem-server-hosting.html">FiveM</a></li><li><a href="sixm-server-mieten.html">SixM</a></li><li><a href="partner.html">Partners</a></li></ul><div class="nav-drawer-foot"><a href="gta6-server-hosting.html">Server Hosting</a><a href="partner.html">Pulseneon × ZAP</a></div></aside></nav>
+<header class="phead"><div class="wrap">
+<a class="back" href="index.html">Back to Home</a>
+<span class="affiliate-kicker" style="display:block;margin-bottom:.5rem">MTA · GUIDE</span>
+<h1>How to Set Up an MTA Server</h1>
+<p class="intro">From configuration to your first resources: the key steps.</p>
+</div></header>
+<main class="wrap prose host-guide">
+<section class="host-answer"><p>An MTA server is configured through <strong>mtaserver.conf</strong>, and resources live in <strong>mods/deathmatch/resources</strong>. With a rented server the web panel handles part of this.</p></section>
+
+<section><h2>Step by step</h2><ol class="steps"><li><b>Get the server files.</b> Via your host’s panel or from the official MTA site.</li><li><b>Edit mtaserver.conf.</b> Set server name, max players, password, and ports.</li><li><b>Open ports.</b> By default UDP 22003 for the game and TCP 22005 for HTTP. Hosts usually preconfigure this.</li><li><b>Add resources.</b> Place folders in <code>mods/deathmatch/resources</code> and start them on the server.</li><li><b>Create an admin.</b> Create an account and add it to the admin group via acl.xml.</li></ol></section><section><h2>Common mistakes</h2><ul class="partner-list"><li>Port not open: players cannot find the server.</li><li>Missing resource or script error: check the server log.</li><li>Wrong ACL rights: admin commands do not work.</li></ul></section><section><h2>Prefer it ready-made?</h2><p>See <a href="rent-mta-server.html">Rent an MTA server</a>.</p></section>
+<section><h2>Frequently Asked Questions</h2><div class="faq"><details><summary>Which ports does MTA use?</summary><p>By default UDP 22003 for the game and TCP 22005 for HTTP. Hosts usually preconfigure them.</p></details><details><summary>Where do resources go?</summary><p>In mods/deathmatch/resources.</p></details><details><summary>Do I need Lua knowledge?</summary><p>For your own scripts, yes. Ready-made resources work without programming.</p></details></div></section>
+<section class="host-cta-final"><div class="cta-row"><a class="btn" href="https://zap-hosting.com/zappulsehost?voucher=FeedError-a-4064" rel="sponsored noopener noreferrer" target="_blank">Game server at ZAP</a> </div><p class="affiliate-disclosure">Affiliate disclosure: Pulseneon may earn a commission when you buy through these links. There is no extra cost to you. Orders and support are handled by ZAP-Hosting.</p></section>
+<section><h2>More guides</h2><ul class="partner-list"><li><a href="rent-mta-server.html">Rent an MTA Server</a></li><li><a href="how-to-set-up-fivem-server.html">How to Set Up a FiveM Server</a></li><li><a href="server-hosting-guides.html">All server guides</a></li></ul></section>
+<p style="margin-top:2.5rem;color:var(--muted);font-size:.9rem">Pulseneon is an unofficial fan site. Trademarks belong to their respective owners. Offers change: verify details with the provider.</p>
+<p style="margin-top:1rem;font-size:.85rem"><a href="mta-server-einrichten.html" hreflang="de">Deutsche Version</a></p>
+</main>
+<div class="wrap" style="padding:0 0 2.5rem">
+<p class="affiliate-duo-label">MORE HOSTING OFFERS</p>
+<div aria-label="ZAP-Hosting Angebote" class="affiliate-duo">
+<a aria-label="Minecraft und Gameserver Hosting" href="https://zap-hosting.com/minecraftneonz?voucher=FeedError-a-4064" rel="sponsored noopener noreferrer" target="_blank">
+<img alt="ZAP-Hosting Gameserver and Webhosting" decoding="async" height="120" loading="lazy" src="https://zap-hosting.com/interface/download/images.php?type=affiliate&amp;id=467159" width="400"/>
+</a>
+<a aria-label="vServer Hosting" href="https://zap-hosting.com/vServerpulseneon1?voucher=FeedError-a-4064" rel="sponsored noopener noreferrer" target="_blank">
+<img alt="ZAP-Hosting Gameserver and Webhosting" decoding="async" height="120" loading="lazy" src="https://zap-hosting.com/interface/download/images.php?type=affiliate&amp;id=467160" width="400"/>
+</a>
+</div>
+<p class="affiliate-disclosure" style="margin-top:.8rem">Affiliate banner · Purchases are completed at ZAP-Hosting · Pulseneon may earn a commission.</p></div>
+<footer><div class="wrap">Pulseneon is an unofficial fan website and is not affiliated with Rockstar Games or Take-Two Interactive. Grand Theft Auto is a trademark of Take-Two Interactive.<div class="legal"><a href="impressum.html">Legal Notice</a><a href="datenschutz.html">Privacy Policy</a></div></div></footer>
+<script src="site.js"></script>
+</body>
+</html>
