@@ -100,7 +100,18 @@
 </script>
 </head>
 <body>
-<div aria-hidden="true" class="bg" style="--d:1"><img alt="" src="hero.png"/><img alt="" class="blur" src="hero.png"/><div class="grade"></div><div class="shade"></div><div class="water"></div><div class="rays"></div><div class="bubbles" id="bubbles"></div></div>
+<div aria-hidden="true" class="bg" data-bg="garage">
+<picture class="bg-pic">
+<source media="(orientation:portrait)" srcset="bg/u-garage-m.jpg">
+<img src="bg/u-garage.jpg" alt="" width="1920" height="1080" decoding="async" fetchpriority="high">
+</picture>
+<div class="grade"></div>
+<div class="shade"></div>
+<div class="water"></div>
+<div class="caustics"></div>
+<div class="rays"></div>
+<div class="bubbles" id="bubbles"></div>
+</div>
 <nav>
 <div class="wrap nav-bar">
 <a class="logo" href="index.html"><img src="logo.png" alt="Pulseneon" width="140" height="56" decoding="async"></a>

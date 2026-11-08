@@ -15,18 +15,17 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body class="page-shop">
-<div class="bg" style="--d:0.28" aria-hidden="true" aria-hidden="true"><picture class="bg-pic">
-<source media="(max-width:768px)" srcset="bg/u-boat-m.jpg">
-<source media="(min-width:769px)" srcset="bg/u-boat.jpg">
-<img src="bg/u-boat.jpg" alt="" width="1920" height="1080" decoding="async" fetchpriority="low">
+<div aria-hidden="true" class="bg" data-bg="night">
+<picture class="bg-pic">
+<source media="(orientation:portrait)" srcset="bg/v2-night-m.jpg">
+<img src="bg/v2-night-1920.jpg" srcset="bg/v2-night-1920.jpg 1920w, bg/v2-night-2560.jpg 2560w" sizes="100vw" alt="" width="1920" height="1080" decoding="async" fetchpriority="high">
 </picture>
-  <picture>
-    <source media="(max-width: 768px)" srcset="bg/bg-night-m.jpg">
-    <source media="(min-width: 769px)" srcset="bg/bg-night.jpg">
-    
-  </picture>
-  <div class="grade"></div>
-  <div class="shade"></div>
+<div class="grade"></div>
+<div class="shade"></div>
+<div class="water"></div>
+<div class="caustics"></div>
+<div class="rays"></div>
+<div class="bubbles" id="bubbles"></div>
 </div>
 <nav>
 <div class="wrap nav-bar">
