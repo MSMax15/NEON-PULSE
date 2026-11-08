@@ -19,30 +19,37 @@
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;900&family=Figtree:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <style>
-.preorder-hero{min-height:66vh;padding:9rem 0 5rem;background:linear-gradient(120deg,#071326dd,#07132688),url('hero.png') center/cover}
-.preorder-hero .eyebrow,.preorder-kicker{color:#7cecff;letter-spacing:.16em;text-transform:uppercase;font-size:.75rem;font-weight:700}
-.preorder-hero h1{font:900 clamp(2.1rem,6vw,4.6rem)/1.08 Unbounded,sans-serif;max-width:900px;margin:.8rem 0 1.2rem;text-shadow:0 8px 36px #000}
-.preorder-hero p{max-width:720px;color:#e0eaf7;font-size:1.1rem}
-.preorder-wrap{width:min(1120px,calc(100% - 40px));margin:auto}
-.preorder-section{padding:4rem 0;background:linear-gradient(180deg,#06142beF,#07152df2)}
-.preorder-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.4rem;margin-top:2rem}
-.preorder-card{position:relative;padding:2rem;border:1px solid #66dfff55;border-radius:22px;background:linear-gradient(145deg,#102a48ed,#071326f5);box-shadow:0 22px 70px #0008,inset 0 1px #ffffff18;overflow:hidden}
+.preorder-hero{position:relative;min-height:470px;padding:8.5rem 0 4rem;background:linear-gradient(90deg,#050916ef 0%,#071326bb 48%,#07132655 100%),url('hero.png') center 43%/cover;overflow:hidden}
+.preorder-hero:after{content:"";position:absolute;inset:auto 0 0;height:2px;background:linear-gradient(90deg,transparent,#f04cff,#5be8ff,transparent)}
+.preorder-wrap{width:min(1160px,calc(100% - 36px));margin:auto;position:relative;z-index:1}
+.preorder-hero .eyebrow,.preorder-kicker{color:#78eaff;letter-spacing:.18em;text-transform:uppercase;font-size:.75rem;font-weight:800}
+.preorder-hero h1{font:900 clamp(2.4rem,6vw,5rem)/1.03 Unbounded,sans-serif;max-width:850px;margin:.8rem 0 1rem;text-shadow:0 8px 36px #000}
+.preorder-hero p{max-width:680px;color:#e0eaf7;font-size:1.08rem;line-height:1.7}
+.preorder-section{padding:4.5rem 0;background:linear-gradient(180deg,#06142bf5,#07152df9)}
+.shop-heading{display:flex;align-items:end;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin:0 0 1.4rem}
+.shop-heading h2{font:900 clamp(1.5rem,3vw,2.3rem)/1.15 Unbounded,sans-serif;margin:.45rem 0;color:#fff}
+.shop-heading p{color:#9fb4ca;margin:0}
+.shop-trust{display:flex;gap:.45rem;align-items:center;color:#cde4f6;font-size:.82rem}.shop-trust strong{color:#00b67a;letter-spacing:.08em}
+.preorder-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.35rem;margin-top:1.5rem}
+.preorder-card{position:relative;display:grid;grid-template-columns:minmax(125px, .78fr) 1.22fr;align-items:center;gap:1.2rem;padding:1.25rem;border:1px solid #5edfff66;border-radius:22px;background:radial-gradient(ellipse at 15% 0%,#123c62 0%,transparent 60%),linear-gradient(145deg,#0c1e36f5,#050c1cf7);box-shadow:0 22px 70px #0009,inset 0 1px #ffffff18;overflow:hidden;transition:transform .22s,border-color .22s,box-shadow .22s}
+.preorder-card:hover{transform:translateY(-5px);border-color:#8beeff;box-shadow:0 28px 75px #000b,0 0 28px #35caff24}
 .preorder-card:before{content:"";position:absolute;inset:0 0 auto;height:2px;background:linear-gradient(90deg,transparent,#62e8ff,transparent)}
-.preorder-card h2{font:900 clamp(1.2rem,2.4vw,1.7rem)/1.2 Unbounded,sans-serif;margin:.7rem 0}
-.preorder-card p{color:#c5d5e8;line-height:1.65}
-.platform-pill{display:inline-block;padding:.35rem .7rem;border:1px solid #7cecff66;border-radius:99px;color:#8beeff;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase}
-.preorder-button{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;margin-top:1.1rem;padding:.95rem 1.25rem;border-radius:10px;background:linear-gradient(120deg,#7cecff,#42a8dc);color:#03101d;text-decoration:none;font-weight:900;box-shadow:0 8px 28px #39caff35;transition:transform .2s,box-shadow .2s}
-.preorder-button:hover{transform:translateY(-3px);box-shadow:0 14px 34px #39caff66}
-.disclosure{font-size:.82rem!important;color:#9fb2c9!important;margin-top:1.2rem}
-.notice{margin:1.6rem 0;padding:1.2rem 1.3rem;border-left:3px solid #72e7ff;background:#0c2540;border-radius:0 12px 12px 0;color:#d9e8f7;line-height:1.65}
-.preorder-content{max-width:850px;margin:auto;color:#d0dced;line-height:1.8}
-.preorder-content h2{font:900 clamp(1.35rem,3vw,2rem)/1.2 Unbounded,sans-serif;color:#fff;margin:2.4rem 0 .8rem}
-.preorder-content h3{font-size:1.1rem;color:#fff;margin:1.5rem 0 .5rem}
-.preorder-content a{color:#8beeff}
-.preorder-faq details{border-bottom:1px solid #ffffff22;padding:1rem 0}
-.preorder-faq summary{cursor:pointer;color:#fff;font-weight:700}
-.preorder-faq details p{color:#c5d5e8;line-height:1.7}
-@media(max-width:760px){.preorder-grid{grid-template-columns:1fr}.preorder-card{padding:1.4rem}.preorder-hero{min-height:58vh;padding-top:8rem}}
+.product-visual{display:flex;align-items:center;justify-content:center;min-height:250px;border-radius:15px;background:radial-gradient(ellipse,#1c4774aa,transparent 70%)}
+.product-visual img{display:block;width:100%;max-width:205px;height:260px;object-fit:contain;filter:drop-shadow(0 16px 20px #000b)}
+.product-info{min-width:0}.platform-pill{display:inline-block;padding:.36rem .7rem;border:1px solid #7cecff66;border-radius:99px;color:#8beeff;font-size:.69rem;letter-spacing:.1em;text-transform:uppercase;font-weight:800}
+.preorder-card h2{font:900 clamp(1.15rem,2vw,1.55rem)/1.2 Unbounded,sans-serif;margin:.75rem 0 .35rem;color:#fff}
+.preorder-card p{color:#c5d5e8;line-height:1.6;font-size:.92rem}
+.product-points{list-style:none;padding:0;margin:.85rem 0;color:#d7e6f5;font-size:.84rem}.product-points li{margin:.42rem 0}.product-points li:before{content:'✓';color:#61e8ff;font-weight:900;margin-right:.5rem}
+.product-price{font:900 1.65rem Unbounded,sans-serif;color:#fff;margin:.9rem 0 .25rem}.price-note{font-size:.72rem;color:#91a9c1}
+.preorder-button{display:flex;align-items:center;justify-content:center;gap:.6rem;margin-top:.9rem;padding:.9rem 1rem;border-radius:11px;background:linear-gradient(110deg,#a42dff,#e83fc7);border:1px solid #ff8af4;color:white;text-decoration:none;font-weight:900;box-shadow:0 8px 28px #c32bff35;transition:transform .2s,box-shadow .2s;text-align:center}
+.preorder-card.xbox{border-color:#5cdb9b66;background:radial-gradient(ellipse at 15% 0%,#123e35 0%,transparent 60%),linear-gradient(145deg,#0b211f,#050c1cf7)}
+.preorder-card.xbox:before{background:linear-gradient(90deg,transparent,#60e89b,transparent)}.preorder-card.xbox .platform-pill{border-color:#60e89b77;color:#7cf0a8}.preorder-card.xbox .product-points li:before{color:#67e99b}.preorder-card.xbox .preorder-button{background:linear-gradient(110deg,#087b48,#16b86d);border-color:#72f3a7;box-shadow:0 8px 28px #16b86d35}
+.preorder-button:hover{transform:translateY(-2px);box-shadow:0 14px 34px #39caff66}
+.disclosure{font-size:.78rem!important;color:#9fb2c9!important;margin-top:1rem}.notice{margin:1.5rem 0;padding:1.1rem 1.25rem;border-left:3px solid #72e7ff;background:#0c2540;border-radius:0 12px 12px 0;color:#d9e8f7;line-height:1.65}
+.shop-benefits{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin:1.6rem 0 0}.shop-benefits div{padding:1rem;border:1px solid #ffffff1c;border-radius:14px;background:#ffffff08;color:#d4e7f8;font-size:.85rem}.shop-benefits strong{display:block;color:#fff;margin-bottom:.2rem}
+.preorder-content{max-width:850px;margin:auto;color:#d0dced;line-height:1.8}.preorder-content h2{font:900 clamp(1.35rem,3vw,2rem)/1.2 Unbounded,sans-serif;color:#fff;margin:2.4rem 0 .8rem}.preorder-content h3{font-size:1.1rem;color:#fff;margin:1.5rem 0 .5rem}.preorder-content a{color:#8beeff}.preorder-faq details{border-bottom:1px solid #ffffff22;padding:1rem 0}.preorder-faq summary{cursor:pointer;color:#fff;font-weight:700}.preorder-faq details p{color:#c5d5e8;line-height:1.7}
+@media(max-width:800px){.preorder-grid{grid-template-columns:1fr}.preorder-card{grid-template-columns:minmax(115px,.7fr) 1.3fr}.product-visual{min-height:230px}.product-visual img{height:230px}}
+@media(max-width:520px){.preorder-hero{min-height:0;padding:7.5rem 0 3rem}.preorder-section{padding:3rem 0}.preorder-card{grid-template-columns:1fr;padding:1.1rem;gap:.35rem}.product-visual{min-height:190px}.product-visual img{height:205px;max-width:160px}.product-info{text-align:center}.product-points{display:inline-block;text-align:left}.preorder-button{width:100%}.shop-benefits{grid-template-columns:1fr}}
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Article","headline":"GTA 6 vorbestellen für PS5 und Xbox Series X|S","description":"Unabhängiger Überblick zur GTA 6 Standard Edition als Code-in-Box, mit Plattformlinks und wichtigen Vorbestellinformationen.","author":{"@type":"Organization","name":"Pulseneon"},"publisher":{"@type":"Organization","name":"Pulseneon","url":"https://pulseneon.de"},"mainEntityOfPage":"https://pulseneon.de/gta-6-vorbestellen.html","datePublished":"2026-11-08","dateModified":"2026-11-08","inLanguage":"de"}
@@ -59,18 +66,20 @@
 <div aria-hidden="true" class="bg" style="--d:1"><img class="bg-surface" src="hero.png" alt=""><img class="bg-surface blur" src="hero.png" alt=""><div class="grade"></div><div class="shade"></div><div class="water"></div><div class="rays"></div><div class="bubbles" id="bubbles"></div></div>
 <nav><div class="wrap nav-bar"><a class="logo" href="index.html"><img alt="Pulseneon" decoding="async" height="56" src="logo.png" width="140"/></a><button aria-controls="nav-drawer" aria-expanded="false" aria-label="Open menu" class="nav-burger" type="button"><span aria-hidden="true" class="burger-lines"><i></i><i></i><i></i></span></button></div><div class="nav-backdrop" hidden="" id="nav-backdrop"></div><aside aria-hidden="true" class="nav-drawer" id="nav-drawer"><div class="nav-drawer-head"><a aria-label="Pulseneon Home" class="nav-drawer-logo" href="index.html"><img alt="Pulseneon" decoding="async" height="64" src="logo.png" width="160"/></a><button aria-label="Close menu" class="nav-close" type="button"><svg aria-hidden="true" fill="none" height="18" viewbox="0 0 18 18" width="18"><path d="M4 4l10 10M14 4L4 14" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path></svg></button></div><ul class="nav-list"><li><a href="index.html">Home</a></li><li><a href="cheats.html">Cheats</a></li><li><a href="cars.html">Cars</a></li><li><a href="weapons.html">Weapons</a></li><li><a href="leaks.html">Leaks</a></li><li><a href="map.html">Map</a></li><li><a href="gameplay.html">Gameplay</a></li><li><a href="alarm.html">Alerts</a></li><li><a href="gta6-server-status.html">Status</a></li><li><a aria-current="page" href="gta6-server-hosting.html">Hosting</a></li><li><a href="fivem-server-hosting.html">FiveM</a></li><li><a href="sixm-server-mieten.html">SixM</a></li><li><a href="blog.html">Blog</a></li><li><a href="partner.html">Partners</a></li></ul><div class="nav-drawer-foot"><a href="gta6-server-hosting.html">Server Hosting</a><a href="partner.html">Pulseneon × ZAP</a></div></aside></nav>
 <header class="preorder-hero"><div class="preorder-wrap">
-<span class="eyebrow">NEON PULSE · BUYER GUIDE</span>
-<h1>GTA 6 vorbestellen</h1>
-<p>Wähle deine Plattform: Grand Theft Auto VI für PlayStation 5 oder Xbox Series X|S. Hier findest du die direkten Angebotslinks und die wichtigsten Fakten zur Box-Version.</p>
-<div class="notice"><strong>Wichtig vor dem Kauf:</strong> Die physische Version ist eine <strong>Code-in-Box</strong>. In der Verpackung befindet sich ein Download-Code – <strong>keine Disc</strong>. Bitte prüfe vor der Bestellung auch die aktuelle Verfügbarkeit und Lieferbedingungen beim Händler.</div>
+<span class="eyebrow">NEON PULSE · OFFICIAL BUYER GUIDE</span>
+<h1>GTA 6. Deine Plattform. Dein Vice City.</h1>
+<p>Bereit für die Rückkehr nach Vice City? Wähle deine Edition für PlayStation 5 oder Xbox Series X|S und prüfe das aktuelle Angebot direkt beim Händler.</p>
+<div class="notice"><strong>Vor dem Kauf wissen:</strong> Die angebotene physische Edition ist eine <strong>Code-in-Box</strong> – in der Verpackung liegt ein Download-Code, <strong>keine Disc</strong>. Preis und Verfügbarkeit werden vom Händler festgelegt.</div>
 </div></header>
 <main>
 <section class="preorder-section"><div class="preorder-wrap">
-<span class="preorder-kicker">CHOOSE YOUR PLATFORM</span><h2>GTA 6 Standard Edition – Händlerlinks</h2>
+<div class="shop-heading"><div><span class="preorder-kicker">CHOOSE YOUR PLATFORM</span><h2>GTA 6 – Shop the Edition</h2><p>Wähle deine Konsole und öffne das aktuelle Händlerangebot.</p></div><div class="shop-trust"><strong>NEON PULSE</strong> · unabhängiger Fan-Guide</div></div>
 <div class="preorder-grid">
-<article class="preorder-card"><span class="platform-pill">PlayStation 5</span><h2>GTA 6 für PS5</h2><p>Standard Edition für PlayStation 5. Die Box enthält einen Download-Code zum Einlösen über ein kompatibles PlayStation-Konto. Keine Disc enthalten.</p><a class="preorder-button" href="https://link.amazon/B02TKZIep" target="_blank" rel="sponsored nofollow noopener">Bei Amazon ansehen <span aria-hidden="true">↗</span></a><p class="disclosure">Werbe-/Affiliate-Link: Wenn du über diesen Link kaufst, kann Pulseneon eine Provision erhalten. Für dich entstehen dadurch keine zusätzlichen Kosten.</p></article>
-<article class="preorder-card"><span class="platform-pill">Xbox Series X|S</span><h2>GTA 6 für Xbox</h2><p>Standard Edition für Xbox Series X|S. Die Box enthält einen Download-Code zum Einlösen über ein kompatibles Xbox-Konto. Keine Disc enthalten.</p><a class="preorder-button" href="https://link.amazon/B0fjTIdzS" target="_blank" rel="sponsored nofollow noopener">Bei Amazon ansehen <span aria-hidden="true">↗</span></a><p class="disclosure">Werbe-/Affiliate-Link: Wenn du über diesen Link kaufst, kann Pulseneon eine Provision erhalten. Für dich entstehen dadurch keine zusätzlichen Kosten.</p></article>
+<article class="preorder-card"><div class="product-visual"><img src="gta6-ps5-product.jpg" alt="GTA 6 PS5 Code-in-Box Produkt-Mockup" width="666" height="912" loading="eager"></div><div class="product-info"><span class="platform-pill">PlayStation 5</span><h2>GTA 6 – PS5 Edition</h2><p>Für PlayStation 5 · Physische Verpackung mit Download-Code.</p><ul class="product-points"><li>Code-in-Box Edition</li><li>Download statt Disc</li><li>PS5-Version</li></ul><div class="product-price">Angebot ansehen</div><div class="price-note">Aktueller Preis & Bestand beim Händler</div><a class="preorder-button" href="https://link.amazon/B02TKZIep" target="_blank" rel="sponsored nofollow noopener">JETZT BEI AMAZON ANSEHEN <span aria-hidden="true">↗</span></a></div></article>
+<article class="preorder-card xbox"><div class="product-visual"><img src="gta6-xbox-product.jpg" alt="GTA 6 Xbox Code-in-Box Produkt-Mockup" width="666" height="912" loading="lazy"></div><div class="product-info"><span class="platform-pill">Xbox Series X|S</span><h2>GTA 6 – Xbox Edition</h2><p>Für Xbox Series X|S · Physische Verpackung mit Download-Code.</p><ul class="product-points"><li>Code-in-Box Edition</li><li>Download statt Disc</li><li>Xbox Series X|S</li></ul><div class="product-price">Angebot ansehen</div><div class="price-note">Aktueller Preis & Bestand beim Händler</div><a class="preorder-button" href="https://link.amazon/B0fjTIdzS" target="_blank" rel="sponsored nofollow noopener">JETZT BEI AMAZON ANSEHEN <span aria-hidden="true">↗</span></a></div></article>
 </div>
+<div class="shop-benefits"><div><strong>🎮 Plattformwahl</strong>PS5 oder Xbox Series X|S</div><div><strong>📦 Code-in-Box</strong>Verpackung mit Download-Code, ohne Disc</div><div><strong>↗ Direkt zum Händler</strong>Preis und Verfügbarkeit live beim Anbieter prüfen</div></div>
+<p class="disclosure">Die Produktbilder sind illustrative Mockups und keine offiziellen Händler-Packshots. Werbe-/Affiliate-Hinweis: Bei einem Kauf über unsere Links kann Pulseneon eine Provision erhalten. Für dich entstehen dadurch keine zusätzlichen Kosten.</p>
 <p class="disclosure">Preise, Lagerbestand, Versand und Liefertermine können sich jederzeit ändern. Maßgeblich sind die Angaben auf der Händlerseite zum Zeitpunkt deiner Bestellung.</p>
 </div></section>
 <section class="preorder-section"><div class="preorder-wrap preorder-content">
