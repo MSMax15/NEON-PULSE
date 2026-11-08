@@ -527,3 +527,17 @@ if (chips.length) {
   });
 })();
 
+
+
+/* Burger accordion: Shop categories expand down */
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest(".nav-acc-btn");
+  if (!btn) return;
+  e.preventDefault();
+  const panel = document.getElementById(btn.getAttribute("aria-controls"));
+  if (!panel) return;
+  const open = btn.getAttribute("aria-expanded") === "true";
+  btn.setAttribute("aria-expanded", open ? "false" : "true");
+  panel.hidden = open;
+  panel.classList.toggle("is-open", !open);
+});

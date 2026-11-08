@@ -1041,3 +1041,44 @@ body.page-home .hero .date {
 .shop-soon-list li{
   border:1px dashed #ffffff30;border-radius:99px;padding:.4rem .85rem;font-size:.85rem;color:var(--muted);
 }
+
+
+/* Organized drawer labels + Shop accordion */
+.nav-label{
+  list-style:none;
+  margin:1rem 0 .35rem;
+  padding:.35rem 0 0;
+  font:700 .68rem/1 Unbounded,sans-serif;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--teal);
+  opacity:.9;
+  pointer-events:none;
+}
+.nav-label:first-child{margin-top:.25rem}
+.nav-acc{list-style:none;margin:0;padding:0}
+.nav-acc-btn{
+  width:100%;
+  display:flex;align-items:center;justify-content:space-between;gap:.75rem;
+  background:transparent;border:0;padding:.55rem 0;margin:0;
+  font:inherit;font-weight:700;color:inherit;cursor:pointer;text-align:left;
+}
+.nav-acc-arrow{
+  width:.55rem;height:.55rem;
+  border-right:2px solid currentColor;border-bottom:2px solid currentColor;
+  transform:rotate(45deg);transition:transform .2s ease;flex:none;
+  opacity:.75;
+}
+.nav-acc-btn[aria-expanded="true"] .nav-acc-arrow{
+  transform:rotate(-135deg);opacity:1;
+}
+.nav-acc-panel{
+  list-style:none;margin:0 0 .5rem;padding:.15rem 0 .35rem .85rem;
+  border-left:2px solid #ff4f8b66;
+}
+.nav-acc-panel[hidden]{display:none}
+.nav-acc-panel a{
+  display:block;padding:.4rem 0;font-size:.92rem;opacity:.92;
+}
+.nav-acc-panel a:hover{opacity:1}
+.nav-drawer-logo{cursor:pointer}
