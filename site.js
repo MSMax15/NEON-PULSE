@@ -63,14 +63,15 @@ if (bub) {
 })();
 
 // Official launch cinema: autoplay is attempted immediately. Browsers may block audible autoplay;
-// if so, continue muted and expose a one-tap sound control. Redirect on video end or at 40 seconds.
+// if so, continue muted and expose a one-tap sound control. Open the scheduled YouTube stream
+// when the intro ends, with a 40-second hard limit. YouTube's scheduled watch page is the waiting room.
 function showLaunchCinema(previewMode = false) {
   let seen = false;
   try { seen = localStorage.getItem('np-launch-cinema-seen') === '1'; } catch (_) {}
   if (seen && !previewMode && !/(?:\?|&)replay=1(?:&|$)/.test(location.search)) return;
   if (document.querySelector('.launch-cinema')) return;
 
-  const YOUTUBE_CHANNEL_URL = 'https://www.youtube.com/@Pulseneonz';
+  const YOUTUBE_STREAM_URL = 'https://www.youtube.com/watch?v=Mb1ktnaW00o';
   const overlay = document.createElement('section');
   overlay.className = 'launch-cinema is-playing';
   overlay.setAttribute('aria-label', 'Pulseneon GTA 6 Launch');
@@ -78,26 +79,24 @@ function showLaunchCinema(previewMode = false) {
     '<video class="launch-cinema-video" playsinline autoplay preload="auto" poster="hero.png"><source src="launch-video/gta6-launch.mp4" type="video/mp4"></video>' +
     '<div class="launch-cinema-shade"></div>' +
     '<button type="button" class="cinema-unmute" aria-label="Enable video sound">🔊 Enable sound</button>' +
-    '<div class="launch-cinema-copy" hidden><span class="cinema-kicker">PULSENEON PRESENTS</span><h2>VICE CITY IS YOURS.</h2><p>The wait is over. Welcome to GTA VI.</p><div class="cinema-actions"><a class="cinema-youtube" href="' + YOUTUBE_CHANNEL_URL + '" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div><small class="cinema-hint">Taking you to the Pulseneon channel…</small></div>';
+    '<div class="launch-cinema-copy" hidden><span class="cinema-kicker">PULSENEON PRESENTS</span><h2>VICE CITY IS YOURS.</h2><p>The wait is over. Welcome to GTA VI.</p><div class="cinema-actions"><a class="cinema-youtube" href="' + YOUTUBE_STREAM_URL + '" target="_blank" rel="noopener noreferrer">Watch the GTA 6 livestream ↗</a></div><small class="cinema-hint">Opening the scheduled YouTube livestream…</small></div>';
 
   let finished = false;
-  let endCardShown = false;
   let redirectTimer;
-  const redirectToYouTube = () => {
+  const redirectToStream = () => {
     if (finished) return;
     finished = true;
     try { if (!previewMode) localStorage.setItem('np-launch-cinema-seen', '1'); } catch (_) {}
-    window.location.href = YOUTUBE_CHANNEL_URL;
+    window.location.href = YOUTUBE_STREAM_URL;
   };
   const revealEndCard = () => {
-    if (endCardShown || finished) return;
-    endCardShown = true;
+    if (finished || overlay.classList.contains('show-end-card')) return;
     video.pause();
     overlay.classList.add('show-end-card');
     const copy = overlay.querySelector('.launch-cinema-copy');
     if (copy) copy.hidden = false;
     clearTimeout(redirectTimer);
-    redirectTimer = setTimeout(redirectToYouTube, 5000);
+    redirectTimer = setTimeout(redirectToStream, 2500);
   };
   const video = overlay.querySelector('video');
   overlay.querySelector('.cinema-unmute').addEventListener('click', () => {
@@ -112,8 +111,8 @@ function showLaunchCinema(previewMode = false) {
     revealEndCard();
   }, { once: true });
   document.body.append(overlay);
-  // Hard limit: redirect after 40 seconds from launch, even if the video is longer or stalls.
-  redirectTimer = setTimeout(redirectToYouTube, 40000);
+  // Hard limit: go to the livestream after 40 seconds, even if the video is longer or stalls.
+  redirectTimer = setTimeout(redirectToStream, 40000);
   video.muted = false;
   video.volume = 1;
   const playAttempt = video.play();
