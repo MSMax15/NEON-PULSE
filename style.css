@@ -1219,3 +1219,18 @@ body:has(.packs-section) .bg img{object-position:center 25%}
 .bg-pic, .bg picture{position:absolute;inset:0;width:100%;height:100%;display:block}
 .bg-pic img, .bg picture img{width:100%;height:100%;object-fit:cover;object-position:center 28%}
 .bg img.blur{display:none !important} /* old soft blur layer off – sharp only */
+
+
+/* User backgrounds: portrait mobile, landscape desktop */
+@media (max-width:768px){
+  .bg-pic img, .bg picture img, .bg img{
+    object-fit:cover;
+    object-position:center 20%;
+  }
+}
+@media (min-width:769px){
+  .bg-pic img, .bg picture img, .bg img{
+    object-fit:cover;
+    object-position:center 35%;
+  }
+}
