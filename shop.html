@@ -15,7 +15,19 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body class="page-shop">
-<div class="bg" style="--d:0.28" aria-hidden="true"><img src="bg/night-neon.jpg" alt=""><div class="grade"></div><div class="shade"></div></div>
+<div class="bg" style="--d:0.28" aria-hidden="true" aria-hidden="true"><picture class="bg-pic">
+<source media="(max-width:768px)" srcset="bg/bg-night-m.jpg">
+<source media="(min-width:769px)" srcset="bg/bg-night.jpg">
+<img src="bg/bg-night.jpg" alt="" width="1920" height="1080" decoding="async" fetchpriority="low">
+</picture>
+  <picture>
+    <source media="(max-width: 768px)" srcset="bg/bg-night-m.jpg">
+    <source media="(min-width: 769px)" srcset="bg/bg-night.jpg">
+    
+  </picture>
+  <div class="grade"></div>
+  <div class="shade"></div>
+</div>
 <nav>
 <div class="wrap nav-bar">
 <a class="logo" href="index.html"><img src="logo.png" alt="Pulseneon" width="140" height="56" decoding="async"></a>

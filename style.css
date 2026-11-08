@@ -1167,3 +1167,55 @@ body:has(.packs-section) .bg img{object-position:center 25%}
   text-wrap:balance;
 }
 .intro{max-width:40rem}
+
+
+/* HD backgrounds: sharp, responsive, no soft mud */
+.bg{
+  position:fixed; inset:0; z-index:-1; overflow:hidden;
+  pointer-events:none;
+}
+.bg picture,
+.bg img{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  display:block;
+}
+.bg img{
+  object-fit:cover;
+  object-position:center 28%;
+  filter:none !important;
+  transform:none;
+  image-rendering:auto;
+  -webkit-backface-visibility:hidden;
+  backface-visibility:hidden;
+}
+@media (max-width:768px){
+  .bg img{ object-position:center 22%; }
+}
+@media (min-width:1200px){
+  .bg img{ object-position:center 32%; }
+}
+.bg .grade{
+  position:absolute; inset:0;
+  background:linear-gradient(180deg,#0a0618aa 0%,#0a061866 40%,#0a0618e6 100%);
+  pointer-events:none;
+}
+.bg .shade{
+  position:absolute; inset:0;
+  background:radial-gradient(ellipse at 50% 20%, transparent 0%, #0a0618cc 70%);
+  pointer-events:none;
+}
+/* Widgets: sharp, not soft-blur mush */
+.shop-widget,.shop-trust > div,.affiliate-band-inner,.hosting-link,.shop-card{
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+  border:1px solid #ffffff1a;
+  background:#0c0a16f2;
+}
+.shop-card{
+  background:linear-gradient(165deg,#16121ff5,#0a0c16f8);
+}
+
+.bg-pic, .bg picture{position:absolute;inset:0;width:100%;height:100%;display:block}
+.bg-pic img, .bg picture img{width:100%;height:100%;object-fit:cover;object-position:center 28%}
+.bg img.blur{display:none !important} /* old soft blur layer off – sharp only */

@@ -23,7 +23,11 @@
 <meta content="de" name="language"/>
 </head>
 <body class="page-packs">
-<div aria-hidden="true" class="bg" style="--d:0.4"><img alt="" class="bg-surface" src="bg/keyart-sunset.jpg"/><div class="grade"></div><div class="shade"></div></div>
+<div aria-hidden="true" class="bg" style="--d:0.4"><picture class="bg-pic">
+<source media="(max-width:768px)" srcset="bg/bg-keyart-m.jpg">
+<source media="(min-width:769px)" srcset="bg/bg-keyart.jpg">
+<img src="bg/bg-keyart.jpg" alt="" width="1920" height="1080" decoding="async" fetchpriority="low">
+</picture><div class="grade"></div><div class="shade"></div></div>
 <nav>
 <div class="wrap nav-bar">
 <a class="logo" href="index.html"><img src="logo.png" alt="Pulseneon" width="140" height="56" decoding="async"></a>

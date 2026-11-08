@@ -39,7 +39,11 @@
 <meta content="de" name="language"/>
 </head>
 <body>
-<div aria-hidden="true" class="bg" style="--d:1"><img alt="" src="bg/motel-sun.jpg"/><img alt="" class="blur" src="bg/motel-sun.jpg"/><div class="grade"></div><div class="shade"></div><div class="water"></div><div class="rays"></div><div class="bubbles" id="bubbles"></div></div>
+<div aria-hidden="true" class="bg" style="--d:1"><picture class="bg-pic">
+<source media="(max-width:768px)" srcset="bg/bg-motel-m.jpg">
+<source media="(min-width:769px)" srcset="bg/bg-motel.jpg">
+<img src="bg/bg-motel.jpg" alt="" width="1920" height="1080" decoding="async" fetchpriority="low">
+</picture><div class="grade"></div><div class="shade"></div><div class="water"></div><div class="rays"></div><div class="bubbles" id="bubbles"></div></div>
 <nav>
 <div class="wrap nav-bar">
 <a class="logo" href="index.html"><img src="logo.png" alt="Pulseneon" width="140" height="56" decoding="async"></a>
