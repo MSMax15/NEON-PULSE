@@ -49,6 +49,73 @@ if (bub) {
   addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
 })();
 
+// International visitors: offer Google Translate once, based on browser language (not IP tracking).
+(() => {
+  let dismissed = false;
+  try { dismissed = localStorage.getItem('np-language-prompt') === '1'; } catch (_) {}
+  if (dismissed) return;
+  const lang = (navigator.languages && navigator.languages[0] || navigator.language || 'en').toLowerCase();
+  if (lang.startsWith('de')) return;
+  const target = lang.startsWith('pt') ? 'pt' : lang.startsWith('es') ? 'es' : 'en';
+  const labels = { en: ['English', 'Would you like to view Pulseneon in English?'], pt: ['Português', 'Quer ver o Pulseneon em português?'], es: ['Español', '¿Quieres ver Pulseneon en español?'] };
+  const current = location.href;
+  const googleUrl = 'https://translate.google.com/translate?sl=de&tl=' + target + '&u=' + encodeURIComponent(current);
+  const panel = document.createElement('aside');
+  panel.className = 'language-nudge';
+  panel.setAttribute('role', 'dialog');
+  panel.setAttribute('aria-label', 'Language suggestion');
+  panel.innerHTML = '<div><b>' + labels[target][0] + '</b><p>' + labels[target][1] + '</p></div><a class="language-yes" href="' + googleUrl + '" rel="noopener">Translate</a><button type="button" aria-label="Close">✕</button>';
+  const dismiss = () => { try { localStorage.setItem('np-language-prompt', '1'); } catch (_) {} panel.remove(); };
+  panel.querySelector('button').addEventListener('click', dismiss);
+  panel.querySelector('a').addEventListener('click', () => { try { localStorage.setItem('np-language-prompt', '1'); } catch (_) {} });
+  document.body.append(panel);
+})();
+
+// YouTube link is available site-wide without overpowering the navigation.
+(() => {
+  const footer = document.querySelector('footer .wrap');
+  if (!footer || footer.querySelector('.youtube-channel-link')) return;
+  const link = document.createElement('a');
+  link.className = 'youtube-channel-link';
+  link.href = 'https://www.youtube.com/@Pulseneonz';
+  link.target = '_blank';
+  link.rel = 'noopener noreferrer';
+  link.textContent = 'YouTube · Pulseneonz ↗';
+  footer.append(link);
+})();
+
+// One-time, short launch cinema. Drop a legally usable GTA-style MP4 at /gta6-launch.mp4.
+function showLaunchCinema() {
+  let seen = false;
+  try { seen = localStorage.getItem('np-launch-cinema-seen') === '1'; } catch (_) {}
+  if (seen && !/(?:\?|&)replay=1(?:&|$)/.test(location.search)) return;
+  if (document.querySelector('.launch-cinema')) return;
+  const YOUTUBE_CHANNEL_URL = 'https://www.youtube.com/@Pulseneonz';
+  const overlay = document.createElement('section');
+  overlay.className = 'launch-cinema';
+  overlay.setAttribute('aria-label', 'Pulseneon GTA 6 Launch');
+  overlay.innerHTML = '<video class="launch-cinema-video" autoplay muted playsinline preload="auto" poster="hero.png"><source src="gta6-launch.mp4" type="video/mp4"></video>' +
+    '<div class="launch-cinema-shade"></div><div class="launch-cinema-copy"><span class="cinema-kicker">PULSENEON PRESENTS</span><h2>VICE CITY IS YOURS.</h2><p>Der Countdown ist vorbei. Willkommen in GTA 6.</p><div class="cinema-actions"><button type="button" class="cinema-enter">Weiter zur Website</button><a href="' + YOUTUBE_CHANNEL_URL + '" target="_blank" rel="noopener noreferrer">YouTube ansehen ↗</a></div><small class="cinema-hint">Dein nächstes Kapitel beginnt jetzt.</small></div>';
+  let finished = false;
+  const finish = () => {
+    if (finished) return;
+    finished = true;
+    try { localStorage.setItem('np-launch-cinema-seen', '1'); } catch (_) {}
+    overlay.classList.add('is-leaving');
+    setTimeout(() => overlay.remove(), 650);
+  };
+  overlay.querySelector('.cinema-enter').addEventListener('click', finish);
+  const video = overlay.querySelector('video');
+  video.addEventListener('ended', finish, { once: true });
+  video.addEventListener('error', () => overlay.classList.add('video-unavailable'), { once: true });
+  document.body.append(overlay);
+  const play = video.play();
+  if (play && play.catch) play.catch(() => overlay.classList.add('video-unavailable'));
+  // Never make visitors wait: missing video falls back quickly; any intro is capped at 8 seconds.
+  setTimeout(finish, 8000);
+  video.addEventListener('error', () => setTimeout(finish, 3500), { once: true });
+}
+
 // Home: countdown → launch mode
 const hero = document.querySelector('.hero');
 if (hero) {
@@ -60,26 +127,27 @@ if (hero) {
 
   const enterLaunch = () => {
     document.body.classList.add('launch');
+    showLaunchCinema();
     document.documentElement.classList.add('launch');
     const hl = $('headline');
     const count = $('count');
     const date = $('date');
     const actions = document.getElementById('hero-actions');
-    if (hl) hl.textContent = 'GTA 6 is out';
+    if (hl) hl.textContent = 'GTA 6 ist da';
     if (count) {
-      count.innerHTML = '<div class="out">Launch Day</div><p class="launch-sub">Vice City is live. Check status, set the alarm, get your server.</p>';
+      count.innerHTML = '<div class="out">Launch Day</div><p class="launch-sub">Vice City ist live. Check den Status, aktiviere den Alarm und starte deine Community.</p>';
     }
-    if (date) date.textContent = 'Offizielle Statusseite und Community-Hosting – alles an einem Ort.';
+    if (date) date.textContent = 'Offizieller Status, Community-Hosting und alle GTA-6-Updates an einem Ort.';
     if (actions) {
       actions.innerHTML =
-        '<a class="dive dive-primary" href="https://support.rockstargames.com/servicestatus" target="_blank" rel="noopener">Rockstar Status</a>' +
+        '<a class="dive dive-primary" href="https://support.rockstargames.com/servicestatus" target="_blank" rel="noopener">Rockstar-Status</a>' +
         '<a class="dive" href="#alarm">Server-Alarm</a>' +
         '<a class="dive" href="gta6-server-hosting.html">Server mieten</a>' +
         '<a class="dive" href="partner.html">Pulseneon × ZAP</a>';
     }
     const ticker = document.querySelector('.ticker div');
     if (ticker) {
-      ticker.innerHTML = '<span>LAUNCH DAY</span><i></i><span>GTA 6 is out now</span><i></i><span>Check Rockstar status</span><i></i><span>Server &amp; TeamSpeak hosting</span><i></i><span>Status-Alarm aktivieren</span><i></i><span>Pulseneon × ZAP</span><i></i><span>LAUNCH DAY</span><i></i><span>GTA 6 is out now</span><i></i><span>Check Rockstar status</span><i></i><span>Server &amp; TeamSpeak hosting</span><i></i><span>Status-Alarm aktivieren</span><i></i><span>Pulseneon × ZAP</span><i></i>';
+      ticker.innerHTML = '<span>GTA 6 IST DA</span><i></i><span>Jetzt verfügbar</span><i></i><span>Rockstar-Status prüfen</span><i></i><span>Server &amp; TeamSpeak-Hosting</span><i></i><span>Status-Alarm aktivieren</span><i></i><span>Pulseneon × ZAP</span><i></i><span>GTA 6 IST DA</span><i></i><span>Jetzt verfügbar</span><i></i><span>Rockstar-Status prüfen</span><i></i><span>Server &amp; TeamSpeak-Hosting</span><i></i><span>Status-Alarm aktivieren</span><i></i><span>Pulseneon × ZAP</span><i></i>'; 
     }
   };
 
@@ -150,7 +218,7 @@ if (hero) {
     };
     const off = () => {
       if ($('hub1')) $('hub1').textContent = 'GTA 6';
-      if ($('hub2')) $('hub2').textContent = 'Pick a slot';
+      if ($('hub2')) $('hub2').textContent = 'Wähle einen Bereich';
     };
     g.addEventListener('mouseenter', on);
     g.addEventListener('focus', on);
