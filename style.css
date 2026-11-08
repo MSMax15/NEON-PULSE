@@ -1009,3 +1009,35 @@ body.page-home .hero .date {
 .shop-ph b{font-size:.9rem}
 .shop-ph small{color:var(--muted);font-size:.75rem}
 .shop-legal{margin-top:2rem;font-size:.85rem}
+
+
+/* Nav Shop groups */
+.nav-group{display:block}
+.nav-group > a{font-weight:700}
+.nav-sub{
+  list-style:none;margin:.25rem 0 .6rem 0.75rem;padding:0 0 0 .6rem;
+  border-left:2px solid #ff4f8b55;
+}
+.nav-sub a{
+  display:block;padding:.35rem 0;font-size:.9rem;opacity:.9;
+}
+.nav-sub a:hover{opacity:1;color:var(--teal)}
+/* Shop layout clean */
+.shop-subnav{
+  display:flex;flex-wrap:wrap;gap:.45rem;margin:0 0 1.25rem;position:sticky;top:4.5rem;z-index:5;
+  padding:.5rem 0;background:linear-gradient(180deg,#0a0618f2,#0a0618cc);
+  backdrop-filter:blur(8px);
+}
+.shop-subnav-link{
+  border:1px solid #ffffff28;border-radius:99px;padding:.4rem .85rem;
+  font-size:.8rem;font-weight:700;text-decoration:none;color:var(--sand);background:#ffffff0a;
+}
+.shop-subnav-link:hover{border-color:var(--flamingo);color:#fff}
+.shop-subnav-soon{font-size:.75rem;opacity:.45;padding:.4rem .5rem;align-self:center}
+.shop-note{font-size:.9rem;color:var(--muted);margin:0 0 1.5rem}
+.shop-section{margin:0 0 2.25rem;scroll-margin-top:6rem}
+.shop-section h2{margin:0 0 1rem;font:900 1.2rem/1.2 Unbounded,sans-serif}
+.shop-soon-list{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;padding:0;margin:0}
+.shop-soon-list li{
+  border:1px dashed #ffffff30;border-radius:99px;padding:.4rem .85rem;font-size:.85rem;color:var(--muted);
+}
