@@ -1,11 +1,16 @@
-# Launch-Video-Platzhalter
+# Launch video
 
-Der Launch-Screen ist vorbereitet. Lege später eine kurze, selbst erstellte oder rechtmäßig verwendbare MP4-Datei mit dem Namen `gta6-launch.mp4` direkt neben `index.html`.
+Put your MP4 inside the `launch-video` folder and name it `gta6-launch.mp4`.
 
-- Empfohlen: 5–8 Sekunden, 1920×1080, H.264/MP4.
-- Der Screen erscheint einmalig, sobald der Countdown null erreicht.
-- Besucher können jederzeit auf „Weiter zur Website“ klicken.
-- Das Intro endet automatisch nach spätestens 8 Sekunden; fehlt die Videodatei, wird der vorhandene Website-Hintergrund als Fallback genutzt.
-- Vorschau: `https://pulseneon.de/?launch=1&replay=1` (für erneutes Testen ggf. Browser-Speicher löschen).
+Full path: `launch-video/gta6-launch.mp4` (the folder sits beside `index.html`).
 
-YouTube-Kanal: https://www.youtube.com/@Pulseneonz
+Open `index.html` locally to see a private 30-second countdown followed by your video. Alternatively use `https://pulseneon.de/?preview=1`.
+
+The live release countdown is not changed. The public launch intro stays short (maximum 8 seconds) and can be skipped.
+
+YouTube: https://www.youtube.com/@Pulseneonz
+
+## Sound and end card
+- Visitors choose **Start with Sound** to begin playback with audio. Browsers do not allow websites to force autoplay with sound; this click is required by browser policy.
+- The launch title and message appear only after the video ends.
+- Visitors can choose Continue muted or Skip intro. The end card then closes automatically after a few seconds, or immediately with Enter Website.

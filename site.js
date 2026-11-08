@@ -62,50 +62,99 @@ if (bub) {
   footer.append(link);
 })();
 
-// One-time, short launch cinema. Drop a legally usable GTA-style MP4 at /gta6-launch.mp4.
-function showLaunchCinema() {
+// Official launch cinema: autoplay is attempted immediately. Browsers may block audible autoplay;
+// if so, continue muted and expose a one-tap sound control. Redirect on video end or at 40 seconds.
+function showLaunchCinema(previewMode = false) {
   let seen = false;
   try { seen = localStorage.getItem('np-launch-cinema-seen') === '1'; } catch (_) {}
-  if (seen && !/(?:\?|&)replay=1(?:&|$)/.test(location.search)) return;
+  if (seen && !previewMode && !/(?:\?|&)replay=1(?:&|$)/.test(location.search)) return;
   if (document.querySelector('.launch-cinema')) return;
+
   const YOUTUBE_CHANNEL_URL = 'https://www.youtube.com/@Pulseneonz';
   const overlay = document.createElement('section');
-  overlay.className = 'launch-cinema';
+  overlay.className = 'launch-cinema is-playing';
   overlay.setAttribute('aria-label', 'Pulseneon GTA 6 Launch');
-  overlay.innerHTML = '<video class="launch-cinema-video" autoplay muted playsinline preload="auto" poster="hero.png"><source src="gta6-launch.mp4" type="video/mp4"></video>' +
-    '<div class="launch-cinema-shade"></div><div class="launch-cinema-copy"><span class="cinema-kicker">PULSENEON PRESENTS</span><h2>VICE CITY IS YOURS.</h2><p>The countdown is over. Welcome to GTA 6.</p><div class="cinema-actions"><button type="button" class="cinema-enter">Enter Website</button><a href="' + YOUTUBE_CHANNEL_URL + '" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div><small class="cinema-hint">Your next chapter starts now.</small></div>';
+  overlay.innerHTML =
+    '<video class="launch-cinema-video" playsinline autoplay preload="auto" poster="hero.png"><source src="launch-video/gta6-launch.mp4" type="video/mp4"></video>' +
+    '<div class="launch-cinema-shade"></div>' +
+    '<button type="button" class="cinema-unmute" aria-label="Enable video sound">🔊 Enable sound</button>' +
+    '<div class="launch-cinema-copy" hidden><span class="cinema-kicker">PULSENEON PRESENTS</span><h2>VICE CITY IS YOURS.</h2><p>The wait is over. Welcome to GTA VI.</p><div class="cinema-actions"><a class="cinema-youtube" href="' + YOUTUBE_CHANNEL_URL + '" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div><small class="cinema-hint">Taking you to the Pulseneon channel…</small></div>';
+
   let finished = false;
-  const finish = () => {
+  let endCardShown = false;
+  let redirectTimer;
+  const redirectToYouTube = () => {
     if (finished) return;
     finished = true;
-    try { localStorage.setItem('np-launch-cinema-seen', '1'); } catch (_) {}
-    overlay.classList.add('is-leaving');
-    setTimeout(() => overlay.remove(), 650);
+    try { if (!previewMode) localStorage.setItem('np-launch-cinema-seen', '1'); } catch (_) {}
+    window.location.href = YOUTUBE_CHANNEL_URL;
   };
-  overlay.querySelector('.cinema-enter').addEventListener('click', finish);
+  const revealEndCard = () => {
+    if (endCardShown || finished) return;
+    endCardShown = true;
+    video.pause();
+    overlay.classList.add('show-end-card');
+    const copy = overlay.querySelector('.launch-cinema-copy');
+    if (copy) copy.hidden = false;
+    clearTimeout(redirectTimer);
+    redirectTimer = setTimeout(redirectToYouTube, 5000);
+  };
   const video = overlay.querySelector('video');
-  video.addEventListener('ended', finish, { once: true });
-  video.addEventListener('error', () => overlay.classList.add('video-unavailable'), { once: true });
+  overlay.querySelector('.cinema-unmute').addEventListener('click', () => {
+    video.muted = false;
+    video.volume = 1;
+    video.play().catch(() => {});
+    overlay.querySelector('.cinema-unmute').hidden = true;
+  });
+  video.addEventListener('ended', revealEndCard, { once: true });
+  video.addEventListener('error', () => {
+    overlay.classList.add('video-unavailable');
+    revealEndCard();
+  }, { once: true });
   document.body.append(overlay);
-  const play = video.play();
-  if (play && play.catch) play.catch(() => overlay.classList.add('video-unavailable'));
-  // Never make visitors wait: missing video falls back quickly; any intro is capped at 8 seconds.
-  setTimeout(finish, 8000);
-  video.addEventListener('error', () => setTimeout(finish, 3500), { once: true });
+  // Hard limit: redirect after 40 seconds from launch, even if the video is longer or stalls.
+  redirectTimer = setTimeout(redirectToYouTube, 40000);
+  video.muted = false;
+  video.volume = 1;
+  const playAttempt = video.play();
+  if (playAttempt && playAttempt.catch) {
+    playAttempt.catch(() => {
+      // Audible autoplay is commonly blocked. Muted autoplay is the best automatic fallback.
+      video.muted = true;
+      video.play().then(() => {
+        const soundButton = overlay.querySelector('.cinema-unmute');
+        if (soundButton) soundButton.hidden = false;
+      }).catch(() => {
+        // If even muted autoplay is blocked, retain the visible video and sound control.
+        const soundButton = overlay.querySelector('.cinema-unmute');
+        if (soundButton) soundButton.textContent = '▶ Play video / enable sound';
+      });
+    });
+  }
 }
 
 // Home: countdown → launch mode
 const hero = document.querySelector('.hero');
 if (hero) {
-  const target = new Date(2026, 10, 19, 0, 0, 0).getTime();
+  const releaseTarget = new Date(2026, 10, 19, 0, 0, 0).getTime();
+  // Opening index.html directly on your computer starts a private 30-second preview.
+  // On the live website, use ?preview=1 to test without changing the real release countdown.
+  const previewMode = isFile || /(?:\?|&)preview=1(?:&|$)/.test(location.search);
+  const target = previewMode ? Date.now() + 30000 : releaseTarget;
   let forceLaunch = false;
   try {
-    forceLaunch = /(?:\?|&)launch=1(?:&|$)/.test(location.search) || localStorage.getItem('np-launch') === '1';
+    forceLaunch = !previewMode && (/(?:\?|&)launch=1(?:&|$)/.test(location.search) || localStorage.getItem('np-launch') === '1');
   } catch (_) {}
+  if (previewMode) {
+    const headline = $('headline');
+    const dateLine = $('date');
+    if (headline) headline.textContent = 'Launch experience preview';
+    if (dateLine) dateLine.textContent = 'Preview mode · The launch screen starts automatically in 30 seconds.';
+  }
 
   const enterLaunch = () => {
     document.body.classList.add('launch');
-    showLaunchCinema();
+    showLaunchCinema(previewMode);
     document.documentElement.classList.add('launch');
     const hl = $('headline');
     const count = $('count');

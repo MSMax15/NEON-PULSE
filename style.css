@@ -888,19 +888,25 @@ body.page-home .hero .date {
 .language-nudge button{border:0;background:transparent;color:#cbd5e1;font-size:1.1rem;cursor:pointer;padding:4px}
 @media(max-width:520px){.language-nudge{left:12px;right:12px;bottom:12px;gap:9px;padding:12px}.language-nudge p{font-size:.8rem}.language-nudge .language-yes{font-size:.82rem;padding:.6rem}}
 
-/* Full-screen GTA 6 launch reveal. Video file expected at /gta6-launch.mp4. */
+/* Full-screen GTA 6 launch reveal: sound starts after an explicit visitor gesture. */
 .launch-cinema{position:fixed;inset:0;z-index:10050;display:grid;place-items:center;overflow:hidden;background:#030713;color:#fff;opacity:1;transition:opacity .65s ease}
 .launch-cinema.is-leaving{opacity:0;pointer-events:none}
 .launch-cinema-video,.launch-cinema-shade{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.launch-cinema-video{opacity:.92}
-.launch-cinema-shade{background:linear-gradient(90deg,#030713dd,#03071355 60%,#03071399),linear-gradient(0deg,#030713bb,transparent 65%)}
-.launch-cinema-copy{position:relative;z-index:1;width:min(1100px,90vw);padding:30px;text-align:center;text-shadow:0 4px 30px #000}
+.launch-cinema-video{opacity:.96}
+.launch-cinema-shade{background:linear-gradient(90deg,#03071399,#03071322 60%,#03071366),linear-gradient(0deg,#03071399,transparent 65%)}
+.cinema-gate,.launch-cinema-copy{position:relative;z-index:2;width:min(1100px,90vw);padding:30px;text-align:center;text-shadow:0 4px 30px #000}
+.cinema-gate h2,.launch-cinema-copy h2{margin:1rem 0;font:900 clamp(2.5rem,9vw,7rem)/.98 Unbounded,sans-serif;letter-spacing:-.06em;background:linear-gradient(90deg,#fff,#ff4f9a,#2ef5e4);background-clip:text;color:transparent;filter:drop-shadow(0 8px 25px #000)}
+.cinema-gate p,.launch-cinema-copy p{font-size:clamp(1rem,2vw,1.35rem);color:#fff}
 .cinema-kicker{font:800 .78rem Unbounded,sans-serif;letter-spacing:.35em;color:#2ef5e4}
-.launch-cinema-copy h2{margin:1rem 0;font:900 clamp(2.5rem,9vw,7rem)/.98 Unbounded,sans-serif;letter-spacing:-.06em;background:linear-gradient(90deg,#fff,#ff4f9a,#2ef5e4);background-clip:text;color:transparent;filter:drop-shadow(0 8px 25px #000)}
-.launch-cinema-copy p{font-size:clamp(1rem,2vw,1.35rem);color:#fff}
-.cinema-actions{display:flex;justify-content:center;gap:12px;align-items:center;margin-top:2rem}
-.cinema-enter,.cinema-actions a{border:1px solid #2ef5e4;background:#2ef5e4;color:#061322;padding:14px 24px;border-radius:8px;font-weight:900;text-decoration:none;cursor:pointer;letter-spacing:.04em}
+.cinema-actions{display:flex;justify-content:center;gap:12px;align-items:center;flex-wrap:wrap;margin-top:1.5rem}
+.cinema-start-sound,.cinema-start-muted,.cinema-enter,.cinema-actions a{min-height:48px;display:inline-flex;align-items:center;justify-content:center;padding:13px 22px;border:1px solid #2ef5e4;border-radius:9px;background:#2ef5e4;color:#061322;font-weight:900;text-decoration:none;cursor:pointer;letter-spacing:.04em}
+.cinema-start-muted,.cinema-actions a{background:#06152acc;color:#fff;border-color:#2ef5e477}
+.cinema-start-sound:hover,.cinema-enter:hover{box-shadow:0 0 24px #2ef5e477}
+.cinema-skip{margin-top:18px;border:0;background:transparent;color:#d5e4f5;text-decoration:underline;text-underline-offset:4px;cursor:pointer;font-family:inherit;font-size:.85rem;font-weight:600}
+.launch-cinema-copy[hidden]{display:none}
 .launch-cinema.video-unavailable .launch-cinema-shade{background:radial-gradient(ellipse at center,#142b55,#030713 75%)}
+.launch-cinema.show-end-card .launch-cinema-video{opacity:.38;transition:opacity .7s ease}
+@media(max-width:600px){.cinema-gate,.launch-cinema-copy{padding:20px}.cinema-gate h2,.launch-cinema-copy h2{letter-spacing:-.045em}.cinema-actions{gap:9px}.cinema-start-sound,.cinema-start-muted,.cinema-enter,.cinema-actions a{width:100%}}
 @media(prefers-reduced-motion:reduce){.launch-cinema,.launch-cinema.is-leaving{transition:none}}
 
 
