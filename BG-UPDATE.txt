@@ -1,0 +1,14 @@
+Hintergrund-Update — in die GitHub-Repo-ROOT kopieren und überschreiben.
+Nichts löschen. style.css und site.js nicht anfassen.
+
+Bilder (Handy + PC, gerade ausgerichtet):
+- weapons + cheats     bg/np-weapons-*
+- cars                 bg/np-cars-*
+- map + alarm          bg/np-swamp-*
+- gameplay             bg/np-ops-*        (90° korrigiert, Himmel oben)
+- index (Dive unten)   bg/np-underwater-*
+- leaks                bg/np-night-*
+- packs + gta-6-mieten bg/np-boat-*
+- roleplay seiten      bg/np-jason-*
+
+Danach Hard-Refresh (Ctrl+Shift+R).
