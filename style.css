@@ -1410,3 +1410,63 @@ body > nav{ z-index:100 !important; }
 .phead, header.phead{
   padding-top: calc(5.25rem + env(safe-area-inset-top, 0px)) !important;
 }
+
+/* PULSENEON NAV SYSTEM FINAL */
+html.nav-open, html.nav-open body{overflow:hidden!important}
+#site-nav.site-nav{
+  position:fixed!important;top:0!important;left:0!important;right:0!important;
+  width:100%!important;z-index:10000!important;margin:0!important;padding:0!important;
+  border:none!important;display:block!important;inset:0 0 auto!important;transform:none!important;
+  background:linear-gradient(180deg,rgba(6,4,16,.94) 0%,rgba(6,4,16,.45) 70%,transparent 100%)!important;
+  pointer-events:none!important;backdrop-filter:none!important;
+}
+#site-nav .nav-bar,#site-nav .logo,#site-nav .nav-burger,#site-nav .nav-drawer,#site-nav .nav-backdrop,#site-nav a,#site-nav button{pointer-events:auto!important}
+#site-nav .nav-bar{
+  display:flex!important;align-items:center!important;justify-content:space-between!important;
+  gap:1rem!important;padding:max(0.75rem,env(safe-area-inset-top,0px)) 1rem 0.9rem!important;
+  position:relative!important;z-index:2!important;max-width:1100px;margin:0 auto;
+}
+#site-nav .logo img{display:block!important;height:48px!important;width:auto!important}
+#site-nav .nav-burger{
+  width:48px;height:48px;border-radius:14px;border:1px solid rgba(255,255,255,.18);
+  background:rgba(255,255,255,.08);box-shadow:0 10px 28px rgba(0,0,0,.4);
+  display:grid;place-items:center;cursor:pointer;
+}
+#site-nav .burger-lines{display:flex;flex-direction:column;gap:5px;width:18px}
+#site-nav .burger-lines i{display:block;height:2px;border-radius:2px;background:#fff}
+#nav-backdrop{position:fixed!important;inset:0!important;z-index:10001!important;background:rgba(3,2,10,.6)!important;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+#nav-drawer{
+  position:fixed!important;top:0!important;right:0!important;bottom:0!important;
+  width:min(90vw,360px)!important;z-index:10002!important;
+  padding:1rem 1.15rem 1.5rem!important;display:flex!important;flex-direction:column!important;gap:.65rem!important;
+  background:linear-gradient(165deg,rgba(30,20,52,.97),rgba(10,8,24,.98))!important;
+  border-left:1px solid rgba(255,255,255,.14)!important;
+  box-shadow:-24px 0 64px rgba(0,0,0,.6)!important;
+  transform:translateX(110%)!important;transition:transform .3s cubic-bezier(.22,.9,.28,1)!important;
+  overflow:auto!important;-webkit-overflow-scrolling:touch;
+}
+#nav-drawer.is-open,#nav-drawer[aria-hidden="false"]{transform:translateX(0)!important}
+#site-nav .nav-drawer-head{display:flex;align-items:center;justify-content:space-between;padding-bottom:.55rem;border-bottom:1px solid rgba(255,255,255,.12)}
+#nav-close{width:44px;height:44px;border-radius:12px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.07);color:#fff;font-size:1.6rem;line-height:1;cursor:pointer}
+#nav-list{list-style:none;margin:0;padding:.25rem 0;display:flex;flex-direction:column;gap:.2rem}
+#nav-list>li>a.nav-link,#site-nav .nav-acc-btn{
+  width:100%;display:flex;align-items:center;justify-content:space-between;gap:.6rem;
+  padding:.72rem .9rem;border-radius:14px;border:1px solid transparent;background:transparent;
+  color:#f7f3ff;font:700 1.02rem/1.2 Figtree,system-ui,sans-serif;text-align:left;cursor:pointer;text-decoration:none;
+}
+#nav-list>li>a.nav-link:hover,#site-nav .nav-acc-btn:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.12)}
+#nav-list a[aria-current="page"]{color:#5ef0d8!important;text-shadow:0 0 16px rgba(25,227,210,.4)}
+#site-nav .nav-acc-arrow{width:.55rem;height:.55rem;flex:none;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);opacity:.75;transition:transform .2s ease}
+#site-nav .nav-acc-btn[aria-expanded="true"] .nav-acc-arrow{transform:rotate(-135deg);opacity:1}
+#site-nav .nav-acc-panel{list-style:none;margin:0 0 .3rem .7rem!important;padding:.15rem 0 .3rem .55rem!important;border-left:2px solid rgba(255,79,139,.5);display:none!important}
+#site-nav .nav-acc-panel.is-open{display:block!important}
+#site-nav .nav-acc-panel[hidden]{display:none!important}
+#site-nav .nav-acc-panel a{display:block;padding:.5rem .7rem;border-radius:10px;color:rgba(247,243,255,.92);text-decoration:none;font:600 .95rem/1.25 Figtree,system-ui,sans-serif}
+#site-nav .nav-acc-panel a:hover{background:rgba(255,255,255,.07);color:#fff}
+#site-nav .nav-soon{display:inline-block;margin-left:.3rem;padding:.08rem .4rem;border-radius:99px;font-size:.62rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;background:rgba(255,79,139,.25);color:#ffc0d6}
+#site-nav .nav-drawer-foot{margin-top:auto;padding-top:.9rem;border-top:1px solid rgba(255,255,255,.12);display:flex;flex-wrap:wrap;gap:.5rem}
+#site-nav .nav-drawer-foot a{flex:1 1 auto;text-align:center;padding:.7rem .65rem;border-radius:12px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:#fff;text-decoration:none;font-weight:700;font-size:.88rem}
+body>.bg{z-index:0!important}
+.page-home header.hero,header.hero{padding-top:calc(5.75rem + env(safe-area-inset-top,0px))!important;position:relative;z-index:1}
+header.phead,.phead{padding-top:calc(5.5rem + env(safe-area-inset-top,0px))!important;position:relative;z-index:1}
+main,footer{position:relative;z-index:1}
