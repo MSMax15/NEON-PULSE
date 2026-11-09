@@ -1,0 +1,25 @@
+NEON PULSE FOUNDATION — OVERWRITE DEPLOY
+========================================
+
+1. Extract this ZIP.
+2. Copy ALL files from the extracted folder into the ROOT of your GitHub repository.
+   (Overwrite existing files. That is the point.)
+3. Keep these large media files if they are already on the server / in the repo
+   and missing from this package:
+      - bg/          (all background images)
+      - gta6-launch.mp4
+      - logo.png, hero.png, favicon.png
+      - any shop-img / weapon images
+4. In the repository root run:
+      python3 check.py
+5. Fix any errors the checker reports.
+6. Commit + push to main.
+7. Wait for GitHub Pages, then hard-refresh the live site.
+8. Test: burger menu, all 4 nav accordions, index countdown, dive background.
+
+Rulebook for every AI: AGENTS.md
+Checker:               check.py
+Handoff notes:         HANDOFF-REPORT.md
+
+Language of the website: English
+Domain:                  pulseneon.de

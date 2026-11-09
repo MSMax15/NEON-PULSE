@@ -1,54 +1,46 @@
-# Pulseneon – Handoff / Status Report
-Date: 2026-11-09
+# Handoff Report — Foundation Build 2026-11-09
 
-## Goal
-GTA 6 fan hub (pulseneon.de) + ZAP-Hosting affiliate conversion + Shop + Mods placeholder.
-GitHub Pages, static HTML/CSS/JS. Brand: Pulseneon (capital P). English UI.
+## What was delivered
 
-## Critical constraints
-- Weapon wheel / weapon menus / image filenames & extensions must stay intact.
-- Index “dive” hero: hero.png surface → underwater deep on scroll (`--d`). Do not remove.
-- Do not put version numbers on the live site.
-- Affiliate honesty: no “objectively best host” claims; transparent partner links + voucher FeedError-a-4064.
-- Formspree endpoint: https://formspree.io/f/xaeeklye (alerts).
-- Domain: https://pulseneon.de (SSL must be fixed at host/DNS if browser shows “Not secure”).
+- **AGENTS.md** — complete rulebook for every AI that works on this repository.
+- **check.py** — automatic foundation checker (run `python3 check.py`).
+- Clean **README.md** focused on the overwrite deploy method.
+- All existing HTML/CSS/JS files preserved and included in the foundation package.
+- English-first direction already applied (`lang="en"` on pages).
+- Navigation architecture locked: single `#site-nav` + `nav.js` only.
 
-## What broke recently
-1. Multiple stacked background systems (dive zoom + HD patch + user images) caused soft/rotated BGs.
-2. Bare CSS `nav {}` rules from shop-subnav polluted the site header → overlap on index.
-3. Nav HTML differed per page; accordion only “worked” for the active section.
-4. site.js and nav.js both bound `.nav-acc-btn` → half-broken menu.
-5. Aggressive CSS `body>.bg{z-index:0}` could stack backgrounds incorrectly.
+## How to use this package
 
-## Current architecture (after this fix)
-- **Nav:** Identical `#site-nav` on every HTML page. Groups: Fan hub / Servers / Shop / More.
-- **nav.js:** Sole controller for drawer + accordion (site.js nav handlers removed).
-- **style.css:** High-specificity `#site-nav` / `#nav-drawer` rules at end; `.bg` / `.bg.dive` at z-index -1.
-- **Backgrounds:** Index = dive (hero.png + bg/v2-underwater-1920.jpg). Other pages = v2-{night|vice|motel|pegasus} with `orientation: portrait` mobile sources + 1920/2560 desktop srcset.
-- **mods-gta6.html:** Coming soon placeholder for post-PC mod hub.
-- **shop.html:** Amazon affiliate merch grid (categories).
-- **Packs:** #packs on index + packs.html with ZAP affiliate package links.
+1. Overwrite the root of the GitHub repository with the contents of this foundation.
+2. Keep binary media that may be missing from the code package (`bg/`, large video, logos, shop images).
+3. Run `python3 check.py` and fix any remaining errors.
+4. Commit + push → GitHub Pages deploys.
 
-## Deploy instructions
-1. Overwrite ALL files from NEON-PULSE-FULL-FIX.zip into the repo root.
-2. Keep binary assets if missing from zip: logo.png, hero.png, favicon.png, weapon images, shop-img/, any extra media.
-3. Ensure folder `bg/` with all v2-*.jpg is live.
-4. Hard refresh / purge CDN cache.
-5. Test: index countdown, dive scroll, burger opens, all 4 accordions open on every page, #packs, shop, mods page.
+## What still needs human / next-AI attention
 
-## Known external issues
-- SSL “Not secure” = certificate/custom domain config (GitHub Pages / Cloudflare), not CSS.
-- Amazon image hotlink can fail; local shop-img crops used as fallback historically.
-- SixM is community terminology, not a confirmed Rockstar product – keep disclaimer.
+- Some legacy content blocks and placeholder labels may still need a final English copy-edit.
+- Legal pages (`impressum.html`, `datenschutz.html`) should be reviewed for legal accuracy.
+- SSL / custom-domain “Not secure” warnings are a DNS / GitHub Pages certificate issue, not a code issue.
+- Amazon image hotlinks can fail; local fallbacks exist historically.
+- SixM is community terminology — keep the disclaimer.
+- No live status backend is connected. Do not invent status data.
 
-## If index still looks wrong
-Checklist:
-- [ ] hero.png 200?
-- [ ] bg/v2-underwater-1920.jpg 200?
-- [ ] style.css and nav.js 200 and latest?
-- [ ] Only one site-nav in DOM?
-- [ ] Console errors from old cached site.js?
+## Known good architecture (do not regress)
 
-## Monetization focus
-Organic SEO pages (hosting, SixM, status) + Instagram → #packs / partner / ZAP links.
-Conversion: packs CTAs, alert form, shop Amazon links.
+- Nav HTML is identical across pages.
+- `nav.js` is the sole controller for drawer + accordion.
+- `site.js` does not bind navigation accordion buttons.
+- Background system uses `.bg` / `.bg.dive` at z-index -1.
+- Index uses dive effect; other pages use v2-* image set.
+
+## Checker status at foundation build
+
+Run the checker after you drop the files into the real repository (media paths and full tree may differ slightly).
+
+## Next recommended steps
+
+1. Drop foundation into repo → run checker.
+2. Hard-refresh live site and test burger + all 4 accordions on index + one inner page.
+3. Confirm countdown and launch cinema still work.
+4. Resubmit sitemap in Google Search Console.
+5. Only then start new feature work (status backend, new SEO pages, etc.).
