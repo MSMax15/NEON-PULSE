@@ -1470,3 +1470,83 @@ body>.bg,.bg.dive{z-index:-1!important}
 .page-home header.hero,header.hero{padding-top:calc(5.75rem + env(safe-area-inset-top,0px))!important;position:relative;z-index:1}
 header.phead,.phead{padding-top:calc(5.5rem + env(safe-area-inset-top,0px))!important;position:relative;z-index:1}
 main,footer{position:relative;z-index:1}
+
+/* === INDEX BG REPAIR (classic surface/deep – no picture stack) === */
+body.page-home > .bg{
+  position:fixed !important;
+  inset:0 !important;
+  z-index:-1 !important;
+  overflow:hidden !important;
+  pointer-events:none !important;
+  background:#020814 !important;
+}
+body.page-home > .bg .bg-surface,
+body.page-home > .bg .bg-deep{
+  position:absolute !important;
+  inset:-8% !important;
+  width:116% !important;
+  height:116% !important;
+  object-fit:cover !important;
+  object-position:center center !important;
+  max-width:none !important;
+  pointer-events:none !important;
+  transform:none !important;
+}
+/* surface fades out as --d grows; deep fades in */
+body.page-home > .bg .bg-surface{
+  opacity:calc(1 - var(--d, 0) * 1.05) !important;
+  filter:saturate(1.15) contrast(1.05) !important;
+  z-index:0;
+}
+body.page-home > .bg .bg-surface.blur{
+  opacity:calc((1 - var(--d, 0)) * 0.35) !important;
+  filter:blur(18px) saturate(1.2) !important;
+  z-index:0;
+}
+body.page-home > .bg .bg-deep{
+  opacity:calc(var(--d, 0) * 1.05) !important;
+  filter:saturate(1.1) !important;
+  z-index:0;
+}
+body.page-home > .bg .bg-deep.blur-deep{
+  opacity:calc(var(--d, 0) * 0.4) !important;
+  filter:blur(22px) !important;
+}
+body.page-home > .bg .grade,
+body.page-home > .bg .shade,
+body.page-home > .bg .water,
+body.page-home > .bg .caustics,
+body.page-home > .bg .rays,
+body.page-home > .bg .bubbles{
+  position:absolute !important;
+  inset:0 !important;
+  pointer-events:none !important;
+  z-index:1 !important;
+}
+/* content ABOVE background – never under bg images */
+body.page-home > nav,
+body.page-home > header,
+body.page-home > section,
+body.page-home > div.surface,
+body.page-home > div.ticker,
+body.page-home > aside,
+body.page-home > footer,
+body.page-home > main{
+  position:relative;
+  z-index:2;
+}
+/* fixed nav stays on top */
+body.page-home > #site-nav,
+body.page-home > nav.site-nav{
+  z-index:10000 !important;
+}
+/* packs / widgets solid so bg never shows “through” as overlap mess */
+body.page-home .pack-card,
+body.page-home .packs-section .pack-card,
+body.page-home .affiliate-band-inner,
+body.page-home .hosting-link,
+body.page-home .alert,
+body.page-home .facts,
+body.page-home .road{
+  isolation:isolate;
+}

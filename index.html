@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
@@ -35,9 +34,11 @@
 </script>
 </head>
 <body class="page-home">
-<div aria-hidden="true" class="bg dive" data-bg="dive" style="--d:0">
-<picture class="bg-pic bg-surface"><img src="hero.png" alt="" width="1920" height="1080" decoding="async" fetchpriority="high"></picture>
-<picture class="bg-pic bg-deep"><img src="bg/v2-underwater-1920.jpg" alt="" width="1920" height="1080" decoding="async" loading="lazy"></picture>
+<div class="bg" style="--d:0" aria-hidden="true">
+<img class="bg-surface" src="hero.png" alt="" width="1920" height="1080" decoding="async" fetchpriority="high">
+<img class="bg-surface blur" src="hero.png" alt="" decoding="async">
+<img class="bg-deep" src="underwater.jpg" alt="" width="1920" height="1080" decoding="async" loading="lazy">
+<img class="bg-deep blur-deep" src="underwater.jpg" alt="" decoding="async" loading="lazy">
 <div class="grade"></div>
 <div class="shade"></div>
 <div class="water"></div>
@@ -45,6 +46,7 @@
 <div class="rays"></div>
 <div class="bubbles" id="bubbles"></div>
 </div>
+
 <nav class="site-nav" id="site-nav">
   <div class="wrap nav-bar">
     <a class="logo" href="index.html" aria-label="Pulseneon home">
@@ -358,3 +360,4 @@
 <script src="nav.js"></script>
 </body>
 </html>
+
