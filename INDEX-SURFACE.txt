@@ -1,11 +1,11 @@
-Index surface update only.
+Index surface update.
 Copy into GitHub repo root and overwrite.
 
-- index.html  (surface = cyberpunk car, deep = underwater, dive stays)
-- bg/np-cyber-1920.jpg
-- bg/np-cyber-m.jpg
-- bg/np-underwater-1920.jpg  (dive deep, if not already live)
+- index.html
+- bg/np-index-surface-1920.jpg  (top surface)
+- bg/np-index-surface-m.jpg     (mobile surface)
+- bg/np-underwater-1920.jpg     (dive deep, if not live)
 - bg/np-underwater-m.jpg
 
-hero.png is no longer used as surface. Do not delete hero.png if other pages or og:image still need it.
-Hard-refresh after push (Ctrl+Shift+R).
+Dive transition stays: surface -> underwater.
+Hard-refresh after push.
