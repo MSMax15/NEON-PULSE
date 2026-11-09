@@ -38,37 +38,30 @@
 <meta content="de" name="language"/>
 </head>
 <body>
-<div aria-hidden="true" class="bg" data-bg="chase">
-<picture class="bg-pic">
-<source media="(orientation:portrait)" srcset="bg/u-chase-m.jpg">
-<img src="bg/u-chase.jpg" alt="" width="1920" height="1080" decoding="async" fetchpriority="high">
-</picture>
-<div class="grade"></div>
-<div class="shade"></div>
-<div class="water"></div>
-<div class="caustics"></div>
-<div class="rays"></div>
-<div class="bubbles" id="bubbles"></div>
-</div>
+<div aria-hidden="true" class="bg" style="--d:1"><picture class="bg-pic">
+<source media="(max-width:768px)" srcset="bg/u-chase-m.jpg">
+<source media="(min-width:769px)" srcset="bg/u-chase.jpg">
+<img src="bg/u-chase.jpg" alt="" width="1920" height="1080" decoding="async" fetchpriority="low">
+</picture><div class="grade"></div><div class="shade"></div><div class="water"></div><div class="rays"></div><div class="bubbles" id="bubbles"></div></div>
 <nav>
 <div class="wrap nav-bar">
 <a class="logo" href="index.html"><img src="logo.png" alt="Pulseneon" width="140" height="56" decoding="async"></a>
-<button type="button" class="nav-burger" aria-expanded="false" aria-controls="nav-drawer" aria-label="Menü öffnen">
+<button type="button" class="nav-burger" aria-expanded="false" aria-controls="nav-drawer" aria-label="Open menu">
 <span class="burger-lines" aria-hidden="true"><i></i><i></i><i></i></span>
 </button>
 </div>
 <div class="nav-backdrop" id="nav-backdrop" hidden></div>
 <aside class="nav-drawer" id="nav-drawer" aria-hidden="true">
 <div class="nav-drawer-head">
-<a class="nav-drawer-logo" href="index.html" aria-label="Pulseneon Home">
+<a class="nav-drawer-logo" href="index.html" aria-label="Pulseneon home">
 <img src="logo.png" alt="Pulseneon" width="160" height="64" decoding="async">
 </a>
-<button type="button" class="nav-close" aria-label="Menü schließen">
+<button type="button" class="nav-close" aria-label="Close menu">
 <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 4l10 10M14 4L4 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
 </button>
 </div>
 <ul class="nav-list">
-<li class="nav-label">Fan-Hub</li>
+<li class="nav-label">Fan hub</li>
 <li><a href="index.html">Home</a></li>
 <li><a href="cheats.html">Cheats</a></li>
 <li><a href="cars.html">Cars</a></li>
@@ -76,17 +69,15 @@
 <li><a href="leaks.html">Leaks</a></li>
 <li><a href="map.html">Map</a></li>
 <li><a href="gameplay.html">Gameplay</a></li>
-
-<li class="nav-label">Status &amp; Server</li>
-<li><a href="gta6-server-status.html">Server Status</a></li>
-<li><a href="alarm.html">Alarm</a></li>
-<li><a href="gta6-server-hosting.html">Hosting Guide</a></li>
-<li><a href="packs.html">Server-Pakete</a></li>
+<li class="nav-label">Status &amp; servers</li>
+<li><a href="gta6-server-status.html">Server status</a></li>
+<li><a href="alarm.html">Alerts</a></li>
+<li><a href="gta6-server-hosting.html">Hosting guide</a></li>
+<li><a href="packs.html">Server packs</a></li>
 <li><a href="fivem-server-hosting.html">FiveM</a></li>
 <li><a href="sixm-server-mieten.html" aria-current="page">SixM</a></li>
 <li><a href="teamspeak-server-mieten.html">TeamSpeak</a></li>
 <li><a href="minecraft-server-mieten.html">Minecraft</a></li>
-
 <li class="nav-label">Shop</li>
 <li class="nav-acc">
 <button type="button" class="nav-acc-btn" aria-expanded="false" aria-controls="nav-shop-sub">
@@ -94,7 +85,7 @@ Shop
 <span class="nav-acc-arrow" aria-hidden="true"></span>
 </button>
 <ul class="nav-acc-panel" id="nav-shop-sub" hidden>
-<li><a href="shop.html">Übersicht</a></li>
+<li><a href="shop.html">Overview</a></li>
 <li><a href="shop.html#cat-gta6">GTA 6</a></li>
 <li><a href="shop.html#cat-apparel">Apparel</a></li>
 <li><a href="shop.html#cat-caps">Caps</a></li>
@@ -103,15 +94,14 @@ Shop
 <li><a href="shop.html#cat-premium">Premium</a></li>
 </ul>
 </li>
-
-<li class="nav-label">Mehr</li>
+<li class="nav-label">More</li>
 <li><a href="blog.html">Blog</a></li>
-<li><a href="partner.html">Partner</a></li>
-<li><a href="impressum.html">Impressum</a></li>
+<li><a href="partner.html">Partnerss</a></li>
+<li><a href="impressum.html">Legal notice</a></li>
 </ul>
 <div class="nav-drawer-foot">
 <a href="shop.html">Shop</a>
-<a href="packs.html">Pakete</a>
+<a href="packs.html">Packs</a>
 <a href="partner.html">Pulseneon × ZAP</a>
 </div>
 </aside>
@@ -124,8 +114,8 @@ Shop
 </div></header>
 <main class="wrap prose host-guide">
 <section class="host-answer">
-<p><strong>Klartext:</strong> “SixM” is a community term, not a live product confirmed by Rockstar. This page explains hosting options and links to partner offers where relevant.</p>
-<h2>Kurzantwort: SixM Server Hosting</h2>
+<p><strong>Plain talk:</strong> “SixM” is a community term, not a live product confirmed by Rockstar. This page explains hosting options and links to partner offers where relevant.</p>
+<h2>Short answer: SixM Server Hosting</h2>
 <p><strong>SixM</strong> refers to the idea of community multiplayer around GTA 6, comparable to FiveM for GTA V: private servers, custom rules, and often roleplay. Whether and how features are officially supported depends on the community and providers. For stable public servers, the usual principles still apply:</p>
 <ol class="steps">
 <li><b>Rent hosting</b> with 24/7 uptime, a fixed IP, and enough RAM/player slots.</li>
@@ -186,16 +176,16 @@ Shop
 <strong>View Offers ↗</strong>
 </a>
 </div>
-<p class="affiliate-disclosure" style="margin-top:1rem">Pulseneon is Affiliate-Partner von ZAP-Hosting.</p>
+<p class="affiliate-disclosure" style="margin-top:1rem">Pulseneon is Affiliate-Partners von ZAP-Hosting.</p>
 </section>
 <section>
 <h2>SixM, FiveM, and GTA 6</h2>
 <p><strong>FiveM</strong> remains the established option for GTA V roleplay. <strong>SixM</strong> is aimed at the GTA 6 community space. Official Rockstar servers and community hosting are not the same thing — we keep them separate. For the full overview:</p>
 <ul class="partner-list">
-<li><a href="gta6-server-status.html">GTA 6 Server Status</a></li>
+<li><a href="gta6-server-status.html">GTA 6 Server status</a></li>
 <li><a href="gta6-server-hosting.html">GTA 6 Server Hosting – Guide</a></li>
 <li><a href="fivem-server-hosting.html">FiveM Server Hosting</a></li>
-<li><a href="partner.html">Pulseneon × ZAP Partner</a></li>
+<li><a href="partner.html">Pulseneon × ZAP Partners</a></li>
 </ul>
 </section>
 <section>
@@ -215,7 +205,7 @@ Shop
 </details>
 <details>
 <summary>SixM or official GTA 6 Online?</summary>
-<p>Official online services are provided by Rockstar. SixM community servers are a separate ecosystem, if one becomes established. Check the official service status here: <a href="gta6-server-status.html">GTA 6 Server Status</a>.</p>
+<p>Official online services are provided by Rockstar. SixM community servers are a separate ecosystem, if one becomes established. Check the official service status here: <a href="gta6-server-status.html">GTA 6 Server status</a>.</p>
 </details>
 </div>
 </section>

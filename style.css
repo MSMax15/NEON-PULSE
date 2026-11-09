@@ -12,6 +12,71 @@ button{font:inherit;color:inherit;cursor:pointer}
 :focus-visible{outline:3px solid var(--orange);outline-offset:3px}
 .wrap{max-width:1120px;margin:0 auto;padding:0 1.4rem}
 h1,h2,h3{font-family:Unbounded,Figtree,sans-serif}
+/* background */
+.bg{--d:0;position:fixed;inset:0;z-index:-1;overflow:hidden;background:#020814}
+.bg .bg-surface,.bg .bg-deep{
+  position:absolute;inset:-10%;width:120%;height:120%;object-fit:cover;
+  will-change:transform,opacity;
+  transform:translate(calc(var(--mx,0) * -18px),calc(var(--my,0) * -12px)) scale(calc(1.05 + var(--d) * .28)) translateY(calc(var(--d) * -10%));
+}
+.bg .bg-surface{
+  filter:saturate(1.4) contrast(1.1) brightness(1.05);
+  opacity:calc(1 - var(--d) * 1.05);
+  transition:opacity .05s linear;
+}
+.bg .bg-surface.blur{
+  filter:saturate(1.35) contrast(1.08) blur(18px);
+  opacity:calc(var(--d) * 0.35 * (1 - var(--d)));
+}
+.bg .bg-deep{
+  filter:saturate(1.25) contrast(1.12) brightness(calc(0.75 + var(--d) * 0.35));
+  opacity:min(1,calc(var(--d) * 1.15));
+}
+.bg .bg-deep.blur-deep{
+  filter:saturate(1.2) contrast(1.05) blur(22px) brightness(0.85);
+  opacity:calc(var(--d) * 0.45);
+  transform:translate(calc(var(--mx,0) * -10px),calc(var(--my,0) * -8px)) scale(calc(1.1 + var(--d) * .2));
+}
+.bg .grade{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,#5a1a8ccc,#ff4f8baa 45%,#ff9a3c66 70%,#0a4a7888);
+  opacity:calc(1 - var(--d) * 0.85);
+  mix-blend-mode:soft-light;
+}
+.bg .shade{
+  position:absolute;inset:0;
+  background:linear-gradient(95deg,#170a2eee,#170a2e44 50%,transparent 75%);
+  opacity:calc(1 - var(--d) * 0.5);
+}
+.bg .water{
+  position:absolute;inset:0;
+  opacity:min(1,calc(var(--d) * 1.25));
+  background:
+    linear-gradient(180deg,#0a8aaa00 0%,#0a6a9a55 25%,#064a7acc 55%,#031428ee 100%);
+  mix-blend-mode:multiply;
+}
+.bg .caustics{
+  position:absolute;inset:-15%;
+  opacity:calc(var(--d) * 0.4);
+  background:
+    radial-gradient(ellipse 40% 20% at 30% 20%,#ffffff28,transparent 50%),
+    radial-gradient(ellipse 35% 18% at 70% 35%,#7ec8ff22,transparent 45%),
+    radial-gradient(ellipse 50% 25% at 50% 60%,#ffffff15,transparent 50%);
+  animation:caustic 11s ease-in-out infinite alternate;
+  pointer-events:none;
+}
+.bg .rays{
+  position:absolute;inset:-25% -10%;
+  opacity:calc(var(--d) * .65);
+  background:repeating-linear-gradient(105deg,#ffffff22 0 28px,transparent 28px 120px);
+  will-change:transform;animation:sway 10s ease-in-out infinite alternate;
+  mix-blend-mode:screen;
+}
+@keyframes caustic{
+  from{transform:translateY(0) scale(1)}
+  to{transform:translateY(3%) scale(1.04)}
+}
+@keyframes sway{to{transform:translateX(60px) skewX(-6deg)}}
 .bubbles span{position:absolute;bottom:-30px;border:2px solid #ffffff55;border-radius:50%;opacity:calc(var(--d) * 0.9);animation:up linear infinite;box-shadow:0 0 12px #7ec8ff44}
 @keyframes up{to{transform:translateY(-110vh)}}
 /* nav */
@@ -1070,6 +1135,14 @@ body.page-home .hero .date {
 
 
 /* Fine polish: widgets + varied page atmosphere */
+.bg img{
+  object-fit:cover;
+  object-position:center 30%;
+  filter:saturate(1.05) contrast(1.05);
+}
+.page-shop .bg img{object-position:center 40%; filter:saturate(1.1) brightness(.85)}
+.page-packs .bg img,
+body:has(.packs-section) .bg img{object-position:center 25%}
 .shop-widget,.shop-trust > div,
 .affiliate-band-inner,
 .hosting-link{
@@ -1096,6 +1169,42 @@ body.page-home .hero .date {
 .intro{max-width:40rem}
 
 
+/* HD backgrounds: sharp, responsive, no soft mud */
+.bg{
+  position:fixed; inset:0; z-index:-1; overflow:hidden;
+  pointer-events:none;
+}
+.bg picture,
+.bg img{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  display:block;
+}
+.bg img{
+  object-fit:cover;
+  object-position:center 28%;
+  filter:none !important;
+  transform:none;
+  image-rendering:auto;
+  -webkit-backface-visibility:hidden;
+  backface-visibility:hidden;
+}
+@media (max-width:768px){
+  .bg img{ object-position:center 22%; }
+}
+@media (min-width:1200px){
+  .bg img{ object-position:center 32%; }
+}
+.bg .grade{
+  position:absolute; inset:0;
+  background:linear-gradient(180deg,#0a0618aa 0%,#0a061866 40%,#0a0618e6 100%);
+  pointer-events:none;
+}
+.bg .shade{
+  position:absolute; inset:0;
+  background:radial-gradient(ellipse at 50% 20%, transparent 0%, #0a0618cc 70%);
+  pointer-events:none;
+}
 /* Widgets: sharp, not soft-blur mush */
 .shop-widget,.shop-trust > div,.affiliate-band-inner,.hosting-link,.shop-card{
   backdrop-filter:none;
@@ -1107,29 +1216,134 @@ body.page-home .hero .date {
   background:linear-gradient(165deg,#16121ff5,#0a0c16f8);
 }
 
-/* ===================================================================
-   BACKGROUND SYSTEM v2 – one markup, one stylesheet, all pages
-   - landscape image on landscape screens, portrait image on portrait
-   - no scaling, no blur, no filters on the picture (sharp at 1:1)
-   - .dive = index only (surface -> underwater crossfade)
-   =================================================================== */
-.bg{position:fixed;inset:0;z-index:-1;overflow:hidden;background:#07040f;pointer-events:none;contain:layout paint}
-.bg picture,.bg .bg-pic{position:absolute;inset:0;display:block;width:100%;height:100%}
-.bg picture img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 30%;transform:none;filter:none;image-rendering:auto;-webkit-backface-visibility:hidden;backface-visibility:hidden}
-@media (orientation:portrait){.bg picture img{object-position:50% 25%}}
-.bg .grade,.bg .shade{position:absolute;inset:0}
-html body .bg:not(.dive) .grade{background:linear-gradient(180deg,#0a061899 0%,#0a061866 40%,#0a0618e6 100%);opacity:1;mix-blend-mode:normal}
-html body .bg:not(.dive) .shade{background:radial-gradient(ellipse at 50% 30%,transparent 40%,#0a061888 100%);opacity:1}
-.bg:not(.dive) .water,.bg:not(.dive) .caustics,.bg:not(.dive) .rays,.bg:not(.dive) .bubbles{display:none}
-/* index dive */
-.bg.dive .bg-surface{opacity:calc(1 - var(--d,0))}
-.bg.dive .bg-deep{opacity:var(--d,0)}
-.bg.dive .grade{background:linear-gradient(180deg,#5a1a8cb0,#ff4f8b80 45%,#ff9a3c50 70%,#0a4a7870);opacity:calc(1 - var(--d,0) * .85);mix-blend-mode:soft-light}
-.bg.dive .shade{background:linear-gradient(95deg,#170a2ecc,#170a2e40 50%,transparent 75%);opacity:calc(1 - var(--d,0) * .5)}
-.bg.dive .water{position:absolute;inset:0;opacity:min(1,calc(var(--d,0) * 1.1));background:linear-gradient(180deg,#0a8aaa00 0%,#0a6a9a40 25%,#064a7a99 55%,#031428cc 100%);mix-blend-mode:multiply}
-.bg.dive .caustics{position:absolute;inset:-15%;opacity:calc(var(--d,0) * .35);background:radial-gradient(ellipse 40% 20% at 30% 20%,#ffffff28,transparent 50%),radial-gradient(ellipse 35% 18% at 70% 35%,#7ec8ff22,transparent 45%),radial-gradient(ellipse 50% 25% at 50% 60%,#ffffff15,transparent 50%);animation:caustic 11s ease-in-out infinite alternate}
-.bg.dive .rays{position:absolute;inset:-25% -10%;opacity:calc(var(--d,0) * .5);background:repeating-linear-gradient(105deg,#ffffff22 0 28px,transparent 28px 120px);mix-blend-mode:screen;animation:sway 10s ease-in-out infinite alternate}
-.bg .bubbles{position:absolute;inset:0;overflow:hidden}
-@keyframes caustic{from{transform:translateY(0) scale(1)}to{transform:translateY(3%) scale(1.04)}}
-@keyframes sway{to{transform:translateX(60px) skewX(-6deg)}}
-@media (prefers-reduced-motion:reduce){.bg.dive .caustics,.bg.dive .rays{animation:none}}
+.bg-pic, .bg picture{position:absolute;inset:0;width:100%;height:100%;display:block}
+.bg-pic img, .bg picture img{width:100%;height:100%;object-fit:cover;object-position:center 28%}
+.bg img.blur{display:none !important} /* old soft blur layer off – sharp only */
+
+
+/* User backgrounds: portrait mobile, landscape desktop */
+@media (max-width:768px){
+  .bg-pic img, .bg picture img, .bg img{
+    object-fit:cover;
+    object-position:center 20%;
+  }
+}
+@media (min-width:769px){
+  .bg-pic img, .bg picture img, .bg img{
+    object-fit:cover;
+    object-position:center 35%;
+  }
+}
+
+/* ========== FULL BG + WIDGET FIX (stable layering) ========== */
+.bg{
+  position:fixed !important;
+  inset:0 !important;
+  z-index:0 !important;
+  overflow:hidden !important;
+  pointer-events:none !important;
+  background:#050510 !important;
+}
+.bg-pic,
+.bg picture{
+  position:absolute !important;
+  inset:0 !important;
+  width:100% !important;
+  height:100% !important;
+  display:block !important;
+  margin:0 !important;
+  z-index:0 !important;
+}
+.bg-pic img,
+.bg picture img,
+.bg > img{
+  position:absolute !important;
+  inset:0 !important;
+  width:100% !important;
+  height:100% !important;
+  object-fit:cover !important;
+  object-position:center center !important;
+  filter:none !important;
+  opacity:1 !important;
+  transform:none !important;
+  max-width:none !important;
+}
+.bg img.blur{ display:none !important; }
+/* overlays stay subtle, never block readability */
+.bg .grade,
+.bg .shade,
+.bg .water,
+.bg .rays,
+.bg .bubbles{
+  position:absolute !important;
+  inset:0 !important;
+  pointer-events:none !important;
+  z-index:1 !important;
+}
+.bg .grade{
+  background:linear-gradient(180deg,rgba(8,6,20,.55) 0%,rgba(8,6,20,.25) 40%,rgba(8,6,20,.75) 100%) !important;
+  opacity:1 !important;
+  mix-blend-mode:normal !important;
+}
+.bg .shade{
+  background:radial-gradient(ellipse at 50% 0%, transparent 0%, rgba(8,6,20,.5) 75%) !important;
+  opacity:1 !important;
+  mix-blend-mode:normal !important;
+}
+.bg .water,
+.bg .rays,
+.bg .bubbles{
+  opacity:0 !important; /* disable heavy effects that muddy widgets */
+  visibility:hidden !important;
+}
+/* content above bg */
+nav, header, main, footer, .phead, .wrap, .shop-main, .host-guide{
+  position:relative;
+  z-index:2;
+}
+nav{
+  z-index:50 !important;
+}
+.nav-drawer{ z-index:60 !important; }
+.nav-backdrop{ z-index:55 !important; }
+
+/* Widgets: solid, readable, no soft mush */
+.shop-widget,
+.shop-trust > div,
+.affiliate-band-inner,
+.hosting-link,
+.shop-card,
+.pack-card,
+.note,
+.tip,
+.card,
+.panel,
+.box,
+.status-card,
+.alarm-card,
+.form-card,
+.affiliate-kicker + p,
+.intro{
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+}
+.shop-widget,
+.shop-trust > div,
+.hosting-link,
+.shop-card,
+.pack-card,
+.note,
+.status-card,
+.alarm-card,
+.form-card{
+  background:rgba(10, 8, 22, 0.92) !important;
+  border:1px solid rgba(255,255,255,0.14) !important;
+  box-shadow:0 12px 32px rgba(0,0,0,0.45) !important;
+}
+.shop-card{
+  background:linear-gradient(165deg,rgba(22,18,36,.95),rgba(10,12,22,.96)) !important;
+}
+/* text always readable on overlays */
+.phead h1, .phead .intro, main h1, main h2, main p{
+  text-shadow:0 1px 2px rgba(0,0,0,.6);
+}
