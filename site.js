@@ -9,45 +9,7 @@ if (bub) {
   }).join('');
 }
 
-// Hamburger → right drawer
-(() => {
-  const btn = document.querySelector('.nav-burger');
-  const drawer = document.getElementById('nav-drawer');
-  const backdrop = document.getElementById('nav-backdrop');
-  const closeBtn = document.querySelector('.nav-close');
-  if (!btn || !drawer) return;
-
-  const open = () => {
-    btn.setAttribute('aria-expanded', 'true');
-    drawer.classList.add('open');
-    drawer.setAttribute('aria-hidden', 'false');
-    if (backdrop) {
-      backdrop.hidden = false;
-      requestAnimationFrame(() => backdrop.classList.add('show'));
-    }
-    document.body.classList.add('nav-open');
-    btn.setAttribute('aria-label', 'Close menu');
-  };
-  const close = () => {
-    btn.setAttribute('aria-expanded', 'false');
-    drawer.classList.remove('open');
-    drawer.setAttribute('aria-hidden', 'true');
-    if (backdrop) {
-      backdrop.classList.remove('show');
-      setTimeout(() => { if (!drawer.classList.contains('open')) backdrop.hidden = true; }, 350);
-    }
-    document.body.classList.remove('nav-open');
-    btn.setAttribute('aria-label', 'Open menu');
-  };
-
-  btn.addEventListener('click', () => {
-    btn.getAttribute('aria-expanded') === 'true' ? close() : open();
-  });
-  closeBtn?.addEventListener('click', close);
-  backdrop?.addEventListener('click', close);
-  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
-  addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
-})();
+// Navigation is controlled only by nav.js (do not re-add hamburger logic here).
 
 // YouTube link is available site-wide without overpowering the navigation.
 (() => {
@@ -234,9 +196,14 @@ if (hero) {
   }
   const wheel = $('wheel');
   if (wheel) {
-    new IntersectionObserver((es, o) => es.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('in'); o.unobserve(e.target); }
-    }), { threshold: .25 }).observe(wheel);
+    const revealWheel = () => wheel.classList.add('in');
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver((es, o) => es.forEach(e => {
+        if (e.isIntersecting) { revealWheel(); o.unobserve(e.target); }
+      }), { threshold: .15 }).observe(wheel);
+    }
+    // Fallback: always reveal after a short delay so the wheel never stays invisible
+    setTimeout(revealWheel, 900);
   }
   document.querySelectorAll('.seg').forEach(g => {
     const on = () => {
@@ -245,7 +212,7 @@ if (hero) {
     };
     const off = () => {
       if ($('hub1')) $('hub1').textContent = 'GTA 6';
-      if ($('hub2')) $('hub2').textContent = 'Wähle einen Bereich';
+      if ($('hub2')) $('hub2').textContent = 'Pick a category';
     };
     g.addEventListener('mouseenter', on);
     g.addEventListener('focus', on);
@@ -526,8 +493,3 @@ if (chips.length) {
     }
   });
 })();
-
-
-
-/* Burger accordion: Shop categories expand down */
-document.addEventListener("click", (e) => {

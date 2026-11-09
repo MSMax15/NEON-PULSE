@@ -12,17 +12,21 @@ ready(function(){
 
   function openDrawer(){
     drawer.classList.add("is-open");
+    drawer.classList.add("open");
     drawer.setAttribute("aria-hidden","false");
     burger.setAttribute("aria-expanded","true");
-    if(backdrop){ backdrop.hidden=false; }
+    if(backdrop){ backdrop.hidden=false; backdrop.classList.add("show"); }
     document.documentElement.classList.add("nav-open");
+    document.body.classList.add("nav-open");
   }
   function closeDrawer(){
     drawer.classList.remove("is-open");
+    drawer.classList.remove("open");
     drawer.setAttribute("aria-hidden","true");
     burger.setAttribute("aria-expanded","false");
-    if(backdrop){ backdrop.hidden=true; }
+    if(backdrop){ backdrop.classList.remove("show"); backdrop.hidden=true; }
     document.documentElement.classList.remove("nav-open");
+    document.body.classList.remove("nav-open");
   }
 
   burger.onclick=function(e){
