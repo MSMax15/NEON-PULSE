@@ -9,7 +9,45 @@ if (bub) {
   }).join('');
 }
 
-// Navigation is controlled only by nav.js (do not re-add hamburger logic here).
+// Hamburger → right drawer
+(() => {
+  const btn = document.querySelector('.nav-burger');
+  const drawer = document.getElementById('nav-drawer');
+  const backdrop = document.getElementById('nav-backdrop');
+  const closeBtn = document.querySelector('.nav-close');
+  if (!btn || !drawer) return;
+
+  const open = () => {
+    btn.setAttribute('aria-expanded', 'true');
+    drawer.classList.add('open');
+    drawer.setAttribute('aria-hidden', 'false');
+    if (backdrop) {
+      backdrop.hidden = false;
+      requestAnimationFrame(() => backdrop.classList.add('show'));
+    }
+    document.body.classList.add('nav-open');
+    btn.setAttribute('aria-label', 'Close menu');
+  };
+  const close = () => {
+    btn.setAttribute('aria-expanded', 'false');
+    drawer.classList.remove('open');
+    drawer.setAttribute('aria-hidden', 'true');
+    if (backdrop) {
+      backdrop.classList.remove('show');
+      setTimeout(() => { if (!drawer.classList.contains('open')) backdrop.hidden = true; }, 350);
+    }
+    document.body.classList.remove('nav-open');
+    btn.setAttribute('aria-label', 'Open menu');
+  };
+
+  btn.addEventListener('click', () => {
+    btn.getAttribute('aria-expanded') === 'true' ? close() : open();
+  });
+  closeBtn?.addEventListener('click', close);
+  backdrop?.addEventListener('click', close);
+  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
+  addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+})();
 
 // YouTube link is available site-wide without overpowering the navigation.
 (() => {
@@ -196,14 +234,13 @@ if (hero) {
   }
   const wheel = $('wheel');
   if (wheel) {
-    const revealWheel = () => wheel.classList.add('in');
+    const reveal = () => wheel.classList.add('in');
     if ('IntersectionObserver' in window) {
       new IntersectionObserver((es, o) => es.forEach(e => {
-        if (e.isIntersecting) { revealWheel(); o.unobserve(e.target); }
+        if (e.isIntersecting) { reveal(); o.unobserve(e.target); }
       }), { threshold: .15 }).observe(wheel);
     }
-    // Fallback: always reveal after a short delay so the wheel never stays invisible
-    setTimeout(revealWheel, 900);
+    setTimeout(reveal, 900);
   }
   document.querySelectorAll('.seg').forEach(g => {
     const on = () => {
@@ -493,3 +530,16 @@ if (chips.length) {
     }
   });
 })();
+
+/* Shop accordion inside the drawer */
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest(".nav-acc-btn");
+  if (!btn) return;
+  e.preventDefault();
+  const panelId = btn.getAttribute("aria-controls");
+  const panel = panelId ? document.getElementById(panelId) : btn.parentElement.querySelector(".nav-acc-panel");
+  if (!panel) return;
+  const open = btn.getAttribute("aria-expanded") === "true";
+  btn.setAttribute("aria-expanded", open ? "false" : "true");
+  panel.hidden = open;
+});

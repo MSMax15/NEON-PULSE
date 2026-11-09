@@ -1,0 +1,29 @@
+FULL OVERRIDE — drop into repo root and overwrite EVERYTHING
+=============================================================
+
+WHY THE SITE BROKE
+1. site.js was truncated (JavaScript SyntaxError) → timer + wheel dead
+2. A second nav.js + conflicting #site-nav CSS fought the original menu
+3. Background markup/CSS diverged from the last known-good set
+
+WHAT THIS PACKAGE IS
+- Last known-good HTML pages + style.css (from your working bg-fix + index-update)
+- Repaired complete site.js (countdown, menu, wheel, shop accordion)
+- nav.js REMOVED (not needed; menu lives in site.js again)
+- All media from the current repo (bg/, video, logos, etc.)
+
+HOW TO DEPLOY
+1. Extract this ZIP
+2. Copy ALL contents of the folder into the ROOT of your GitHub repository
+3. Overwrite every file when asked
+4. Commit + push to main
+5. Hard-refresh the live site (Ctrl+Shift+R) / purge CDN cache
+
+TEST AFTER DEPLOY
+- Index: countdown ticks
+- Burger menu opens and closes
+- Shop accordion expands inside the menu
+- Category wheel becomes visible
+- Background dive effect on homepage
+
+If anything still looks cached, wait for GitHub Pages (1–2 min) and hard-refresh again.
