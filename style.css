@@ -15,7 +15,8 @@ h1,h2,h3{font-family:Unbounded,Figtree,sans-serif}
 .bubbles span{position:absolute;bottom:-30px;border:2px solid #ffffff55;border-radius:50%;opacity:calc(var(--d) * 0.9);animation:up linear infinite;box-shadow:0 0 12px #7ec8ff44}
 @keyframes up{to{transform:translateY(-110vh)}}
 /* nav */
-nav{position:fixed;inset:0 0 auto;z-index:40;background:linear-gradient(#170a2eee,transparent)}
+nav{position:fixed;inset:0 0 auto;z-index:40;background:linear-gradient(#170a2eee,transparent);pointer-events:none}
+nav .nav-bar,nav .nav-burger,nav .logo,nav .nav-drawer,nav .nav-backdrop,nav a,nav button{pointer-events:auto}
 nav .wrap{/* layout via .nav-bar */}
 .logo{display:block;flex:none}
 .logo img{display:block;height:52px;width:auto;max-width:min(190px,48vw);object-fit:contain}
@@ -23,7 +24,7 @@ nav .wrap{/* layout via .nav-bar */}
 nav ul{list-style:none;padding:0;margin:0}
 /* nav link styles handled under .nav-panel */
 /* hero */
-.hero{position:relative;min-height:100svh;display:flex;align-items:center;padding:6rem 0 5rem}
+.hero{position:relative;min-height:100svh;display:flex;align-items:center;padding:calc(5.5rem + env(safe-area-inset-top,0px)) 0 5rem}
 .hero h1{font-size:clamp(1.1rem,2.4vw,1.5rem);font-weight:600}
 .count{display:flex;flex-wrap:wrap;gap:.2rem 2.2rem;margin-top:.6rem}
 .unit{display:flex;flex-direction:column}
