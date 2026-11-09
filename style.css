@@ -1466,7 +1466,7 @@ html.nav-open, html.nav-open body{overflow:hidden!important}
 #site-nav .nav-soon{display:inline-block;margin-left:.3rem;padding:.08rem .4rem;border-radius:99px;font-size:.62rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;background:rgba(255,79,139,.25);color:#ffc0d6}
 #site-nav .nav-drawer-foot{margin-top:auto;padding-top:.9rem;border-top:1px solid rgba(255,255,255,.12);display:flex;flex-wrap:wrap;gap:.5rem}
 #site-nav .nav-drawer-foot a{flex:1 1 auto;text-align:center;padding:.7rem .65rem;border-radius:12px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:#fff;text-decoration:none;font-weight:700;font-size:.88rem}
-body>.bg{z-index:0!important}
+body>.bg,.bg.dive{z-index:-1!important}
 .page-home header.hero,header.hero{padding-top:calc(5.75rem + env(safe-area-inset-top,0px))!important;position:relative;z-index:1}
 header.phead,.phead{padding-top:calc(5.5rem + env(safe-area-inset-top,0px))!important;position:relative;z-index:1}
 main,footer{position:relative;z-index:1}
