@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,38 +15,33 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body class="page-shop">
-<div class="bg" style="--d:0.28" aria-hidden="true" aria-hidden="true"><picture class="bg-pic">
-<source media="(max-width:768px)" srcset="bg/u-boat-m.jpg">
-<source media="(min-width:769px)" srcset="bg/u-boat.jpg">
-<img src="bg/u-boat.jpg" alt="" width="1920" height="1080" decoding="async" fetchpriority="low">
+<div aria-hidden="true" class="bg" data-bg="night">
+<picture class="bg-pic">
+<source media="(orientation: portrait)" srcset="bg/v2-night-m.jpg">
+<img src="bg/v2-night-1920.jpg" srcset="bg/v2-night-1920.jpg 1920w, bg/v2-night-2560.jpg 2560w" sizes="100vw" alt="" width="1920" height="1080" decoding="async" fetchpriority="high">
 </picture>
-  <picture>
-    <source media="(max-width: 768px)" srcset="bg/bg-night-m.jpg">
-    <source media="(min-width: 769px)" srcset="bg/bg-night.jpg">
-    
-  </picture>
-  <div class="grade"></div>
-  <div class="shade"></div>
+<div class="grade"></div>
+<div class="shade"></div>
 </div>
 <nav>
 <div class="wrap nav-bar">
 <a class="logo" href="index.html"><img src="logo.png" alt="Pulseneon" width="140" height="56" decoding="async"></a>
-<button type="button" class="nav-burger" aria-expanded="true" aria-controls="nav-drawer" aria-label="Open menu">
+<button type="button" class="nav-burger" aria-expanded="false" aria-controls="nav-drawer" aria-label="Menü öffnen">
 <span class="burger-lines" aria-hidden="true"><i></i><i></i><i></i></span>
 </button>
 </div>
 <div class="nav-backdrop" id="nav-backdrop" hidden></div>
 <aside class="nav-drawer" id="nav-drawer" aria-hidden="true">
 <div class="nav-drawer-head">
-<a class="nav-drawer-logo" href="index.html" aria-label="Pulseneon home">
+<a class="nav-drawer-logo" href="index.html" aria-label="Pulseneon Home">
 <img src="logo.png" alt="Pulseneon" width="160" height="64" decoding="async">
 </a>
-<button type="button" class="nav-close" aria-label="Close menu">
+<button type="button" class="nav-close" aria-label="Menü schließen">
 <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 4l10 10M14 4L4 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
 </button>
 </div>
 <ul class="nav-list">
-<li class="nav-label">Fan hub</li>
+<li class="nav-label">Fan-Hub</li>
 <li><a href="index.html">Home</a></li>
 <li><a href="cheats.html">Cheats</a></li>
 <li><a href="cars.html">Cars</a></li>
@@ -54,23 +49,25 @@
 <li><a href="leaks.html">Leaks</a></li>
 <li><a href="map.html">Map</a></li>
 <li><a href="gameplay.html">Gameplay</a></li>
-<li class="nav-label">Status &amp; servers</li>
-<li><a href="gta6-server-status.html">Server status</a></li>
-<li><a href="alarm.html">Alerts</a></li>
-<li><a href="gta6-server-hosting.html">Hosting guide</a></li>
-<li><a href="packs.html">Server packs</a></li>
+
+<li class="nav-label">Status &amp; Server</li>
+<li><a href="gta6-server-status.html">Server Status</a></li>
+<li><a href="alarm.html">Alarm</a></li>
+<li><a href="gta6-server-hosting.html">Hosting Guide</a></li>
+<li><a href="packs.html">Server-Pakete</a></li>
 <li><a href="fivem-server-hosting.html">FiveM</a></li>
 <li><a href="sixm-server-mieten.html">SixM</a></li>
 <li><a href="teamspeak-server-mieten.html">TeamSpeak</a></li>
 <li><a href="minecraft-server-mieten.html">Minecraft</a></li>
+
 <li class="nav-label">Shop</li>
 <li class="nav-acc">
-<button type="button" class="nav-acc-btn" aria-expanded="false" aria-controls="nav-shop-sub">
+<button type="button" class="nav-acc-btn" aria-expanded="true" aria-controls="nav-shop-sub">
 Shop
 <span class="nav-acc-arrow" aria-hidden="true"></span>
 </button>
-<ul class="nav-acc-panel" id="nav-shop-sub">
-<li><a href="shop.html" aria-current="page">Overview</a></li>
+<ul class="nav-acc-panel is-open" id="nav-shop-sub">
+<li><a href="shop.html" aria-current="page">Übersicht</a></li>
 <li><a href="shop.html#cat-gta6">GTA 6</a></li>
 <li><a href="shop.html#cat-apparel">Apparel</a></li>
 <li><a href="shop.html#cat-caps">Caps</a></li>
@@ -79,24 +76,25 @@ Shop
 <li><a href="shop.html#cat-premium">Premium</a></li>
 </ul>
 </li>
-<li class="nav-label">More</li>
+
+<li class="nav-label">Mehr</li>
 <li><a href="blog.html">Blog</a></li>
-<li><a href="partner.html">Partnerss</a></li>
-<li><a href="impressum.html">Legal notice</a></li>
+<li><a href="partner.html">Partner</a></li>
+<li><a href="impressum.html">Impressum</a></li>
 </ul>
 <div class="nav-drawer-foot">
 <a href="shop.html">Shop</a>
-<a href="packs.html">Packs</a>
+<a href="packs.html">Pakete</a>
 <a href="partner.html">Pulseneon × ZAP</a>
 </div>
 </aside>
 </nav>
 
 <header class="phead shop-head"><div class="wrap">
-<a class="back" href="index.html">Back to home</a>
+<a class="back" href="index.html">Zur Startseite</a>
 <span class="affiliate-kicker" style="display:block;margin-bottom:.4rem">PULSENEON · SHOP</span>
 <h1>Shop</h1>
-<p class="intro">Curated GTA 6 theme picks. Sorted by category. Purchase and shipping via Amazon.</p>
+<p class="intro">Kuratierte GTA‑6‑Theme-Empfehlungen. Sortiert nach Kategorie. Kauf und Versand über Amazon.</p>
 </div></header>
 
 <main class="wrap shop-main">
@@ -110,13 +108,13 @@ Shop
   </nav>
 
   <aside class="shop-trust" aria-label="Hinweise">
-    <div><strong>Affiliate</strong><span>Commission possible – no extra cost to you.</span></div>
-    <div><strong>Amazon</strong><span>Price, stock, shipping and returns are handled by the seller.</span></div>
-    <div><strong>Fan curation</strong><span>Unofficial – not affiliated with Rockstar.</span></div>
+    <div><strong>Affiliate</strong><span>Provision möglich – keine Mehrkosten für dich.</span></div>
+    <div><strong>Amazon</strong><span>Preis, Lager, Versand und Retoure beim Händler.</span></div>
+    <div><strong>Fan-Kuratierung</strong><span>Unofficial – keine Verbindung zu Rockstar.</span></div>
   </aside>
 
   <section id="cat-gta6" class="shop-section">
-    <div class="shop-section-head"><h2>GTA 6</h2><p>Theme highlights</p></div>
+    <div class="shop-section-head"><h2>GTA 6</h2><p>Theme-Highlights</p></div>
     <div class="shop-grid">
       <article class="shop-card">
         <a class="shop-card-media" href="https://link.amazon/B0fhmSKzD" target="_blank" rel="sponsored noopener noreferrer">
@@ -126,7 +124,7 @@ Shop
           <span class="shop-tag">Apparel · GTA 6</span>
           <h3>GTA VI Logo Tee – Blue</h3>
           <div class="shop-card-foot">
-            <p class="shop-price">~30 €</p>
+            <p class="shop-price">ca. 30 €</p>
             <a class="shop-buy" href="https://link.amazon/B0fhmSKzD" target="_blank" rel="sponsored noopener noreferrer">Amazon ↗</a>
           </div>
         </div>
@@ -140,7 +138,7 @@ Shop
           <span class="shop-tag">Apparel · GTA 6</span>
           <h3>Vice City Leonida Tee</h3>
           <div class="shop-card-foot">
-            <p class="shop-price">~30 €</p>
+            <p class="shop-price">ca. 30 €</p>
             <a class="shop-buy" href="https://link.amazon/B03CKEqkZ" target="_blank" rel="sponsored noopener noreferrer">Amazon ↗</a>
           </div>
         </div>
@@ -154,7 +152,7 @@ Shop
           <span class="shop-tag">Apparel · GTA 6</span>
           <h3>VI Logo Tee – Black</h3>
           <div class="shop-card-foot">
-            <p class="shop-price">~30 €</p>
+            <p class="shop-price">ca. 30 €</p>
             <a class="shop-buy" href="https://link.amazon/B02t1skCC" target="_blank" rel="sponsored noopener noreferrer">Amazon ↗</a>
           </div>
         </div>
@@ -168,7 +166,7 @@ Shop
           <span class="shop-tag">Apparel · GTA 6</span>
           <h3>Macca / Pink Drop Tee</h3>
           <div class="shop-card-foot">
-            <p class="shop-price">~30 €</p>
+            <p class="shop-price">ca. 30 €</p>
             <a class="shop-buy" href="https://link.amazon/B020m4eEL" target="_blank" rel="sponsored noopener noreferrer">Amazon ↗</a>
           </div>
         </div>
@@ -176,7 +174,7 @@ Shop
   </section>
 
   <section id="cat-apparel" class="shop-section">
-    <div class="shop-section-head"><h2>Apparel</h2><p>Shirts &amp; tees</p></div>
+    <div class="shop-section-head"><h2>Apparel</h2><p>Shirts &amp; Tees</p></div>
     <div class="shop-grid">
       <article class="shop-card">
         <a class="shop-card-media" href="https://link.amazon/B0fhmSKzD" target="_blank" rel="sponsored noopener noreferrer">
@@ -186,7 +184,7 @@ Shop
           <span class="shop-tag">Apparel</span>
           <h3>Logo Tee Blue Palm</h3>
           <div class="shop-card-foot">
-            <p class="shop-price">~30 €</p>
+            <p class="shop-price">ca. 30 €</p>
             <a class="shop-buy" href="https://link.amazon/B0fhmSKzD" target="_blank" rel="sponsored noopener noreferrer">Amazon ↗</a>
           </div>
         </div>
@@ -200,7 +198,7 @@ Shop
           <span class="shop-tag">Apparel</span>
           <h3>Rockstar Logo Tee</h3>
           <div class="shop-card-foot">
-            <p class="shop-price">~30 €</p>
+            <p class="shop-price">ca. 30 €</p>
             <a class="shop-buy" href="https://link.amazon/B03CKEqkZ" target="_blank" rel="sponsored noopener noreferrer">Amazon ↗</a>
           </div>
         </div>
@@ -218,7 +216,7 @@ Shop
           <span class="shop-tag">Caps</span>
           <h3>GTA VI Pink Cap</h3>
           <div class="shop-card-foot">
-            <p class="shop-price">~30 €</p>
+            <p class="shop-price">ca. 30 €</p>
             <a class="shop-buy" href="https://link.amazon/B08dYYHBH" target="_blank" rel="sponsored noopener noreferrer">Amazon ↗</a>
           </div>
         </div>
@@ -232,7 +230,7 @@ Shop
           <span class="shop-tag">Caps</span>
           <h3>Goodtime / Blue Cap</h3>
           <div class="shop-card-foot">
-            <p class="shop-price">~30 €</p>
+            <p class="shop-price">ca. 30 €</p>
             <a class="shop-buy" href="https://link.amazon/B02TW1iCb" target="_blank" rel="sponsored noopener noreferrer">Amazon ↗</a>
           </div>
         </div>
@@ -246,7 +244,7 @@ Shop
           <span class="shop-tag">Caps</span>
           <h3>Black Cap</h3>
           <div class="shop-card-foot">
-            <p class="shop-price">~30 €</p>
+            <p class="shop-price">ca. 30 €</p>
             <a class="shop-buy" href="https://link.amazon/B08dYYHBH" target="_blank" rel="sponsored noopener noreferrer">Amazon ↗</a>
           </div>
         </div>
@@ -254,7 +252,7 @@ Shop
   </section>
 
   <section id="cat-collectibles" class="shop-section">
-    <div class="shop-section-head"><h2>Collectibles</h2><p>Accessories</p></div>
+    <div class="shop-section-head"><h2>Collectibles</h2><p>Accessoires</p></div>
     <div class="shop-grid">
       <article class="shop-card">
         <a class="shop-card-media" href="https://link.amazon/B01mFeqBv" target="_blank" rel="sponsored noopener noreferrer">
@@ -264,7 +262,7 @@ Shop
           <span class="shop-tag">Collectibles</span>
           <h3>VI / Rockstar Keychain</h3>
           <div class="shop-card-foot">
-            <p class="shop-price">~15 €</p>
+            <p class="shop-price">ca. 15 €</p>
             <a class="shop-buy" href="https://link.amazon/B01mFeqBv" target="_blank" rel="sponsored noopener noreferrer">Amazon ↗</a>
           </div>
         </div>
@@ -278,7 +276,7 @@ Shop
           <span class="shop-tag">Collectibles</span>
           <h3>Vice City Lighter</h3>
           <div class="shop-card-foot">
-            <p class="shop-price">~40 €</p>
+            <p class="shop-price">ca. 40 €</p>
             <a class="shop-buy" href="https://link.amazon/B0iXeSjee" target="_blank" rel="sponsored noopener noreferrer">Amazon ↗</a>
           </div>
         </div>
@@ -292,7 +290,7 @@ Shop
           <span class="shop-tag">Collectibles</span>
           <h3>Sticker Pack</h3>
           <div class="shop-card-foot">
-            <p class="shop-price">from 5 €</p>
+            <p class="shop-price">ab 5 €</p>
             <a class="shop-buy" href="https://link.amazon/B0hEVAIEb" target="_blank" rel="sponsored noopener noreferrer">Amazon ↗</a>
           </div>
         </div>
@@ -306,7 +304,7 @@ Shop
           <span class="shop-tag">Collectibles</span>
           <h3>Money Clip Style</h3>
           <div class="shop-card-foot">
-            <p class="shop-price">~25 €</p>
+            <p class="shop-price">ca. 25 €</p>
             <a class="shop-buy" href="https://link.amazon/B0gM44SWx" target="_blank" rel="sponsored noopener noreferrer">Amazon ↗</a>
           </div>
         </div>
@@ -314,7 +312,7 @@ Shop
   </section>
 
   <section id="cat-bags" class="shop-section">
-    <div class="shop-section-head"><h2>Bags</h2><p>Bags</p></div>
+    <div class="shop-section-head"><h2>Bags</h2><p>Taschen</p></div>
     <div class="shop-grid">
       <article class="shop-card">
         <a class="shop-card-media" href="https://link.amazon/B00dLjP4Z" target="_blank" rel="sponsored noopener noreferrer">
@@ -324,7 +322,7 @@ Shop
           <span class="shop-tag">Bags</span>
           <h3>Vice City Tote</h3>
           <div class="shop-card-foot">
-            <p class="shop-price">~40 €</p>
+            <p class="shop-price">ca. 40 €</p>
             <a class="shop-buy" href="https://link.amazon/B00dLjP4Z" target="_blank" rel="sponsored noopener noreferrer">Amazon ↗</a>
           </div>
         </div>
@@ -338,7 +336,7 @@ Shop
           <span class="shop-tag">Bags</span>
           <h3>VI Blue Tote</h3>
           <div class="shop-card-foot">
-            <p class="shop-price">~40 €</p>
+            <p class="shop-price">ca. 40 €</p>
             <a class="shop-buy" href="https://link.amazon/B01wfzLT3" target="_blank" rel="sponsored noopener noreferrer">Amazon ↗</a>
           </div>
         </div>
@@ -356,7 +354,7 @@ Shop
           <span class="shop-tag">Premium</span>
           <h3>Collector Drop</h3>
           <div class="shop-card-foot">
-            <p class="shop-price">see link</p>
+            <p class="shop-price">siehe Link</p>
             <a class="shop-buy" href="https://link.amazon/B019YJfTE" target="_blank" rel="sponsored noopener noreferrer">Amazon ↗</a>
           </div>
         </div>
@@ -364,19 +362,19 @@ Shop
   </section>
 
   <section class="shop-section shop-soon-block">
-    <div class="shop-section-head"><h2>Soon</h2><p>Placeholder categories</p></div>
+    <div class="shop-section-head"><h2>Bald</h2><p>Platzhalter-Kategorien</p></div>
     <ul class="shop-soon-list">
-      <li>Phone cases</li>
+      <li>Handyhüllen</li>
       <li>Hoodies</li>
-      <li>Posters</li>
-      <li>Controller skins</li>
+      <li>Poster</li>
+      <li>Controller Skins</li>
       <li>Pulseneon Merch</li>
     </ul>
   </section>
 
-  <p class="affiliate-disclosure">Als Amazon-Partners verdient Pulseneon an qualifizierten Verkäufen. Trademarks belong to their respective owners.</p>
+  <p class="affiliate-disclosure">Als Amazon-Partner verdient Pulseneon an qualifizierten Verkäufen. Marken gehören den Rechteinhabern.</p>
 </main>
-<footer><div class="wrap">Pulseneon<div class="legal"><a href="impressum.html">Legal notice</a><a href="datenschutz.html">Privacy</a><a href="shop.html">Shop</a></div></div></footer>
+<footer><div class="wrap">Pulseneon<div class="legal"><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a><a href="shop.html">Shop</a></div></div></footer>
 <script src="site.js"></script>
 </body>
 </html>
