@@ -1,5 +1,14 @@
-Hosting page BG only.
-Copy to repo root, overwrite, hard-refresh.
-- gta6-server-hosting.html
-- bg/np-hosting-1920.jpg
-- bg/np-hosting-m.jpg
+MODS HUB placeholder + nav
+Copy ALL files into GitHub repo root, overwrite, push, hard-refresh.
+
+- mods-gta6.html  = new glossy Mods hub (PLACEHOLDER downloads)
+- index.html      = brand title + Mods in nav
+- other *.html    = Mods link in drawer after Gameplay
+- sitemap.xml     = mods URL if present
+
+TODO for you later (search TODO-MODS-UPDATE):
+1) Real mod cards + download URLs
+2) Real donation link
+3) Remove "placeholder" badge when live
+
+No site.js / style.css changes (page-local CSS/JS only).
