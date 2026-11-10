@@ -1,7 +1,12 @@
-Mods page + background only.
-Copy to repo root, overwrite.
-- mods-gta6.html
-- bg/np-mods-1920.jpg
-- bg/np-mods-m.jpg
-Image was rotated 90° so soldiers stand upright.
-If nav Mods link missing, also import previous MODS-HUB-UPDATE.zip.
+AI / answer-engine FAQ page
+Copy into GitHub repo root, overwrite, push, hard-refresh.
+
+NEW: gta6-server-faq.html
+- FAQPage JSON-LD (10 Q&As)
+- Direct answer block for citations
+- Sunset water background (np-ops)
+- English body, DE keywords in title
+
+Also: gta6-server-hosting.html link, nav Server FAQ, sitemap, bg/np-ops-*.jpg
+
+Canonical: https://pulseneon.de/gta6-server-faq.html
