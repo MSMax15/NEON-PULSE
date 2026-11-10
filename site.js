@@ -1,3 +1,5 @@
+/* Prefer HTTPS on production domain (GSC http/https split) */
+(function(){try{if(location.protocol==='http:'&&/(^|\.)pulseneon\.de$/i.test(location.hostname)){location.replace('https://'+location.host+location.pathname+location.search+location.hash);}}catch(e){}})();
 const $ = id => document.getElementById(id);
 const isFile = location.protocol === 'file:';
 

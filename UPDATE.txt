@@ -1,12 +1,10 @@
-AI / answer-engine FAQ page
-Copy into GitHub repo root, overwrite, push, hard-refresh.
+SEO GSC update – no layout/JS feature changes except http→https guard.
 
-NEW: gta6-server-faq.html
-- FAQPage JSON-LD (10 Q&As)
-- Direct answer block for citations
-- Sunset water background (np-ops)
-- English body, DE keywords in title
+- site.js: redirect http://pulseneon.de → https (fixes GSC split)
+- gta6-server-hosting + faq: stronger CTR titles/descriptions
+- teamspeak / minecraft / sixm / blog: clearer snippets
+- rent-minecraft / rent-post-scriptum / rent-voice: canonical → primary pages + noindex,follow
+- index: brand + https canonical
 
-Also: gta6-server-hosting.html link, nav Server FAQ, sitemap, bg/np-ops-*.jpg
-
-Canonical: https://pulseneon.de/gta6-server-faq.html
+Copy to repo root, overwrite, push.
+Also in GitHub Pages: enable "Enforce HTTPS".
