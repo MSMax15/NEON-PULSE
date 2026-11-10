@@ -1,14 +1,5 @@
-BG batch – copy into GitHub repo root, overwrite, hard-refresh.
-
-Index surface = rooftop sunset (backround33) – dive deep underwater unchanged.
-shop = neon pink tower
-partner = red lounge skyline
-
-Skipped logo6back.jpg as full-page background (only 736px wide – too soft on PC).
-
-Files:
-- index.html, shop.html, partner.html
-- bg/np-index-surface-*.jpg
-- bg/np-neon-tower-*.jpg
-- bg/np-lounge-*.jpg
-- bg/np-underwater-*.jpg (dive)
+Hosting page BG only.
+Copy to repo root, overwrite, hard-refresh.
+- gta6-server-hosting.html
+- bg/np-hosting-1920.jpg
+- bg/np-hosting-m.jpg
