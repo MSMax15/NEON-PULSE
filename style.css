@@ -1136,7 +1136,8 @@ html body .bg:not(.dive) .shade{background:radial-gradient(ellipse at 50% 30%,tr
 @media (prefers-reduced-motion:reduce){.bg.dive .caustics,.bg.dive .rays{animation:none}}
 
 /* ========== Today bar + floating countdown (home) ========== */
-body.page-home{
+body.page-home,
+body.has-today{
   --today-h: 2.65rem;
 }
 .today-bar{
@@ -1226,8 +1227,10 @@ body.page-home{
   0%,100%{opacity:.35;transform:scaleX(.85)}
   50%{opacity:1;transform:scaleX(1)}
 }
-body.page-home nav{top:var(--today-h)}
+body.page-home nav,
+body.has-today nav{top:var(--today-h)}
 body.page-home .hero{padding-top:calc(5.5rem + var(--today-h) + env(safe-area-inset-top,0px))}
+body.has-today:not(.page-home){padding-top:calc(var(--today-h) + 0.25rem)}
 html{scroll-padding-top:calc(4.5rem + 2.65rem)}
 
 .count-dock{

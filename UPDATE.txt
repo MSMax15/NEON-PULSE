@@ -1,8 +1,7 @@
-Support / donate page
-- support.html  → https://pulseneon.de/support.html
-- NOT linked from home main menu (find via Google / direct URL)
-- sitemap.xml includes URL for indexing
-- PayPal + Bitcoin + copy button
-- English UI, clear unofficial disclaimer
+Menu + Today strip (small update)
+- Support in burger menu (index + hosting + FAQ + contact)
+- Today bar also on hosting + FAQ (not every page)
+- style.css: has-today support
+- Does NOT replace support.html content (keep the version you already uploaded)
 
-Copy to repo root, push, then GSC: request indexing for support.html
+Copy files to repo root, overwrite, hard-refresh.
