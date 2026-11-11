@@ -1,7 +1,7 @@
-Home live update
-- Today on Pulseneon top bar (white glossy)
-- Floating white countdown dock when you scroll past the hero
-- site.js keeps hero + dock numbers in sync
+Home tint polish
+- Today bar: Vice City glass tint + horizontal scroll (mobile+PC)
+- First item subtle pulse underline
+- Float timer: transparent neon/sunset tint (not solid white)
+- site.js NOT changed
 
-Copy index.html, style.css, site.js to repo root. Hard-refresh.
-Does not change other pages.
+Copy index.html + style.css only. Hard-refresh.
