@@ -1,10 +1,6 @@
-SEO GSC update – no layout/JS feature changes except http→https guard.
-
-- site.js: redirect http://pulseneon.de → https (fixes GSC split)
-- gta6-server-hosting + faq: stronger CTR titles/descriptions
-- teamspeak / minecraft / sixm / blog: clearer snippets
-- rent-minecraft / rent-post-scriptum / rent-voice: canonical → primary pages + noindex,follow
-- index: brand + https canonical
-
-Copy to repo root, overwrite, push.
-Also in GitHub Pages: enable "Enforce HTTPS".
+Contact page update. Copy to repo root.
+- contact.html
+- contact/index.html ( /contact/ helper)
+- EMAIL-contact-announce.txt for webmail
+- key nav pages + sitemap + night bg
+Form uses mailto to contact@pulseneon.de
