@@ -1,7 +1,8 @@
-Home tint polish
-- Today bar: Vice City glass tint + horizontal scroll (mobile+PC)
-- First item subtle pulse underline
-- Float timer: transparent neon/sunset tint (not solid white)
-- site.js NOT changed
+Support / donate page
+- support.html  → https://pulseneon.de/support.html
+- NOT linked from home main menu (find via Google / direct URL)
+- sitemap.xml includes URL for indexing
+- PayPal + Bitcoin + copy button
+- English UI, clear unofficial disclaimer
 
-Copy index.html + style.css only. Hard-refresh.
+Copy to repo root, push, then GSC: request indexing for support.html

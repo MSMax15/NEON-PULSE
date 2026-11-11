@@ -297,4 +297,5 @@
   <url><loc>https://pulseneon.de/mods-gta6.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://pulseneon.de/gta6-server-faq.html</loc><changefreq>weekly</changefreq><priority>0.95</priority></url>
   <url><loc>https://pulseneon.de/contact.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://pulseneon.de/support.html</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
 </urlset>
