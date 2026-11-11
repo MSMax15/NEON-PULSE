@@ -35,6 +35,25 @@
 </script>
 </head>
 <body class="page-home">
+
+<!-- Today on Pulseneon – top strip -->
+<div class="today-bar" id="today-bar" role="region" aria-label="Today on Pulseneon">
+  <div class="today-bar-inner">
+    <span class="today-kicker">Today on Pulseneon</span>
+    <div class="today-track">
+      <a href="contact.html">Contact open · contact@pulseneon.de</a>
+      <span class="today-dot" aria-hidden="true"></span>
+      <a href="gta6-server-faq.html">Server FAQ live</a>
+      <span class="today-dot" aria-hidden="true"></span>
+      <a href="mods-gta6.html">Mods hub (placeholder)</a>
+      <span class="today-dot" aria-hidden="true"></span>
+      <a href="gta6-server-hosting.html">Hosting guide</a>
+      <span class="today-dot" aria-hidden="true"></span>
+      <span>Launch target · Nov 19, 2026</span>
+    </div>
+  </div>
+</div>
+
 <div aria-hidden="true" class="bg dive" data-bg="dive" style="--d:0">
 <picture class="bg-pic bg-surface"><source media="(orientation:portrait)" srcset="bg/np-index-surface-m.jpg"><img src="bg/np-index-surface-1920.jpg" alt="" width="1920" height="1080" decoding="async" fetchpriority="high"></picture>
 <picture class="bg-pic bg-deep"><source media="(orientation:portrait)" srcset="bg/np-underwater-m.jpg"><img src="bg/np-underwater-1920.jpg" alt="" width="1920" height="1080" decoding="async" loading="lazy"></picture>
@@ -118,7 +137,7 @@ Shop
 <header class="hero" id="top"><div class="wrap">
 <h1 id="headline">GTA 6 launches in</h1>
 <div class="count" id="count" role="timer">
-<div class="unit"><b id="d">--</b><span>Days</span></div><div class="unit"><b id="h">--</b><span>Hours</span></div><div class="unit"><b id="m">--</b><span>Minutes</span></div><div class="unit"><b id="s">--</b><span>Seconds</span></div>
+<div class="unit"><b id="d" data-cd="d">--</b><span>Days</span></div><div class="unit"><b id="h" data-cd="h">--</b><span>Hours</span></div><div class="unit"><b id="m" data-cd="m">--</b><span>Minutes</span></div><div class="unit"><b id="s" data-cd="s">--</b><span>Seconds</span></div>
 </div>
 <p class="date" id="date">Release: November 19, 2026 · PS5 &amp; Xbox. Everything about Vice City, updates, status and community servers.</p>
 <div class="hero-actions" id="hero-actions"><a class="dive dive-primary" href="packs.html">Server Packages</a><a class="dive" href="gta6-server-status.html">Server Status</a><a class="dive" href="alarm.html">Alerts</a><a class="dive" href="#explore">Fan hub</a><a class="dive" href="https://www.youtube.com/@Pulseneonz" target="_blank" rel="noopener noreferrer">YouTube ↗</a></div>
@@ -351,6 +370,24 @@ Shop
 <small>Advertisement · Affiliate link</small>
 </aside>
 <footer><div class="wrap">Pulseneon is an unofficial fan website and is not affiliated with Rockstar Games or Take-Two Interactive. Grand Theft Auto is a trademark of Take-Two Interactive.<div class="legal"><a href="impressum.html">Legal Notice</a><a href="datenschutz.html">Privacy Policy</a><a href="contact.html">Contact</a></div></div></footer>
+
+<!-- Floating glossy countdown (home only) -->
+<aside class="count-dock" id="count-dock" aria-label="Launch countdown" hidden>
+  <div class="count-dock-glass">
+    <div class="count-dock-head">
+      <span class="count-dock-live" aria-hidden="true"></span>
+      <span>GTA 6 launches in</span>
+    </div>
+    <div class="count count-dock-units" role="timer">
+      <div class="unit"><b data-cd="d" id="fd">--</b><span>Days</span></div>
+      <div class="unit"><b data-cd="h" id="fh">--</b><span>Hours</span></div>
+      <div class="unit"><b data-cd="m" id="fm">--</b><span>Minutes</span></div>
+      <div class="unit"><b data-cd="s" id="fs">--</b><span>Seconds</span></div>
+    </div>
+    <a class="count-dock-link" href="#top">Back to top</a>
+  </div>
+</aside>
+
 <script src="site.js"></script>
 </body>
 </html>

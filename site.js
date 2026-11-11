@@ -187,11 +187,21 @@ if (hero) {
       return false;
     }
     const p = n => String(n).padStart(2, '0');
+    const vals = {
+      d: String(Math.floor(left / 864e5)),
+      h: p(Math.floor(left / 36e5) % 24),
+      m: p(Math.floor(left / 6e4) % 60),
+      s: p(Math.floor(left / 1e3) % 60)
+    };
     const d = $('d'), h = $('h'), m = $('m'), s = $('s');
-    if (d) d.textContent = Math.floor(left / 864e5);
-    if (h) h.textContent = p(Math.floor(left / 36e5) % 24);
-    if (m) m.textContent = p(Math.floor(left / 6e4) % 60);
-    if (s) s.textContent = p(Math.floor(left / 1e3) % 60);
+    if (d) d.textContent = vals.d;
+    if (h) h.textContent = vals.h;
+    if (m) m.textContent = vals.m;
+    if (s) s.textContent = vals.s;
+    document.querySelectorAll('[data-cd]').forEach(el => {
+      const k = el.getAttribute('data-cd');
+      if (k && vals[k] != null) el.textContent = vals[k];
+    });
     return true;
   };
 
@@ -545,3 +555,23 @@ document.addEventListener("click", (e) => {
   btn.setAttribute("aria-expanded", open ? "false" : "true");
   panel.hidden = open;
 });
+
+
+/* Floating countdown dock on home */
+(function () {
+  const dock = document.getElementById('count-dock');
+  const hero = document.querySelector('header.hero');
+  if (!dock || !hero || !document.body.classList.contains('page-home')) return;
+  dock.hidden = false;
+  const sync = () => {
+    if (document.body.classList.contains('launch')) {
+      dock.classList.remove('is-on');
+      return;
+    }
+    const past = window.scrollY > Math.max(180, hero.offsetHeight * 0.55);
+    dock.classList.toggle('is-on', past);
+  };
+  sync();
+  window.addEventListener('scroll', sync, { passive: true });
+  window.addEventListener('resize', sync);
+})();

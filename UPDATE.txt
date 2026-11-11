@@ -1,6 +1,7 @@
-Contact page update. Copy to repo root.
-- contact.html
-- contact/index.html ( /contact/ helper)
-- EMAIL-contact-announce.txt for webmail
-- key nav pages + sitemap + night bg
-Form uses mailto to contact@pulseneon.de
+Home live update
+- Today on Pulseneon top bar (white glossy)
+- Floating white countdown dock when you scroll past the hero
+- site.js keeps hero + dock numbers in sync
+
+Copy index.html, style.css, site.js to repo root. Hard-refresh.
+Does not change other pages.
