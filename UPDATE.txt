@@ -1,5 +1,6 @@
-Instant Gaming widget art
-- bg/ig-gta-banner.jpg = GTA Ultimate Edition art + IG logo badge
-- index.html + style.css wired
+Instant Gaming final visual
+- One art image, PC + mobile crops
+- Compact glossy card, glowing Buy now
+- Not oversized (max-width 920px, aspect controlled)
 
-Copy to repo root, hard-refresh.
+Copy index.html, style.css, bg/ig-gta-banner.jpg, bg/ig-gta-banner-m.jpg
