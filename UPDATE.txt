@@ -1,7 +1,8 @@
-Menu + Today strip (small update)
-- Support in burger menu (index + hosting + FAQ + contact)
-- Today bar also on hosting + FAQ (not every page)
-- style.css: has-today support
-- Does NOT replace support.html content (keep the version you already uploaded)
+Instant Gaming affiliate on home
+- Section under server packs (#instant-gaming)
+- Single general link: https://www.instant-gaming.com/?igr=gamer-84f65a8
+- Wide desktop card, stacked mobile
+- CSS banner (no external product image required)
+- Affiliate disclosure included
 
-Copy files to repo root, overwrite, hard-refresh.
+Copy index.html + style.css to repo root. Hard-refresh.
