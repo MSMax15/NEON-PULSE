@@ -1,8 +1,5 @@
-Instant Gaming affiliate on home
-- Section under server packs (#instant-gaming)
-- Single general link: https://www.instant-gaming.com/?igr=gamer-84f65a8
-- Wide desktop card, stacked mobile
-- CSS banner (no external product image required)
-- Affiliate disclosure included
+Instant Gaming widget art
+- bg/ig-gta-banner.jpg = GTA Ultimate Edition art + IG logo badge
+- index.html + style.css wired
 
-Copy index.html + style.css to repo root. Hard-refresh.
+Copy to repo root, hard-refresh.
