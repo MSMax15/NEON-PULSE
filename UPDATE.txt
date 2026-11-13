@@ -1,6 +1,2 @@
-Instant Gaming final visual
-- One art image, PC + mobile crops
-- Compact glossy card, glowing Buy now
-- Not oversized (max-width 920px, aspect controlled)
-
-Copy index.html, style.css, bg/ig-gta-banner.jpg, bg/ig-gta-banner-m.jpg
+Fix black gap: image full-bleed object-fit cover, aspect-ratio 2/1.
+Copy index.html style.css bg/ig-gta-banner.jpg bg/ig-gta-banner-m.jpg
