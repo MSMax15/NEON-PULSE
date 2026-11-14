@@ -1,2 +1,12 @@
-Fix black gap: image full-bleed object-fit cover, aspect-ratio 2/1.
-Copy index.html style.css bg/ig-gta-banner.jpg bg/ig-gta-banner-m.jpg
+SEO English pages (expand only)
+NEW:
+- gta6-rentals.html   (primary: GTA 6 Rentals)
+- gta6-addons.html
+- fivem-gta6-future.html  (is FiveM shutting down?)
+- instant-gaming.html
+
+Also: sitemap.xml, index today-bar link, rent-gta-6 canonical if present
+bg/* for page backgrounds + IG banner
+
+All UI English. Index content not removed.
+Request indexing in GSC for the four new URLs.
